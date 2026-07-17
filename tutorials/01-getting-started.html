@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 1: Quick Start — OASIS Learn</title>
+<meta name="description" content="Install the OASIS WEB4 SDK and make your first authenticated API call in under 15 minutes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Titillium+Web:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<button class="mobile-menu-btn">☰</button>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <a class="sidebar-logo" href="/">
+      <div class="sidebar-logo-icon">O</div>
+      <div class="sidebar-logo-text">
+        <span class="site-name">OASIS LEARN</span>
+        <span class="site-sub">Developer Tutorials</span>
+      </div>
+    </a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Getting Started</div>
+      <a class="nav-item" href="/">Overview</a>
+      <a class="nav-item active" href="/tutorials/01-getting-started">
+        <span class="step-num">1</span> Quick Start
+      </a>
+      <div class="nav-section-title">Core Concepts</div>
+      <a class="nav-item" href="/tutorials/02-avatar-identity"><span class="step-num">2</span> Avatar &amp; Identity</a>
+      <a class="nav-item" href="/tutorials/03-karma-reputation"><span class="step-num">3</span> Karma &amp; Reputation</a>
+      <a class="nav-item" href="/tutorials/04-nft-wallet"><span class="step-num">4</span> NFTs &amp; Wallet</a>
+      <a class="nav-item" href="/tutorials/05-data-holons"><span class="step-num">5</span> Data &amp; Holons</a>
+      <div class="nav-section-title">Building Apps</div>
+      <a class="nav-item" href="/tutorials/06-first-oapp"><span class="step-num">6</span> Your First OApp</a>
+      <a class="nav-item" href="/tutorials/07-metaverse-game"><span class="step-num">7</span> Metaverse &amp; Games</a>
+      <a class="nav-item" href="/tutorials/08-providers-production"><span class="step-num">8</span> Providers &amp; Production</a>
+      <div class="nav-section-title">Reference</div>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS" target="_blank">GitHub ↗</a>
+      <a class="nav-item" href="https://oasisomniverse.gitbook.io/oasis-platform" target="_blank">GitBook Docs ↗</a>
+      <a class="nav-item" href="https://oportal.oasisomniverse.one/developer" target="_blank">Dev Portal ↗</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="https://oasisomniverse.one" target="_blank">oasisomniverse.one</a>
+      <a href="https://discord.gg/oasis" target="_blank">Discord Community</a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="progress-bar-wrap"><div class="progress-bar" style="width:12.5%"></div></div>
+
+    <div class="page-header">
+      <div class="breadcrumb">
+        <a href="/">OASIS Learn</a>
+        <span class="breadcrumb-sep">/</span>
+        <span>Module 1</span>
+      </div>
+      <div class="page-meta">
+        <span class="badge badge-beginner">Beginner</span>
+        <span class="badge badge-time">⏱ 15 min</span>
+      </div>
+      <h1 class="page-title">Quick Start — Your First API Call</h1>
+      <p class="page-desc">Install the WEB4 SDK, register an account, authenticate and read back your avatar profile. You'll understand the OASIS response envelope and be ready to build.</p>
+    </div>
+
+    <div class="build-summary">
+      <h4>What you'll build</h4>
+      <ul>
+        <li>A small Node.js or browser script that registers a new OASIS avatar</li>
+        <li>Authenticates and retrieves a JWT session token</li>
+        <li>Fetches the avatar profile and prints karma score</li>
+      </ul>
+    </div>
+
+    <div class="prereqs">
+      <h4>Prerequisites</h4>
+      <ul>
+        <li><strong>Node.js 18+</strong> (or any modern browser — the SDK is isomorphic)</li>
+        <li>Basic JavaScript knowledge — you don't need to know OASIS yet</li>
+        <li>An email address for registration</li>
+      </ul>
+    </div>
+
+    <!-- STEP 1 -->
+    <h2 id="install">Step 1 — Install the SDK</h2>
+
+    <p>The <strong>@oasisomniverse/web4-api</strong> package covers the complete WEB4 API surface: Avatar, Auth, Karma, NFT, Wallet, Data, Map, Search, HyperDrive, and more. It works in Node 18+ and any modern browser.</p>
+
+    <div class="terminal-block code-block">
+      <div class="code-block-header"><span class="code-lang">terminal</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="cmd">npm install @oasisomniverse/web4-api</span></pre>
+    </div>
+
+    <p>For a <strong>browser-only</strong> project with no build step, use the bundled IIFE script served from the OPORTAL or a CDN:</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-lang">html</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="cmt">&lt;!-- The global OASISWeb4 object is exposed after this loads --&gt;</span>
+&lt;script src="https://oportal.oasisomniverse.one/assets/js/oasis-web4-sdk.js"&gt;&lt;/script&gt;</pre>
+    </div>
+
+    <div class="callout callout-note">
+      <div class="callout-icon">📡</div>
+      <div class="callout-body">
+        <div class="callout-title">Live API endpoint</div>
+        <p>The default base URL baked into the SDK is <code>https://api.oasisweb4.one</code>. You can point at the staging environment by passing <code>baseUrl: 'https://api-dev.oasisweb4.one'</code> to the constructor.</p>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <h2 id="init">Step 2 — Initialise the Client</h2>
+
+    <p>Create a single <code>OASISClient</code> instance and re-use it across your app. It manages JWT storage automatically.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">oasis.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">import</span> { OASISClient } <span class="kw">from</span> <span class="str">'@oasisomniverse/web4-api'</span>;
+
+<span class="cmt">// Default base URL: https://api.oasisweb4.one</span>
+<span class="kw">export const</span> oasis = <span class="kw">new</span> <span class="cls">OASISClient</span>();
+
+<span class="cmt">// Or with explicit config:</span>
+<span class="kw">export const</span> oasis = <span class="kw">new</span> <span class="cls">OASISClient</span>({
+  baseUrl: <span class="str">'https://api.oasisweb4.one'</span>,  <span class="cmt">// Live WEB4 API</span>
+  persistSession: <span class="kw">true</span>               <span class="cmt">// Saves JWT to localStorage</span>
+});</pre>
+    </div>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <div class="callout-title">Session persistence</div>
+        <p>With <code>persistSession: true</code> the JWT is saved to <code>localStorage</code> (browser) or an in-memory store (Node). The client will automatically attach it to every subsequent request — you don't need to think about tokens.</p>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <h2 id="register">Step 3 — Register an Avatar</h2>
+
+    <p>Every user of every app built on OASIS shares one identity — their <strong>Avatar</strong>. If your users will create accounts from within your app, call <code>oasis.auth.register()</code>. If they already have an OASIS account (from another OApp, OPORTAL, or Our World) they can just <a href="#login">log in</a>.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">register.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">import</span> { oasis } <span class="kw">from</span> <span class="str">'./oasis.js'</span>;
+
+<span class="kw">const</span> result = <span class="kw">await</span> oasis.auth.<span class="fn">register</span>({
+  firstName:       <span class="str">'Ada'</span>,
+  lastName:        <span class="str">'Lovelace'</span>,
+  email:           <span class="str">'ada@example.com'</span>,
+  password:        <span class="str">'SecurePassw0rd!'</span>,
+  confirmPassword: <span class="str">'SecurePassw0rd!'</span>,
+  username:        <span class="str">'ada_lovelace'</span>,     <span class="cmt">// optional; defaults to email</span>
+  avatarType:      <span class="str">'User'</span>,             <span class="cmt">// 'User' | 'Wizard' | 'God'</span>
+  acceptTerms:     <span class="kw">true</span>
+});
+
+<span class="kw">if</span> (result.isError) {
+  console.<span class="fn">error</span>(<span class="str">'Registration failed:'</span>, result.message);
+} <span class="kw">else</span> {
+  console.<span class="fn">log</span>(<span class="str">'Registered!'</span>, result.session.avatarId);
+  <span class="cmt">// JWT is now stored automatically — no extra steps needed</span>
+}</pre>
+    </div>
+
+    <h3>The OASISResult envelope</h3>
+    <p>Every response from the SDK follows a consistent shape:</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-lang">json (response shape)</span><button class="copy-btn">Copy</button></div>
+      <pre>{
+  <span class="str">"isError"</span>: <span class="kw">false</span>,
+  <span class="str">"message"</span>: <span class="str">"Avatar registered successfully."</span>,
+  <span class="str">"result"</span>: { <span class="cmt">/* the Avatar object */</span> },
+  <span class="str">"detailedMessage"</span>: <span class="str">""</span>
+}</pre>
+    </div>
+
+    <p>Always check <code>result.isError</code> before using <code>result.result</code>. The SDK normalises all response keys to camelCase regardless of how the server serialises them.</p>
+
+    <!-- STEP 4 -->
+    <h2 id="login">Step 4 — Log In</h2>
+
+    <p>Use an email address <em>or</em> username — the OASIS authenticate endpoint accepts both.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">login.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">import</span> { oasis } <span class="kw">from</span> <span class="str">'./oasis.js'</span>;
+
+<span class="kw">const</span> result = <span class="kw">await</span> oasis.auth.<span class="fn">login</span>({
+  username: <span class="str">'ada@example.com'</span>,  <span class="cmt">// email or username both work</span>
+  password: <span class="str">'SecurePassw0rd!'</span>
+});
+
+<span class="kw">if</span> (result.isError) {
+  console.<span class="fn">error</span>(<span class="str">'Login failed:'</span>, result.message);
+  <span class="kw">return</span>;
+}
+
+<span class="kw">const</span> { avatarId, username, email, jwtToken } = result.session;
+console.<span class="fn">log</span>(<span class="str">`Welcome back, <span class="str">${username}</span>! (ID: <span class="str">${avatarId}</span>)`</span>);</pre>
+    </div>
+
+    <!-- STEP 5 -->
+    <h2 id="profile">Step 5 — Fetch the Avatar Profile</h2>
+
+    <p>Once authenticated, you can read the full avatar detail — including karma score, level, title, inventory and more.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">profile.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">import</span> { oasis } <span class="kw">from</span> <span class="str">'./oasis.js'</span>;
+
+<span class="cmt">// After login, the avatarId is in the stored session</span>
+<span class="kw">const</span> { avatarId } = oasis.auth.<span class="fn">getSession</span>();
+
+<span class="kw">const</span> detail = <span class="kw">await</span> oasis.avatar.<span class="fn">getAvatarDetail</span>({ id: avatarId });
+
+<span class="kw">if</span> (!detail.isError) {
+  <span class="kw">const</span> avatar = detail.result;
+  console.<span class="fn">log</span>(<span class="str">'Username:'</span>, avatar.username);
+  console.<span class="fn">log</span>(<span class="str">'Karma:'</span>, avatar.karma);
+  console.<span class="fn">log</span>(<span class="str">'Level:'</span>, avatar.level);
+  console.<span class="fn">log</span>(<span class="str">'XP:'</span>, avatar.xp);
+}</pre>
+    </div>
+
+    <!-- STEP 6 -->
+    <h2 id="full-example">Step 6 — Putting It All Together</h2>
+
+    <p>Here's a self-contained script you can run with <code>node quickstart.mjs</code>:</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">quickstart.mjs</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">import</span> { OASISClient } <span class="kw">from</span> <span class="str">'@oasisomniverse/web4-api'</span>;
+
+<span class="kw">const</span> oasis = <span class="kw">new</span> <span class="cls">OASISClient</span>();
+
+<span class="cmt">// 1. Log in (assumes account already exists)</span>
+<span class="kw">const</span> login = <span class="kw">await</span> oasis.auth.<span class="fn">login</span>({
+  username: process.env.<span class="prp">OASIS_USER</span>,
+  password: process.env.<span class="prp">OASIS_PASS</span>
+});
+
+<span class="kw">if</span> (login.isError) <span class="kw">throw new</span> <span class="cls">Error</span>(login.message);
+
+<span class="kw">const</span> { avatarId } = login.session;
+console.<span class="fn">log</span>(<span class="str">'✓ Authenticated. Avatar ID:'</span>, avatarId);
+
+<span class="cmt">// 2. Fetch full avatar detail</span>
+<span class="kw">const</span> { result: avatar } = <span class="kw">await</span> oasis.avatar.<span class="fn">getAvatarDetail</span>({ id: avatarId });
+console.<span class="fn">log</span>(<span class="str">'✓ Avatar:'</span>, avatar.username, <span class="str">'| Karma:'</span>, avatar.karma, <span class="str">'| Level:'</span>, avatar.level);
+
+<span class="cmt">// 3. Check karma score</span>
+<span class="kw">const</span> { result: karmaStats } = <span class="kw">await</span> oasis.karma.<span class="fn">getKarmaStats</span>({ avatarId });
+console.<span class="fn">log</span>(<span class="str">'✓ Karma stats:'</span>, karmaStats);
+
+<span class="cmt">// 4. Log out cleanly</span>
+<span class="kw">await</span> oasis.auth.<span class="fn">logout</span>();
+console.<span class="fn">log</span>(<span class="str">'✓ Session revoked.'</span>);</pre>
+    </div>
+
+    <div class="terminal-block code-block">
+      <div class="code-block-header"><span class="code-lang">terminal</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="prompt">$ </span><span class="cmd">OASIS_USER=ada@example.com OASIS_PASS=SecurePassw0rd! node quickstart.mjs</span>
+<span class="out">✓ Authenticated. Avatar ID: 3f8a9b12-...
+✓ Avatar: ada_lovelace | Karma: 0 | Level: 1
+✓ Karma stats: { total: 0, positive: 0, negative: 0 }
+✓ Session revoked.</span></pre>
+    </div>
+
+    <div class="callout callout-usecase">
+      <div class="callout-icon">🌍</div>
+      <div class="callout-body">
+        <div class="callout-title">Real-world use case — Single Sign-On across your app suite</div>
+        <p>A studio building three games on OASIS (a mobile RPG, a web strategy game and a VR experience) uses the same <code>oasis.auth.login()</code> call in all three. Players log in once and carry their avatar, karma, inventory and wallet across all three titles with zero extra integration work. This is the OASIS SSO promise.</p>
+      </div>
+    </div>
+
+    <h2 id="error-handling">Error Handling Patterns</h2>
+
+    <p>All SDK methods return an <code>OASISResult</code> and never throw unless there's a network failure. The recommended pattern:</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-lang">javascript</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">async function</span> <span class="fn">safeLogin</span>(username, password) {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> result = <span class="kw">await</span> oasis.auth.<span class="fn">login</span>({ username, password });
+    <span class="kw">if</span> (result.isError) {
+      <span class="cmt">// API-level error (wrong credentials, account locked, etc.)</span>
+      console.<span class="fn">warn</span>(<span class="str">'Login error:'</span>, result.message);
+      <span class="kw">return null</span>;
+    }
+    <span class="kw">return</span> result.session;
+  } <span class="kw">catch</span> (err) {
+    <span class="cmt">// Network/fetch error</span>
+    console.<span class="fn">error</span>(<span class="str">'Network error:'</span>, err.message);
+    <span class="kw">return null</span>;
+  }
+}</pre>
+    </div>
+
+    <h2 id="what-next">What's Next?</h2>
+
+    <p>You've made your first authenticated OASIS API call. Next up:</p>
+    <ul>
+      <li><a href="/tutorials/02-avatar-identity">Module 2</a> — deep-dive into Avatar profiles, inventory and sessions</li>
+      <li><a href="/tutorials/03-karma-reputation">Module 3</a> — award and track karma points in your app</li>
+      <li><a href="https://oportal.oasisomniverse.one/developer" target="_blank">Dev Portal</a> — Postman collections, live API explorer, npm packages</li>
+    </ul>
+
+    <div class="tutorial-nav">
+      <a href="/">
+        <div class="nav-direction">← Previous</div>
+        <div class="nav-title">Overview</div>
+      </a>
+      <a class="next" href="/tutorials/02-avatar-identity">
+        <div class="nav-direction">Next →</div>
+        <div class="nav-title">Avatar &amp; Identity</div>
+      </a>
+    </div>
+
+  </main>
+
+  <!-- ON-PAGE RAIL -->
+  <aside class="rail">
+    <div class="rail-title">On This Page</div>
+    <nav class="rail-nav">
+      <a href="#install">Install the SDK</a>
+      <a href="#init">Initialise the Client</a>
+      <a href="#register">Register an Avatar</a>
+      <a href="#login">Log In</a>
+      <a href="#profile">Fetch Profile</a>
+      <a href="#full-example">Full Example</a>
+      <a href="#error-handling">Error Handling</a>
+      <a href="#what-next">What's Next</a>
+    </nav>
+  </aside>
+
+</div>
+
+<script src="../assets/js/site.js"></script>
+</body>
+</html>

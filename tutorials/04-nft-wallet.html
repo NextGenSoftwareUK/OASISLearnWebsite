@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 4: NFTs &amp; Wallet — OASIS Learn</title>
+<meta name="description" content="Create NFT collections, mint tokens, collect GeoNFTs and bridge Web3 assets using the OASIS multi-chain wallet layer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Titillium+Web:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<button class="mobile-menu-btn">☰</button>
+<div class="layout">
+  <aside class="sidebar">
+    <a class="sidebar-logo" href="/"><div class="sidebar-logo-icon">O</div><div class="sidebar-logo-text"><span class="site-name">OASIS LEARN</span><span class="site-sub">Developer Tutorials</span></div></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Getting Started</div>
+      <a class="nav-item" href="/">Overview</a>
+      <a class="nav-item" href="/tutorials/01-getting-started"><span class="step-num">1</span> Quick Start</a>
+      <div class="nav-section-title">Core Concepts</div>
+      <a class="nav-item" href="/tutorials/02-avatar-identity"><span class="step-num">2</span> Avatar &amp; Identity</a>
+      <a class="nav-item" href="/tutorials/03-karma-reputation"><span class="step-num">3</span> Karma &amp; Reputation</a>
+      <a class="nav-item active" href="/tutorials/04-nft-wallet"><span class="step-num">4</span> NFTs &amp; Wallet</a>
+      <a class="nav-item" href="/tutorials/05-data-holons"><span class="step-num">5</span> Data &amp; Holons</a>
+      <div class="nav-section-title">Building Apps</div>
+      <a class="nav-item" href="/tutorials/06-first-oapp"><span class="step-num">6</span> Your First OApp</a>
+      <a class="nav-item" href="/tutorials/07-metaverse-game"><span class="step-num">7</span> Metaverse &amp; Games</a>
+      <a class="nav-item" href="/tutorials/08-providers-production"><span class="step-num">8</span> Providers &amp; Production</a>
+      <div class="nav-section-title">Reference</div>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS" target="_blank">GitHub ↗</a>
+      <a class="nav-item" href="https://oasisomniverse.gitbook.io/oasis-platform" target="_blank">GitBook Docs ↗</a>
+      <a class="nav-item" href="https://oportal.oasisomniverse.one/developer" target="_blank">Dev Portal ↗</a>
+    </nav>
+    <div class="sidebar-footer"><a href="https://oasisomniverse.one" target="_blank">oasisomniverse.one</a><a href="https://discord.gg/oasis" target="_blank">Discord Community</a></div>
+  </aside>
+
+  <main class="main">
+    <div class="progress-bar-wrap"><div class="progress-bar" style="width:50%"></div></div>
+
+    <div class="page-header">
+      <div class="breadcrumb"><a href="/">OASIS Learn</a><span class="breadcrumb-sep">/</span><span>Module 4</span></div>
+      <div class="page-meta">
+        <span class="badge badge-intermediate">Intermediate</span>
+        <span class="badge badge-time">⏱ 30 min</span>
+      </div>
+      <h1 class="page-title">NFTs &amp; Wallet — Multi-Chain Digital Assets</h1>
+      <p class="page-desc">OASIS wraps every blockchain's NFT standard behind one API. Create collections, mint tokens, place GeoNFTs on the real-world map, and import existing Web3 assets — without touching a single private key in your app code.</p>
+    </div>
+
+    <div class="build-summary">
+      <h4>What you'll learn</h4>
+      <ul>
+        <li>How the OASIS provider-agnostic NFT layer works</li>
+        <li>Create a WEB4 NFT collection and mint tokens into it</li>
+        <li>Load and collect NFTs for an avatar</li>
+        <li>Create and collect GeoNFTs (location-anchored NFTs on the world map)</li>
+        <li>Bridge existing Web3 NFTs into the OASIS</li>
+        <li>Send tokens via the multi-chain wallet</li>
+      </ul>
+    </div>
+
+    <h2 id="concepts">How OASIS NFTs Work</h2>
+    <p>Traditional NFTs are chain-specific. An NFT on Solana doesn't exist on Ethereum, and vice versa. OASIS introduces the <strong>WEB4 NFT</strong> — a chain-agnostic digital asset record that the platform can represent on <em>any</em> supported provider (Solana, Ethereum, EOSIO, Holochain, or OASIS' own storage) based on your configuration.</p>
+
+    <p>From your app's perspective you always call the same API regardless of which chain is backing the NFT. The OASIS routing layer handles minting on the configured provider, IPFS metadata pinning and cross-chain bridging transparently.</p>
+
+    <div class="callout callout-note">
+      <div class="callout-icon">🔗</div>
+      <div class="callout-body">
+        <div class="callout-title">Supported NFT providers</div>
+        <p>Solana (via Metaplex), Ethereum/EVM (ERC-721/1155), EOSIO, Holochain, IPFS + OASIS native storage. The active provider is set in your OASIS node config or passed per-request as <code>providerType</code>.</p>
+      </div>
+    </div>
+
+    <h2 id="collection">Creating an NFT Collection</h2>
+    <p>A collection groups related NFTs — like all items in your game, or all editions of a limited drop. Create it once; mint into it repeatedly.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">create-collection.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">import</span> { oasis } <span class="kw">from</span> <span class="str">'./oasis.js'</span>;
+
+<span class="kw">const</span> { result: collection } = <span class="kw">await</span> oasis.nft.<span class="fn">createWeb4NFTCollectionAsync</span>({
+  name:        <span class="str">'Founders Weapons'</span>,
+  description: <span class="str">'Legendary weapons for OASIS Founders NFT holders'</span>,
+  symbol:      <span class="str">'FWPN'</span>,
+  imageUrl:    <span class="str">'https://myapp.com/assets/collection-banner.png'</span>,
+  maxSupply:   <span class="num">1000</span>,               <span class="cmt">// 0 = unlimited</span>
+  royaltyBps:  <span class="num">500</span>,                <span class="cmt">// 5% secondary royalty (basis points)</span>
+  mintedByAvatarId: avatarId       <span class="cmt">// who created the collection</span>
+});
+
+console.<span class="fn">log</span>(<span class="str">'Collection ID:'</span>, collection.id);
+console.<span class="fn">log</span>(<span class="str">'On-chain address:'</span>, collection.mintAddress);</pre>
+    </div>
+
+    <h2 id="mint">Minting NFTs</h2>
+    <p>Import an NFT definition into the OASIS — this triggers minting on the configured provider and returns the on-chain address.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">mint-nft.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="cmt">// Mint a single WEB4 NFT into an existing collection</span>
+<span class="kw">const</span> { result: nft } = <span class="kw">await</span> oasis.nft.<span class="fn">importWeb4NFTAsync</span>({
+  importedByAvatarId: avatarId
+}, {
+  <span class="cmt">// NFT metadata</span>
+  title:          <span class="str">'Sword of Light #001'</span>,
+  description:    <span class="str">'A legendary blade forged in the first age of Our World.'</span>,
+  imageUrl:       <span class="str">'https://myapp.com/assets/sword-of-light.png'</span>,
+  animationUrl:   <span class="str">'https://myapp.com/assets/sword-glow.mp4'</span>,  <span class="cmt">// optional</span>
+  collectionId:   collection.id,
+  attributes: [
+    { traitType: <span class="str">'Rarity'</span>,  value: <span class="str">'Legendary'</span> },
+    { traitType: <span class="str">'Element'</span>, value: <span class="str">'Light'</span>     },
+    { traitType: <span class="str">'Damage'</span>,  value: <span class="str">'250-300'</span>   }
+  ],
+  externalUrl:  <span class="str">'https://myapp.com/items/sword-001'</span>,
+  quantity:     <span class="num">1</span>                     <span class="cmt">// 1 = unique; >1 = semi-fungible</span>
+});
+
+console.<span class="fn">log</span>(<span class="str">'Minted NFT ID:'</span>, nft.oasisNFTId);
+console.<span class="fn">log</span>(<span class="str">'Mint address:'</span>,  nft.mintAddress);
+console.<span class="fn">log</span>(<span class="str">'Metadata URI:'</span>,  nft.metadataUri);</pre>
+    </div>
+
+    <h2 id="load">Loading NFTs</h2>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-lang">javascript</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="cmt">// All WEB4 NFTs owned by the logged-in avatar</span>
+<span class="kw">const</span> { result: myNFTs } = <span class="kw">await</span> oasis.nft.<span class="fn">loadAllWeb4NFTsForAvatarAsync</span>({ avatarId });
+
+myNFTs.<span class="fn">forEach</span>(nft =&gt; {
+  console.<span class="fn">log</span>(`${nft.title} — ${nft.mintAddress}`);
+});
+
+<span class="cmt">// All WEB4 NFTs across all avatars (admin / marketplace view)</span>
+<span class="kw">const</span> { result: allNFTs } = <span class="kw">await</span> oasis.nft.<span class="fn">loadAllWeb4NFTsAsync</span>();
+
+<span class="cmt">// Look up by mint wallet address (useful for verifying ownership)</span>
+<span class="kw">const</span> { result: byWallet } = <span class="kw">await</span> oasis.nft.<span class="fn">loadAllWeb3NFTsForMintAddressAsync</span>({
+  mintWalletAddress: <span class="str">'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v'</span>
+});</pre>
+    </div>
+
+    <h2 id="collect">Collecting (Transferring) an NFT</h2>
+    <p>When a user earns or purchases an NFT, call <code>collectNFTAsync</code> to transfer it to their avatar's wallet.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-lang">javascript</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">const</span> result = <span class="kw">await</span> oasis.nft.<span class="fn">collectNFTAsync</span>({
+  oasisNFTId:    nft.oasisNFTId,  <span class="cmt">// the NFT to transfer</span>
+  avatarId,                       <span class="cmt">// recipient avatar</span>
+  providerType:  <span class="str">'Solana'</span>         <span class="cmt">// optional; defaults to node config</span>
+});
+
+<span class="kw">if</span> (!result.isError) {
+  console.<span class="fn">log</span>(<span class="str">'NFT transferred!'</span>, result.result?.transactionId);
+}</pre>
+    </div>
+
+    <h2 id="geonft">GeoNFTs — Location-Anchored Assets</h2>
+    <p>A <strong>GeoNFT</strong> is an NFT placed at a real-world GPS coordinate on the OASIS Our World map. Players must physically travel to (or virtually visit) that location to collect it. This enables location-based games, treasure hunts, city-wide scavenger hunts and real-world brand activations.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">geo-nft.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="cmt">// Place a GeoNFT on the world map</span>
+<span class="kw">const</span> { result: geoNFT } = <span class="kw">await</span> oasis.nft.<span class="fn">importWeb4NFTAsync</span>({
+  importedByAvatarId: avatarId
+}, {
+  title:       <span class="str">'Hidden Treasure of London'</span>,
+  description: <span class="str">'Find this cache near Tower Bridge!'</span>,
+  imageUrl:    <span class="str">'https://myapp.com/assets/treasure-chest.png'</span>,
+  isGeoNFT:    <span class="kw">true</span>,
+  lat:          <span class="num">51.5055</span>,     <span class="cmt">// Tower Bridge, London</span>
+  lng:         -<span class="num">0.0754</span>,
+  collectRadius: <span class="num">50</span>        <span class="cmt">// metres — how close a player must be to collect</span>
+});
+
+<span class="cmt">// Load all GeoNFTs on the map (public — no auth needed)</span>
+<span class="kw">const</span> { result: mapNFTs } = <span class="kw">await</span> oasis.nft.<span class="fn">loadAllGeoNFTsAsync</span>();
+
+<span class="cmt">// Player collects a nearby GeoNFT</span>
+<span class="kw">await</span> oasis.nft.<span class="fn">collectGeoNFTAsync</span>({
+  oasisNFTId: geoNFT.oasisNFTId,
+  avatarId,
+  playerLat:  <span class="num">51.5056</span>,
+  playerLng: -<span class="num">0.0755</span>
+  <span class="cmt">// Server validates player is within collectRadius</span>
+});</pre>
+    </div>
+
+    <div class="callout callout-usecase">
+      <div class="callout-icon">🗺️</div>
+      <div class="callout-body">
+        <div class="callout-title">Real-world use case — city-wide treasure hunt</div>
+        <p>A tourist board placed 50 GeoNFTs across their city, each representing a historic landmark. Players who visit all 50 locations and collect the NFTs receive a "City Explorer" badge NFT and a real discount at local restaurants (verified by showing their OASIS wallet). Footfall to lesser-known landmarks increased 3×.</p>
+      </div>
+    </div>
+
+    <h2 id="bridge">Bridging Web3 NFTs into OASIS</h2>
+    <p>Already have NFTs on Solana, Ethereum or another chain? Import them into the OASIS unified layer so they appear in the avatar's wallet alongside WEB4 NFTs.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-lang">javascript</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="cmt">// Import an existing Web3 NFT by its on-chain mint address</span>
+<span class="kw">const</span> { result: bridged } = <span class="kw">await</span> oasis.nft.<span class="fn">importWeb3NFTAsync</span>({
+  mintAddress:    <span class="str">'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v'</span>,
+  providerType:   <span class="str">'Solana'</span>,
+  avatarId
+});
+
+console.<span class="fn">log</span>(<span class="str">'Bridged NFT:'</span>, bridged.title, bridged.oasisNFTId);</pre>
+    </div>
+
+    <h2 id="wallet">Wallet — Sending Tokens</h2>
+    <p>The OASIS wallet layer abstracts over every chain's token standard. Send any supported token without knowing which chain it lives on.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">wallet.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="cmt">// Send a token to another avatar (must be authenticated)</span>
+<span class="kw">const</span> result = <span class="kw">await</span> oasis.wallet.<span class="fn">sendTokenAsync</span>({
+  toAvatarId:    recipientAvatarId,     <span class="cmt">// or toWalletAddress for raw chain transfer</span>
+  amount:        <span class="num">10.5</span>,
+  token:         <span class="str">'OLAND'</span>,               <span class="cmt">// token symbol (OLAND, SOL, ETH, SEEDS…)</span>
+  providerType:  <span class="str">'Solana'</span>,
+  memo:          <span class="str">'Quest reward payment'</span>
+});
+
+<span class="kw">if</span> (!result.isError) {
+  console.<span class="fn">log</span>(<span class="str">'Transaction ID:'</span>, result.result?.transactionId);
+}</pre>
+    </div>
+
+    <h2 id="export">Exporting NFTs</h2>
+    <p>Export a WEB4 NFT to a standard JSON file (useful for cold-storage backups or marketplace listings):</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-lang">javascript</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="cmt">// Export NFT metadata to JSON</span>
+<span class="kw">const</span> { result: exported } = <span class="kw">await</span> oasis.nft.<span class="fn">exportWeb4NFTAsync</span>({
+  oasisNFTId: nft.oasisNFTId
+});
+
+<span class="cmt">// Export directly to a file path (server-side)</span>
+<span class="kw">await</span> oasis.nft.<span class="fn">exportWeb4NFTToFileAsync</span>({
+  oasisNFTId:       nft.oasisNFTId,
+  fullPathToExportTo: <span class="str">'/exports/sword-of-light-001.json'</span>
+});</pre>
+    </div>
+
+    <h2 id="api-reference">NFT &amp; Wallet API Quick Reference</h2>
+    <ul class="method-list">
+      <li><span class="method-name">oasis.nft.createWeb4NFTCollectionAsync({name, symbol, maxSupply, ...})</span><span class="method-desc">Create an NFT collection</span></li>
+      <li><span class="method-name">oasis.nft.importWeb4NFTAsync({importedByAvatarId}, metadata)</span><span class="method-desc">Mint a new WEB4 NFT</span></li>
+      <li><span class="method-name">oasis.nft.collectNFTAsync({oasisNFTId, avatarId})</span><span class="method-desc">Transfer NFT to an avatar</span></li>
+      <li><span class="method-name">oasis.nft.loadAllWeb4NFTsForAvatarAsync({avatarId})</span><span class="method-desc">List avatar's NFTs</span></li>
+      <li><span class="method-name">oasis.nft.loadAllGeoNFTsAsync()</span><span class="method-desc">All GeoNFTs on the world map</span></li>
+      <li><span class="method-name">oasis.nft.collectGeoNFTAsync({oasisNFTId, avatarId, playerLat, playerLng})</span><span class="method-desc">Collect a GeoNFT (validates proximity)</span></li>
+      <li><span class="method-name">oasis.nft.importWeb3NFTAsync({mintAddress, providerType, avatarId})</span><span class="method-desc">Bridge a Web3 NFT into OASIS</span></li>
+      <li><span class="method-name">oasis.nft.exportWeb4NFTAsync({oasisNFTId})</span><span class="method-desc">Export NFT metadata to JSON</span></li>
+      <li><span class="method-name">oasis.wallet.sendTokenAsync({toAvatarId, amount, token, ...})</span><span class="method-desc">Send tokens cross-chain</span></li>
+    </ul>
+
+    <div class="tutorial-nav">
+      <a href="/tutorials/03-karma-reputation">
+        <div class="nav-direction">← Previous</div>
+        <div class="nav-title">Karma &amp; Reputation</div>
+      </a>
+      <a class="next" href="/tutorials/05-data-holons">
+        <div class="nav-direction">Next →</div>
+        <div class="nav-title">Data &amp; Holons</div>
+      </a>
+    </div>
+  </main>
+
+  <aside class="rail">
+    <div class="rail-title">On This Page</div>
+    <nav class="rail-nav">
+      <a href="#concepts">How NFTs Work</a>
+      <a href="#collection">Creating a Collection</a>
+      <a href="#mint">Minting NFTs</a>
+      <a href="#load">Loading NFTs</a>
+      <a href="#collect">Collecting NFTs</a>
+      <a href="#geonft">GeoNFTs</a>
+      <a href="#bridge">Bridging Web3 NFTs</a>
+      <a href="#wallet">Wallet</a>
+      <a href="#export">Exporting</a>
+      <a href="#api-reference">API Reference</a>
+    </nav>
+  </aside>
+</div>
+<script src="../assets/js/site.js"></script>
+</body>
+</html>
