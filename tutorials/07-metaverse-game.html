@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 7: Metaverse &amp; Game Development — OASIS Learn</title>
+<meta name="description" content="Place GeoNFTs on the world map, create Celestial Bodies, design quests and missions, and integrate with the OGEngine.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Titillium+Web:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<button class="mobile-menu-btn">☰</button>
+<div class="layout">
+  <aside class="sidebar">
+    <a class="sidebar-logo" href="/"><div class="sidebar-logo-icon">O</div><div class="sidebar-logo-text"><span class="site-name">OASIS LEARN</span><span class="site-sub">Developer Tutorials</span></div></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Getting Started</div>
+      <a class="nav-item" href="/">Overview</a>
+      <a class="nav-item" href="/tutorials/01-getting-started"><span class="step-num">1</span> Quick Start</a>
+      <div class="nav-section-title">Core Concepts</div>
+      <a class="nav-item" href="/tutorials/02-avatar-identity"><span class="step-num">2</span> Avatar &amp; Identity</a>
+      <a class="nav-item" href="/tutorials/03-karma-reputation"><span class="step-num">3</span> Karma &amp; Reputation</a>
+      <a class="nav-item" href="/tutorials/04-nft-wallet"><span class="step-num">4</span> NFTs &amp; Wallet</a>
+      <a class="nav-item" href="/tutorials/05-data-holons"><span class="step-num">5</span> Data &amp; Holons</a>
+      <div class="nav-section-title">Building Apps</div>
+      <a class="nav-item" href="/tutorials/06-first-oapp"><span class="step-num">6</span> Your First OApp</a>
+      <a class="nav-item active" href="/tutorials/07-metaverse-game"><span class="step-num">7</span> Metaverse &amp; Games</a>
+      <a class="nav-item" href="/tutorials/08-providers-production"><span class="step-num">8</span> Providers &amp; Production</a>
+      <div class="nav-section-title">Reference</div>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS" target="_blank">GitHub ↗</a>
+      <a class="nav-item" href="https://oasisomniverse.gitbook.io/oasis-platform" target="_blank">GitBook Docs ↗</a>
+      <a class="nav-item" href="https://oportal.oasisomniverse.one/developer" target="_blank">Dev Portal ↗</a>
+    </nav>
+    <div class="sidebar-footer"><a href="https://oasisomniverse.one" target="_blank">oasisomniverse.one</a><a href="https://discord.gg/oasis" target="_blank">Discord Community</a></div>
+  </aside>
+
+  <main class="main">
+    <div class="progress-bar-wrap"><div class="progress-bar" style="width:87.5%"></div></div>
+
+    <div class="page-header">
+      <div class="breadcrumb"><a href="/">OASIS Learn</a><span class="breadcrumb-sep">/</span><span>Module 7</span></div>
+      <div class="page-meta">
+        <span class="badge badge-advanced">Advanced</span>
+        <span class="badge badge-time">⏱ 40 min</span>
+      </div>
+      <h1 class="page-title">Metaverse &amp; Game Development</h1>
+      <p class="page-desc">The WEB5 STAR SDK gives you access to OASIS' spatial layer — the map, virtual worlds (Celestial Bodies), quests, missions, inventory items and the OGEngine game framework that powers Our World.</p>
+    </div>
+
+    <div class="build-summary">
+      <h4>What you'll learn</h4>
+      <ul>
+        <li>The OASIS spatial data model: Celestial Bodies, Spaces, Zones</li>
+        <li>Create a virtual world and populate it with map points</li>
+        <li>Design quests and missions with objectives and rewards</li>
+        <li>Place GeoNFTs on the real-world map and in virtual spaces</li>
+        <li>Add inventory items and set up collection mechanics</li>
+        <li>Integrate with the OGEngine (Our World game engine)</li>
+      </ul>
+    </div>
+
+    <h2 id="star-sdk">The WEB5 STAR SDK</h2>
+    <p>Game and metaverse features live in the <strong>WEB5 STAR API</strong> — a layer above WEB4 that adds spatial awareness, game mechanics and celestial body management. Install alongside the WEB4 SDK:</p>
+
+    <div class="terminal-block code-block">
+      <div class="code-block-header"><span class="code-lang">terminal</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="cmd">npm install @oasisomniverse/web4-api @oasisomniverse/web5-api</span></pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">oasis-star.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">import</span> { OASISClient } <span class="kw">from</span> <span class="str">'@oasisomniverse/web4-api'</span>;
+<span class="kw">import</span> { STARClient } <span class="kw">from</span> <span class="str">'@oasisomniverse/web5-api'</span>;
+
+<span class="kw">export const</span> oasis = <span class="kw">new</span> <span class="cls">OASISClient</span>({ persistSession: <span class="kw">true</span> });
+<span class="kw">export const</span> star  = <span class="kw">new</span> <span class="cls">STARClient</span>({
+  baseUrl: <span class="str">'https://api.web5.oasisomniverse.one'</span>,
+  oasisClient: oasis    <span class="cmt">// shares the same auth token</span>
+});</pre>
+    </div>
+
+    <h2 id="celestial-bodies">Celestial Bodies — Virtual Worlds</h2>
+    <p>A <strong>Celestial Body</strong> is a virtual world — a planet, moon, space station, dungeon or any other navigable environment. Players travel to Celestial Bodies via the Our World map and can interact with their contents.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">create-world.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">import</span> { star } <span class="kw">from</span> <span class="str">'./oasis-star.js'</span>;
+
+<span class="kw">const</span> { avatarId } = oasis.auth.<span class="fn">getSession</span>();
+
+<span class="cmt">// Create a new virtual world</span>
+<span class="kw">const</span> { result: world } = <span class="kw">await</span> star.celestialBodies.<span class="fn">createPlanet</span>({
+  name:        <span class="str">'Aetheria'</span>,
+  description: <span class="str">'A floating archipelago world of ancient ruins and sky-whales.'</span>,
+  createdByAvatarId: avatarId,
+
+  <span class="cmt">// World properties</span>
+  size:        <span class="str">'Large'</span>,         <span class="cmt">// 'Tiny' | 'Small' | 'Medium' | 'Large' | 'Massive'</span>
+  biome:       <span class="str">'SkyIslands'</span>,
+  atmosphere:  <span class="str">'Breathable'</span>,
+  gravity:     <span class="str">'Low'</span>,
+
+  <span class="cmt">// Map placement — where on the Our World map does this world's portal appear?</span>
+  mapLat:      <span class="num">51.5</span>,
+  mapLng:     -<span class="num">0.12</span>,
+  imageUrl:    <span class="str">'https://myapp.com/worlds/aetheria-thumb.jpg'</span>,
+  glbModelUrl: <span class="str">'https://myapp.com/worlds/aetheria.glb'</span>   <span class="cmt">// 3D model</span>
+});
+
+console.<span class="fn">log</span>(<span class="str">'World ID:'</span>, world.id);
+console.<span class="fn">log</span>(<span class="str">'Map portal placed at:'</span>, world.mapLat, world.mapLng);</pre>
+    </div>
+
+    <h3>World hierarchy</h3>
+    <div class="api-table-wrap">
+      <table>
+        <thead><tr><th>Type</th><th>Description</th><th>API method</th></tr></thead>
+        <tbody>
+          <tr><td><code>Planet</code></td><td>Main world — players' primary destination</td><td><code>star.celestialBodies.createPlanet()</code></td></tr>
+          <tr><td><code>Moon</code></td><td>Satellite world, orbiting a Planet</td><td><code>star.celestialBodies.createMoon()</code></td></tr>
+          <tr><td><code>SpaceStation</code></td><td>Orbital hub — hub world or trading post</td><td><code>star.celestialBodies.createSpaceStation()</code></td></tr>
+          <tr><td><code>Asteroid</code></td><td>Small navigable body, often for mini-games</td><td><code>star.celestialBodies.createAsteroid()</code></td></tr>
+          <tr><td><code>GrandQuincunx</code></td><td>Root of the celestial hierarchy — the multiverse</td><td>Pre-created by OASIS</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="map-points">Map Points — Anchoring to the Real World</h2>
+    <p>Map points let you pin content — buildings, portals, NPCs, loot crates, events — to real-world GPS coordinates that appear on the Our World AR/map layer. This is what powers location-based gameplay.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">map-points.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">import</span> { oasis, star } <span class="kw">from</span> <span class="str">'./oasis-star.js'</span>;
+
+<span class="cmt">// Add a map point (e.g. a portal to Aetheria near the Eiffel Tower)</span>
+<span class="kw">const</span> { result: point } = <span class="kw">await</span> oasis.map.<span class="fn">createMapPoint</span>({
+  title:           <span class="str">'Portal to Aetheria'</span>,
+  description:     <span class="str">'Step through to reach the sky-island world.'</span>,
+  lat:              <span class="num">48.8584</span>,   <span class="cmt">// Eiffel Tower</span>
+  lng:              <span class="num">2.2945</span>,
+  type:            <span class="str">'Portal'</span>,   <span class="cmt">// 'Portal' | 'NPC' | 'LootCrate' | 'Event' | 'Building'</span>
+  linkedWorldId:   world.id,
+  iconUrl:         <span class="str">'https://myapp.com/icons/portal.png'</span>,
+  arModelUrl:      <span class="str">'https://myapp.com/ar/portal-gate.glb'</span>,
+  activationRadius: <span class="num">30</span>        <span class="cmt">// metres — how close to activate</span>
+});
+
+<span class="cmt">// Load all map points in a bounding box</span>
+<span class="kw">const</span> { result: nearby } = <span class="kw">await</span> oasis.map.<span class="fn">getMapPointsInBounds</span>({
+  minLat: <span class="num">48.84</span>, maxLat: <span class="num">48.87</span>,
+  minLng:  <span class="num">2.27</span>, maxLng:  <span class="num">2.32</span>
+});
+
+<span class="cmt">// Load map points for a specific world</span>
+<span class="kw">const</span> { result: worldPoints } = <span class="kw">await</span> oasis.map.<span class="fn">getMapPointsForWorld</span>({ worldId: world.id });</pre>
+    </div>
+
+    <h2 id="quests">Quests &amp; Missions</h2>
+    <p>Quests are structured goals players complete to earn rewards. Missions are groups of quests that form a narrative arc. Both are first-class OASIS objects stored as typed Holons.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">create-quest.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">import</span> { star } <span class="kw">from</span> <span class="str">'./oasis-star.js'</span>;
+
+<span class="cmt">// Create a quest</span>
+<span class="kw">const</span> { result: quest } = <span class="kw">await</span> star.quests.<span class="fn">createQuest</span>({
+  name:        <span class="str">'The Lost Sky Compass'</span>,
+  description: <span class="str">'Find the three fragments of the ancient Sky Compass to unlock the Storm Keep.'</span>,
+  worldId:     world.id,
+  difficulty:  <span class="str">'Medium'</span>,
+  estimatedMinutes: <span class="num">30</span>,
+
+  objectives: [
+    { title: <span class="str">'Find the Eastern Fragment'</span>,  type: <span class="str">'CollectItem'</span>, itemId: <span class="str">'compass-east'</span>  },
+    { title: <span class="str">'Find the Western Fragment'</span>,  type: <span class="str">'CollectItem'</span>, itemId: <span class="str">'compass-west'</span>  },
+    { title: <span class="str">'Find the Northern Fragment'</span>, type: <span class="str">'CollectItem'</span>, itemId: <span class="str">'compass-north'</span> },
+    { title: <span class="str">'Return to Sky Cartographer'</span>, type: <span class="str">'TalkToNPC'</span>,   npcId:  <span class="str">'sky-cart-001'</span> }
+  ],
+
+  rewards: {
+    karma:   <span class="str">'CompletingQuest'</span>,
+    xp:      <span class="num">500</span>,
+    items:   [{ itemId: <span class="str">'storm-keep-key'</span>, quantity: <span class="num">1</span> }],
+    nftMint: <span class="kw">true</span>   <span class="cmt">// automatically mint commemorative NFT on completion</span>
+  },
+
+  createdByAvatarId: avatarId
+});
+
+<span class="cmt">// Group quests into a mission (narrative arc)</span>
+<span class="kw">const</span> { result: mission } = <span class="kw">await</span> star.missions.<span class="fn">createMission</span>({
+  name:     <span class="str">'Secrets of Aetheria'</span>,
+  worldId:  world.id,
+  questIds: [quest.id],    <span class="cmt">// add more quests as you create them</span>
+  createdByAvatarId: avatarId
+});</pre>
+    </div>
+
+    <h3>Tracking quest progress</h3>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-lang">javascript</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="cmt">// Start a quest for an avatar</span>
+<span class="kw">await</span> star.quests.<span class="fn">startQuestForAvatar</span>({ questId: quest.id, avatarId });
+
+<span class="cmt">// Mark an objective complete</span>
+<span class="kw">await</span> star.quests.<span class="fn">completeObjective</span>({
+  questId:     quest.id,
+  objectiveId: quest.objectives[<span class="num">0</span>].id,
+  avatarId
+});
+
+<span class="cmt">// Complete the quest (triggers reward payout)</span>
+<span class="kw">await</span> star.quests.<span class="fn">completeQuestForAvatar</span>({ questId: quest.id, avatarId });
+
+<span class="cmt">// Load all active quests for a player</span>
+<span class="kw">const</span> { result: active } = <span class="kw">await</span> star.quests.<span class="fn">getActiveQuestsForAvatar</span>({ avatarId });</pre>
+    </div>
+
+    <h2 id="inventory-items">Inventory Items</h2>
+    <p>In-world objects players can pick up — keys, crafting materials, weapons, consumables. Unlike NFTs, inventory items don't require on-chain minting and can be stacked.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-lang">javascript</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="cmt">// Define an item type (do this once, at game setup)</span>
+<span class="kw">const</span> { result: itemType } = <span class="kw">await</span> star.inventoryItems.<span class="fn">createItemType</span>({
+  id:          <span class="str">'compass-east'</span>,
+  name:        <span class="str">'Eastern Compass Fragment'</span>,
+  description: <span class="str">'One piece of the ancient Sky Compass.'</span>,
+  iconUrl:     <span class="str">'https://myapp.com/items/compass-east.png'</span>,
+  glbModelUrl: <span class="str">'https://myapp.com/items/compass-east.glb'</span>,
+  stackable:   <span class="kw">false</span>,
+  tradeable:   <span class="kw">false</span>,
+  rarity:      <span class="str">'Uncommon'</span>
+});
+
+<span class="cmt">// Give an item to a player (after they find it in-world)</span>
+<span class="kw">await</span> oasis.avatar.<span class="fn">addItemToAvatarInventory</span>({
+  itemId:   itemType.id,
+  name:     itemType.name,
+  quantity: <span class="num">1</span>
+});</pre>
+    </div>
+
+    <h2 id="ogengine">Integrating with OGEngine</h2>
+    <p>The <strong>OGEngine</strong> (Our World Game Engine) is the Unity/Unreal-backed 3D engine that powers the flagship Our World game. If you're building a Unity or Unreal game, use the OGEngine SDK to access all OASIS data natively in-engine.</p>
+
+    <div class="callout callout-note">
+      <div class="callout-icon">🎮</div>
+      <div class="callout-body">
+        <div class="callout-title">OGEngine SDK</div>
+        <p>Available as a <strong>Unity package</strong> and <strong>Unreal plugin</strong>. Download from the <a href="https://oportal.oasisomniverse.one/developer" target="_blank">Dev Portal</a> under "SDKs &amp; DevKits". The package exposes <code>OASISManager</code> MonoBehaviour / Actor component that wraps the full WEB4 + WEB5 API surface with coroutine-friendly async wrappers.</p>
+      </div>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-lang">csharp (Unity)</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">using</span> NextGenSoftware.OASIS.API.Core;
+<span class="kw">using</span> NextGenSoftware.OASIS.STAR;
+
+<span class="kw">public class</span> <span class="cls">QuestManager</span> : MonoBehaviour
+{
+    <span class="kw">private async void</span> <span class="fn">Start</span>()
+    {
+        <span class="cmt">// Login with saved credentials</span>
+        <span class="kw">var</span> loginResult = <span class="kw">await</span> OASISManager.Instance.Avatar.<span class="fn">LoginAsync</span>(
+            email: PlayerPrefs.<span class="fn">GetString</span>(<span class="str">"email"</span>),
+            password: SecureStorage.<span class="fn">Get</span>(<span class="str">"password"</span>)
+        );
+
+        <span class="cmt">// Load active quests</span>
+        <span class="kw">var</span> quests = <span class="kw">await</span> OASISManager.Instance.Quests
+            .<span class="fn">GetActiveQuestsForAvatarAsync</span>(loginResult.Result.Id);
+
+        <span class="kw">foreach</span> (<span class="kw">var</span> quest <span class="kw">in</span> quests.Result)
+            Debug.<span class="fn">Log</span>($<span class="str">"Active quest: {quest.Name}"</span>);
+    }
+
+    <span class="kw">public async void</span> <span class="fn">OnItemCollected</span>(string itemId)
+    {
+        <span class="cmt">// Mark objective complete in current active quest</span>
+        <span class="kw">await</span> OASISManager.Instance.Quests.<span class="fn">CompleteObjectiveAsync</span>(
+            currentQuestId, itemId, currentAvatarId
+        );
+    }
+}</pre>
+    </div>
+
+    <h2 id="geospatial">GeoSpatial Tips for Game Designers</h2>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">📍</div>
+      <div class="callout-body">
+        <div class="callout-title">Best practices for GeoNFT placement</div>
+        <ul>
+          <li><strong>Density matters</strong> — space GeoNFTs at least 100m apart in dense urban areas; 500m+ in rural settings to avoid clustering.</li>
+          <li><strong>Safety first</strong> — never place collectible points inside private property, on busy roads, or in waterways. The OASIS moderation team reviews flag reports.</li>
+          <li><strong>Accessibility</strong> — always provide a "virtual collect" option for users who cannot physically travel, activated by a karma payment or time gate.</li>
+          <li><strong>Seasonality</strong> — use the <code>activeFrom</code> / <code>activeTo</code> fields on map points to run time-limited events without deleting and recreating them.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout callout-usecase">
+      <div class="callout-icon">🌍</div>
+      <div class="callout-body">
+        <div class="callout-title">Real-world use case — museum interactive trail</div>
+        <p>The Natural History Museum placed GeoNFTs at each exhibit. Visitors scan a QR code at each exhibit to collect the species NFT. Collecting all 24 species unlocks a "Master Naturalist" badge NFT and a free book in the museum shop. Because the NFTs are OASIS-native, they also appear in the visitor's Our World avatar wallet — becoming a permanent, shareable trophy of their visit long after the day is over.</p>
+      </div>
+    </div>
+
+    <h2 id="api-reference">STAR / WEB5 API Quick Reference</h2>
+    <ul class="method-list">
+      <li><span class="method-name">star.celestialBodies.createPlanet({name, description, mapLat, mapLng, ...})</span><span class="method-desc">Create a virtual world</span></li>
+      <li><span class="method-name">star.celestialBodies.getPlanet({id})</span><span class="method-desc">Load a world by ID</span></li>
+      <li><span class="method-name">oasis.map.createMapPoint({lat, lng, type, title, ...})</span><span class="method-desc">Pin content to the world map</span></li>
+      <li><span class="method-name">oasis.map.getMapPointsInBounds({minLat, maxLat, minLng, maxLng})</span><span class="method-desc">Load map points in a bounding box</span></li>
+      <li><span class="method-name">star.quests.createQuest({name, objectives, rewards, worldId, ...})</span><span class="method-desc">Define a quest</span></li>
+      <li><span class="method-name">star.quests.startQuestForAvatar({questId, avatarId})</span><span class="method-desc">Begin a quest for a player</span></li>
+      <li><span class="method-name">star.quests.completeObjective({questId, objectiveId, avatarId})</span><span class="method-desc">Mark a single objective done</span></li>
+      <li><span class="method-name">star.quests.completeQuestForAvatar({questId, avatarId})</span><span class="method-desc">Complete quest and pay out rewards</span></li>
+      <li><span class="method-name">star.missions.createMission({name, questIds, worldId, ...})</span><span class="method-desc">Group quests into a mission</span></li>
+      <li><span class="method-name">star.inventoryItems.createItemType({id, name, rarity, ...})</span><span class="method-desc">Define a collectible item type</span></li>
+    </ul>
+
+    <div class="tutorial-nav">
+      <a href="/tutorials/06-first-oapp">
+        <div class="nav-direction">← Previous</div>
+        <div class="nav-title">Your First OApp</div>
+      </a>
+      <a class="next" href="/tutorials/08-providers-production">
+        <div class="nav-direction">Next →</div>
+        <div class="nav-title">Providers &amp; Production</div>
+      </a>
+    </div>
+  </main>
+
+  <aside class="rail">
+    <div class="rail-title">On This Page</div>
+    <nav class="rail-nav">
+      <a href="#star-sdk">WEB5 STAR SDK</a>
+      <a href="#celestial-bodies">Celestial Bodies</a>
+      <a href="#map-points">Map Points</a>
+      <a href="#quests">Quests &amp; Missions</a>
+      <a href="#inventory-items">Inventory Items</a>
+      <a href="#ogengine">OGEngine (Unity)</a>
+      <a href="#geospatial">GeoSpatial Tips</a>
+      <a href="#api-reference">API Reference</a>
+    </nav>
+  </aside>
+</div>
+<script src="../assets/js/site.js"></script>
+</body>
+</html>

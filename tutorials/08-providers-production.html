@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 8: Providers &amp; Production — OASIS Learn</title>
+<meta name="description" content="Understand the OASIS provider system, configure auto-failover, deploy to Railway or Docker and harden for production.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Titillium+Web:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<button class="mobile-menu-btn">☰</button>
+<div class="layout">
+  <aside class="sidebar">
+    <a class="sidebar-logo" href="/"><div class="sidebar-logo-icon">O</div><div class="sidebar-logo-text"><span class="site-name">OASIS LEARN</span><span class="site-sub">Developer Tutorials</span></div></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Getting Started</div>
+      <a class="nav-item" href="/">Overview</a>
+      <a class="nav-item" href="/tutorials/01-getting-started"><span class="step-num">1</span> Quick Start</a>
+      <div class="nav-section-title">Core Concepts</div>
+      <a class="nav-item" href="/tutorials/02-avatar-identity"><span class="step-num">2</span> Avatar &amp; Identity</a>
+      <a class="nav-item" href="/tutorials/03-karma-reputation"><span class="step-num">3</span> Karma &amp; Reputation</a>
+      <a class="nav-item" href="/tutorials/04-nft-wallet"><span class="step-num">4</span> NFTs &amp; Wallet</a>
+      <a class="nav-item" href="/tutorials/05-data-holons"><span class="step-num">5</span> Data &amp; Holons</a>
+      <div class="nav-section-title">Building Apps</div>
+      <a class="nav-item" href="/tutorials/06-first-oapp"><span class="step-num">6</span> Your First OApp</a>
+      <a class="nav-item" href="/tutorials/07-metaverse-game"><span class="step-num">7</span> Metaverse &amp; Games</a>
+      <a class="nav-item active" href="/tutorials/08-providers-production"><span class="step-num">8</span> Providers &amp; Production</a>
+      <div class="nav-section-title">Reference</div>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS" target="_blank">GitHub ↗</a>
+      <a class="nav-item" href="https://oasisomniverse.gitbook.io/oasis-platform" target="_blank">GitBook Docs ↗</a>
+      <a class="nav-item" href="https://oportal.oasisomniverse.one/developer" target="_blank">Dev Portal ↗</a>
+    </nav>
+    <div class="sidebar-footer"><a href="https://oasisomniverse.one" target="_blank">oasisomniverse.one</a><a href="https://discord.gg/oasis" target="_blank">Discord Community</a></div>
+  </aside>
+
+  <main class="main">
+    <div class="progress-bar-wrap"><div class="progress-bar" style="width:100%"></div></div>
+
+    <div class="page-header">
+      <div class="breadcrumb"><a href="/">OASIS Learn</a><span class="breadcrumb-sep">/</span><span>Module 8</span></div>
+      <div class="page-meta">
+        <span class="badge badge-advanced">Advanced</span>
+        <span class="badge badge-time">⏱ 35 min</span>
+      </div>
+      <h1 class="page-title">Providers &amp; Production Deployment</h1>
+      <p class="page-desc">The OASIS provider system is what makes the platform blockchain-agnostic, resilient and future-proof. This module explains how providers work, how to configure your ONODE for production, and how to deploy with Railway or Docker.</p>
+    </div>
+
+    <div class="build-summary">
+      <h4>What you'll learn</h4>
+      <ul>
+        <li>What OASIS providers are and the full provider catalogue</li>
+        <li>Configure auto-failover, load balancing and auto-replication</li>
+        <li>Switch providers at runtime from your app code</li>
+        <li>Deploy an ONODE (the OASIS backend) to Railway and Docker</li>
+        <li>Environment variables, secrets management and OASIS config</li>
+        <li>Production security: JWT expiry, CORS, rate limiting</li>
+        <li>Monitoring and health checks</li>
+      </ul>
+    </div>
+
+    <h2 id="provider-model">The OASIS Provider Model</h2>
+    <p>Every storage, blockchain and identity operation in OASIS goes through a <strong>provider</strong> — a pluggable adapter that translates OASIS API calls into the native operations of a specific network or database. Your app code never calls Solana, MongoDB or Holochain directly; it calls the OASIS API and the active provider handles the rest.</p>
+
+    <p>This gives you three powerful capabilities out of the box:</p>
+    <ul>
+      <li><strong>Auto-failover</strong> — if the primary provider is unavailable, OASIS automatically retries on the next provider in your priority list. Zero downtime, no code changes.</li>
+      <li><strong>Auto-replication</strong> — write once, and OASIS copies the data to all configured providers simultaneously. Reads come from whichever is fastest.</li>
+      <li><strong>Hot-swap</strong> — change the active provider at runtime (or per-request) without restarting anything.</li>
+    </ul>
+
+    <h2 id="provider-catalogue">Provider Catalogue</h2>
+    <div class="api-table-wrap">
+      <table>
+        <thead><tr><th>Provider</th><th>Type</th><th>Best for</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td><code>MongoDBOASIS</code></td><td>Database</td><td>Fast structured data, default for most apps</td><td>Live</td></tr>
+          <tr><td><code>HoloOASIS</code></td><td>P2P / DHT</td><td>Truly decentralised, agent-centric data</td><td>Live</td></tr>
+          <tr><td><code>IPFSOASIS</code></td><td>File / Content</td><td>Immutable content addressing, large assets</td><td>Live</td></tr>
+          <tr><td><code>SolanaOASIS</code></td><td>Blockchain</td><td>NFTs, tokens, on-chain proofs</td><td>Live</td></tr>
+          <tr><td><code>EthereumOASIS</code></td><td>Blockchain</td><td>EVM smart contracts, ERC-721/1155 NFTs</td><td>Live</td></tr>
+          <tr><td><code>EOSIOasisOASIS</code></td><td>Blockchain</td><td>High-throughput EOSIO/SEEDS transactions</td><td>Live</td></tr>
+          <tr><td><code>Neo4jOASIS</code></td><td>Graph DB</td><td>Complex relationship queries, social graphs</td><td>Live</td></tr>
+          <tr><td><code>SQLLiteDBOASIS</code></td><td>Database</td><td>Local / edge deployments, offline-first</td><td>Live</td></tr>
+          <tr><td><code>ThreeFoldOASIS</code></td><td>Decentralised compute</td><td>Sovereign hosting, ThreeFold grid</td><td>Live</td></tr>
+          <tr><td><code>AzureCosmosDBOASIS</code></td><td>Cloud DB</td><td>Enterprise Azure deployments</td><td>Live</td></tr>
+          <tr><td><code>ActivityPubOASIS</code></td><td>Federation</td><td>Fediverse / Mastodon integration</td><td>Beta</td></tr>
+          <tr><td><code>ChainlinkOASIS</code></td><td>Oracle</td><td>Real-world data feeds, price oracles</td><td>Beta</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="configure-providers">Configuring Providers in Your ONODE</h2>
+    <p>The OASIS ONODE reads provider config from <code>appsettings.json</code>. Here's a production-ready example with MongoDB as primary and Holochain as failover:</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">appsettings.json</span><button class="copy-btn">Copy</button></div>
+      <pre>{
+  <span class="str">"OASIS"</span>: {
+    <span class="str">"StorageProviders"</span>: {
+      <span class="str">"MongoDBOASIS"</span>: {
+        <span class="str">"ConnectionString"</span>: <span class="str">"${MONGO_CONNECTION_STRING}"</span>,
+        <span class="str">"DBName"</span>: <span class="str">"oasis_prod"</span>,
+        <span class="str">"Priority"</span>: <span class="num">1</span>        <span class="cmt">// ← primary provider</span>
+      },
+      <span class="str">"HoloOASIS"</span>: {
+        <span class="str">"HolochainConductorURI"</span>: <span class="str">"ws://localhost:8888"</span>,
+        <span class="str">"Priority"</span>: <span class="num">2</span>        <span class="cmt">// ← first failover</span>
+      },
+      <span class="str">"IPFSOASIS"</span>: {
+        <span class="str">"IPFSNode"</span>: <span class="str">"https://ipfs.infura.io:5001"</span>,
+        <span class="str">"Priority"</span>: <span class="num">3</span>        <span class="cmt">// ← second failover</span>
+      }
+    },
+    <span class="str">"AutoFailOver"</span>:      <span class="kw">true</span>,
+    <span class="str">"AutoReplication"</span>:   <span class="kw">true</span>,   <span class="cmt">// write to all providers</span>
+    <span class="str">"AutoLoadBalance"</span>:   <span class="kw">true</span>,   <span class="cmt">// reads from fastest provider</span>
+    <span class="str">"DefaultProvider"</span>:  <span class="str">"MongoDBOASIS"</span>,
+
+    <span class="str">"JWT"</span>: {
+      <span class="str">"Secret"</span>:            <span class="str">"${JWT_SECRET}"</span>,
+      <span class="str">"ExpiresInDays"</span>:      <span class="num">7</span>,
+      <span class="str">"RefreshExpiresInDays"</span>: <span class="num">30</span>
+    }
+  }
+}</pre>
+    </div>
+
+    <div class="callout callout-warning">
+      <div class="callout-icon">⚠️</div>
+      <div class="callout-body">
+        <div class="callout-title">Never commit secrets</div>
+        <p>Use <code>${ENV_VAR}</code> syntax in <code>appsettings.json</code> to reference environment variables. Never commit real connection strings, JWT secrets or API keys to source control. Use Railway / Docker secrets or a vault like HashiCorp Vault for production.</p>
+      </div>
+    </div>
+
+    <h2 id="runtime-switch">Switching Providers at Runtime</h2>
+    <p>You can override the active provider on a per-request basis from your JavaScript app:</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-lang">javascript</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">import</span> { oasis } <span class="kw">from</span> <span class="str">'./oasis.js'</span>;
+
+<span class="cmt">// Switch the global default for subsequent calls</span>
+<span class="kw">await</span> oasis.provider.<span class="fn">setGlobalDefaultProvider</span>({ providerType: <span class="str">'HoloOASIS'</span> });
+
+<span class="cmt">// Or override just for a single request (non-global)</span>
+<span class="kw">const</span> result = <span class="kw">await</span> oasis.data.<span class="fn">saveHolon</span>({
+  name:         <span class="str">'SensitiveRecord'</span>,
+  metaData:     { secret: <span class="str">'data'</span> },
+  providerType: <span class="str">'HoloOASIS'</span>,   <span class="cmt">// only this request uses Holochain</span>
+  setGlobally:  <span class="kw">false</span>
+});
+
+<span class="cmt">// List all registered providers and their status</span>
+<span class="kw">const</span> { result: providers } = <span class="kw">await</span> oasis.provider.<span class="fn">getProviders</span>();
+providers.<span class="fn">forEach</span>(p =&gt; console.<span class="fn">log</span>(p.providerType, p.status, p.priority));</pre>
+    </div>
+
+    <h2 id="deploy-railway">Deploying an ONODE to Railway</h2>
+    <p>Railway is the fastest way to deploy a production ONODE — it handles SSL, custom domains and environment variables automatically.</p>
+
+    <div class="step">
+      <div class="step-indicator"><div class="step-circle">1</div><div class="step-line"></div></div>
+      <div class="step-content">
+        <h3>Fork and connect the repo</h3>
+        <p>Fork <a href="https://github.com/NextGenSoftwareUK/OASIS" target="_blank">NextGenSoftwareUK/OASIS</a> to your GitHub account. In Railway, click <strong>New Project → Deploy from GitHub</strong> and select your fork. Choose the <code>ONODE/NextGenSoftware.OASIS.API.ONODE.WebAPI</code> directory as the root.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-indicator"><div class="step-circle">2</div><div class="step-line"></div></div>
+      <div class="step-content">
+        <h3>Set environment variables</h3>
+        <div class="code-block">
+          <div class="code-block-header"><span class="code-lang">railway env vars</span><button class="copy-btn">Copy</button></div>
+          <pre>MONGO_CONNECTION_STRING = mongodb+srv://user:pass@cluster.mongodb.net/oasis_prod
+JWT_SECRET              = your-256-bit-random-secret
+OASIS__DefaultProvider  = MongoDBOASIS
+OASIS__AutoFailOver     = true
+OASIS__AutoReplication  = false   <span class="cmt"># enable when you have 2+ providers</span>
+ASPNETCORE_ENVIRONMENT  = Production</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-indicator"><div class="step-circle">3</div><div class="step-line"></div></div>
+      <div class="step-content">
+        <h3>Set the start command</h3>
+        <div class="terminal-block code-block">
+          <div class="code-block-header"><span class="code-lang">railway start command</span><button class="copy-btn">Copy</button></div>
+          <pre><span class="cmd">dotnet NextGenSoftware.OASIS.API.ONODE.WebAPI.dll</span></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-indicator"><div class="step-circle">4</div><div class="step-line"></div></div>
+      <div class="step-content">
+        <h3>Custom domain</h3>
+        <p>In Railway → Settings → Domains, add your custom domain (e.g. <code>api.myapp.com</code>). Railway provisions Let's Encrypt SSL automatically. Point your OASIS SDK at this URL:</p>
+        <div class="code-block">
+          <div class="code-block-header"><span class="code-lang">javascript</span><button class="copy-btn">Copy</button></div>
+          <pre><span class="kw">const</span> oasis = <span class="kw">new</span> <span class="cls">OASISClient</span>({ baseUrl: <span class="str">'https://api.myapp.com'</span> });</pre>
+        </div>
+      </div>
+    </div>
+
+    <h2 id="deploy-docker">Deploying with Docker</h2>
+    <p>For self-hosted or enterprise deployments, use the official Docker setup:</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">docker-compose.yml</span><button class="copy-btn">Copy</button></div>
+      <pre>version: <span class="str">'3.9'</span>
+
+services:
+  onode:
+    image: nextgensoftware/oasis-onode:latest
+    ports:
+      - <span class="str">"80:80"</span>
+      - <span class="str">"443:443"</span>
+    environment:
+      - MONGO_CONNECTION_STRING=${MONGO_CONNECTION_STRING}
+      - JWT_SECRET=${JWT_SECRET}
+      - OASIS__DefaultProvider=MongoDBOASIS
+      - OASIS__AutoFailOver=true
+      - ASPNETCORE_ENVIRONMENT=Production
+    volumes:
+      - ./appsettings.json:/app/appsettings.json
+    restart: unless-stopped
+    healthcheck:
+      test: [<span class="str">"CMD"</span>, <span class="str">"curl"</span>, <span class="str">"-f"</span>, <span class="str">"http://localhost/api/health"</span>]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  mongo:
+    image: mongo:7
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASS}
+
+volumes:
+  mongo_data:</pre>
+    </div>
+
+    <div class="terminal-block code-block">
+      <div class="code-block-header"><span class="code-lang">terminal</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="cmd">docker compose up -d</span>
+<span class="out">✓ Container onode   Started
+✓ Container mongo   Started</span>
+
+<span class="cmt"># Verify health</span>
+<span class="cmd">curl https://api.myapp.com/api/health</span>
+<span class="out">{"status":"Healthy","providers":{"MongoDBOASIS":"Connected"}}</span></pre>
+    </div>
+
+    <h2 id="security">Production Security Checklist</h2>
+
+    <div class="callout callout-warning">
+      <div class="callout-icon">🔒</div>
+      <div class="callout-body">
+        <div class="callout-title">Before going live</div>
+        <ul>
+          <li><strong>JWT secret</strong> — use a cryptographically random 256-bit value; rotate it every 90 days</li>
+          <li><strong>CORS</strong> — set <code>AllowedOrigins</code> in appsettings to your actual domains; never use <code>*</code> in production</li>
+          <li><strong>Rate limiting</strong> — enable the built-in rate limiter (<code>OASIS__RateLimiting__Enabled: true</code>); default is 100 req/min per IP</li>
+          <li><strong>HTTPS only</strong> — set <code>ASPNETCORE_URLS=https://+:443</code> and redirect HTTP → HTTPS</li>
+          <li><strong>Password policy</strong> — the OASIS avatar system enforces minimum 8 chars + complexity by default; don't disable this</li>
+          <li><strong>Admin endpoints</strong> — endpoints like <code>/api/avatar/get-all-avatars</code> require <code>[Authorize]</code> and admin role; verify your role config</li>
+          <li><strong>MongoDB</strong> — use a dedicated database user with least-privilege access; enable MongoDB Atlas IP allowlisting</li>
+          <li><strong>Secrets</strong> — use Railway secrets, Docker secrets or HashiCorp Vault; never put real values in <code>appsettings.json</code></li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 id="health-monitoring">Health &amp; Monitoring</h2>
+    <p>The ONODE exposes a health endpoint and a stats endpoint for monitoring:</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-lang">javascript</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="cmt">// Health check (no auth required — safe to expose)</span>
+<span class="kw">const</span> health = <span class="kw">await</span> oasis.health.<span class="fn">getHealthInfo</span>();
+console.<span class="fn">log</span>(health.result.status);           <span class="cmt">// 'Healthy' | 'Degraded' | 'Unhealthy'</span>
+console.<span class="fn">log</span>(health.result.providers);         <span class="cmt">// { MongoDBOASIS: 'Connected', ... }</span>
+
+<span class="cmt">// Platform stats</span>
+<span class="kw">const</span> stats = <span class="kw">await</span> oasis.stats.<span class="fn">getStats</span>();
+console.<span class="fn">log</span>(stats.result.totalAvatars);
+console.<span class="fn">log</span>(stats.result.totalHolons);
+console.<span class="fn">log</span>(stats.result.totalNFTs);</pre>
+    </div>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">📊</div>
+      <div class="callout-body">
+        <div class="callout-title">Recommended monitoring stack</div>
+        <p>Point Uptime Robot or Better Stack at <code>https://api.myapp.com/api/health</code> for uptime alerts. For detailed metrics, the ONODE emits OpenTelemetry traces — connect to Grafana Cloud or Datadog by setting <code>OTEL_EXPORTER_OTLP_ENDPOINT</code> in your environment.</p>
+      </div>
+    </div>
+
+    <h2 id="custom-provider">Building a Custom Provider</h2>
+    <p>If you need to integrate OASIS with a database or chain that isn't in the catalogue, you can build your own provider by implementing the <code>IOASISStorageProvider</code> interface in C#:</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-lang">csharp (skeleton)</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">using</span> NextGenSoftware.OASIS.API.Core.Interfaces;
+<span class="kw">using</span> NextGenSoftware.OASIS.API.Core.Enums;
+
+<span class="kw">public class</span> <span class="cls">MyCustomOASIS</span> : <span class="cls">IOASISStorageProvider</span>
+{
+    <span class="kw">public</span> ProviderType ProviderType =&gt; ProviderType.Custom;
+    <span class="kw">public</span> string ProviderName    =&gt; <span class="str">"MyCustomOASIS"</span>;
+
+    <span class="kw">public async</span> Task&lt;OASISResult&lt;IHolon&gt;&gt; <span class="fn">SaveHolonAsync</span>(IHolon holon, ...)
+    {
+        <span class="cmt">// Write holon to your custom backend</span>
+        <span class="kw">var</span> id = <span class="kw">await</span> _myDb.<span class="fn">UpsertAsync</span>(holon);
+        holon.Id = id;
+        <span class="kw">return new</span> OASISResult&lt;IHolon&gt;(holon);
+    }
+
+    <span class="kw">public async</span> Task&lt;OASISResult&lt;IHolon&gt;&gt; <span class="fn">LoadHolonAsync</span>(Guid id, ...)
+    {
+        <span class="kw">var</span> doc = <span class="kw">await</span> _myDb.<span class="fn">GetAsync</span>(id);
+        <span class="kw">return new</span> OASISResult&lt;IHolon&gt;(<span class="fn">MapToHolon</span>(doc));
+    }
+
+    <span class="cmt">// ... implement remaining interface methods</span>
+}</pre>
+    </div>
+
+    <p>Register your provider in <code>Program.cs</code> or via the OASIS provider registration API, and it becomes available as <code>providerType: 'Custom'</code> in all SDK calls. See the <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/NextGenSoftware.OASIS.API.Providers" target="_blank">Providers directory</a> in the main repo for full examples.</p>
+
+    <h2 id="whats-next">You've Completed the Series!</h2>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">🎉</div>
+      <div class="callout-body">
+        <div class="callout-title">Congratulations</div>
+        <p>You've worked through all 8 modules — from your first API call to a production-deployed ONODE with multi-provider failover, GeoNFTs, quests and a published OApp. You're now equipped to build anything on the OASIS platform.</p>
+      </div>
+    </div>
+
+    <h3>What to explore next</h3>
+    <ul>
+      <li><strong>WEB6 AI APIs</strong> — holonic memory, embeddings, ML inference and reasoning networks at <code>api.web6.oasisomniverse.one</code></li>
+      <li><strong>STARNET</strong> — the decentralised OASIS networking layer for P2P app communication</li>
+      <li><strong>OGEngine</strong> — download the Unity package from the Dev Portal and build a 3D game world</li>
+      <li><strong>OASIS Founders NFT</strong> — holders get elevated platform access, revenue share and governance rights</li>
+      <li><strong>Contributing</strong> — the OASIS is open source; check the <a href="https://github.com/NextGenSoftwareUK/OASIS/blob/master/CONTRIBUTING.md" target="_blank">CONTRIBUTING.md</a> guide</li>
+      <li><strong>Discord</strong> — join the developer community at <a href="https://discord.gg/oasis" target="_blank">discord.gg/oasis</a> for support, feedback and early access to new APIs</li>
+    </ul>
+
+    <div class="tutorial-nav">
+      <a href="/tutorials/07-metaverse-game">
+        <div class="nav-direction">← Previous</div>
+        <div class="nav-title">Metaverse &amp; Games</div>
+      </a>
+      <a class="next" href="/">
+        <div class="nav-direction">↩ Back to</div>
+        <div class="nav-title">Overview</div>
+      </a>
+    </div>
+  </main>
+
+  <aside class="rail">
+    <div class="rail-title">On This Page</div>
+    <nav class="rail-nav">
+      <a href="#provider-model">Provider Model</a>
+      <a href="#provider-catalogue">Provider Catalogue</a>
+      <a href="#configure-providers">Configuring Providers</a>
+      <a href="#runtime-switch">Runtime Switch</a>
+      <a href="#deploy-railway">Deploy: Railway</a>
+      <a href="#deploy-docker">Deploy: Docker</a>
+      <a href="#security">Security Checklist</a>
+      <a href="#health-monitoring">Monitoring</a>
+      <a href="#custom-provider">Custom Provider</a>
+      <a href="#whats-next">What's Next</a>
+    </nav>
+  </aside>
+</div>
+<script src="../assets/js/site.js"></script>
+</body>
+</html>

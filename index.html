@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OASIS Learn — Developer Onboarding</title>
+<meta name="description" content="Step-by-step tutorials, real-world examples and API references for building on the OASIS Omniverse platform.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Titillium+Web:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+  .hero {
+    padding: 60px 0 48px;
+    text-align: center;
+    max-width: 660px;
+    margin: 0 auto;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: var(--font-heading);
+    font-size: 36px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .hero p {
+    font-size: 16px;
+    color: var(--text-dim);
+    margin-bottom: 32px;
+    text-align: center;
+  }
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: var(--bg);
+    font-weight: 700;
+    font-size: 14px;
+    padding: 12px 28px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.15s, transform 0.15s;
+  }
+  .hero-cta:hover { background: #33ddff; transform: translateY(-1px); text-decoration: none; }
+
+  .stats-row {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 48px 0 16px;
+    flex-wrap: wrap;
+  }
+  .stat { text-align: center; }
+  .stat-num { font-family: var(--font-heading); font-size: 28px; font-weight: 700; color: var(--accent); }
+  .stat-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+
+  .section-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 48px 0 20px;
+  }
+
+  .prereqs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+  .prereq-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+  .prereq-item span:first-child { font-size: 18px; }
+</style>
+</head>
+<body>
+
+<button class="mobile-menu-btn">☰</button>
+
+<div class="layout layout-no-rail">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <a class="sidebar-logo" href="/">
+      <div class="sidebar-logo-icon">O</div>
+      <div class="sidebar-logo-text">
+        <span class="site-name">OASIS LEARN</span>
+        <span class="site-sub">Developer Tutorials</span>
+      </div>
+    </a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Getting Started</div>
+      <a class="nav-item active" href="/">Overview</a>
+      <a class="nav-item" href="/tutorials/01-getting-started">
+        <span class="step-num">1</span> Quick Start
+      </a>
+
+      <div class="nav-section-title">Core Concepts</div>
+      <a class="nav-item" href="/tutorials/02-avatar-identity">
+        <span class="step-num">2</span> Avatar &amp; Identity
+      </a>
+      <a class="nav-item" href="/tutorials/03-karma-reputation">
+        <span class="step-num">3</span> Karma &amp; Reputation
+      </a>
+      <a class="nav-item" href="/tutorials/04-nft-wallet">
+        <span class="step-num">4</span> NFTs &amp; Wallet
+      </a>
+      <a class="nav-item" href="/tutorials/05-data-holons">
+        <span class="step-num">5</span> Data &amp; Holons
+      </a>
+
+      <div class="nav-section-title">Building Apps</div>
+      <a class="nav-item" href="/tutorials/06-first-oapp">
+        <span class="step-num">6</span> Your First OApp
+      </a>
+      <a class="nav-item" href="/tutorials/07-metaverse-game">
+        <span class="step-num">7</span> Metaverse &amp; Games
+      </a>
+      <a class="nav-item" href="/tutorials/08-providers-production">
+        <span class="step-num">8</span> Providers &amp; Production
+      </a>
+
+      <div class="nav-section-title">Reference</div>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS" target="_blank">GitHub ↗</a>
+      <a class="nav-item" href="https://oasisomniverse.gitbook.io/oasis-platform" target="_blank">GitBook Docs ↗</a>
+      <a class="nav-item" href="https://oportal.oasisomniverse.one/developer" target="_blank">Dev Portal ↗</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="https://oasisomniverse.one" target="_blank">oasisomniverse.one</a>
+      <a href="https://discord.gg/oasis" target="_blank">Discord Community</a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="hero">
+      <div class="hero-eyebrow">Developer Onboarding Series</div>
+      <h1>Build on the OASIS Omniverse</h1>
+      <p>From your first API call to a fully deployed OApp — 8 hands-on tutorials covering Avatar SSO, NFTs, karma, data holons, metaverse worlds and production deployment.</p>
+      <a class="hero-cta" href="/tutorials/01-getting-started">Start Learning →</a>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat"><div class="stat-num">8</div><div class="stat-label">Modules</div></div>
+      <div class="stat"><div class="stat-num">~3h</div><div class="stat-label">Total time</div></div>
+      <div class="stat"><div class="stat-num">WEB4–6</div><div class="stat-label">API coverage</div></div>
+      <div class="stat"><div class="stat-num">50+</div><div class="stat-label">Code examples</div></div>
+    </div>
+
+    <div class="section-title">Prerequisites</div>
+    <div class="prereqs-grid">
+      <div class="prereq-item"><span>🟢</span> Node.js 18+ (or any browser)</div>
+      <div class="prereq-item"><span>📦</span> npm or yarn</div>
+      <div class="prereq-item"><span>🔑</span> OASIS account (free)</div>
+      <div class="prereq-item"><span>⚡</span> Basic JavaScript knowledge</div>
+    </div>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <div class="callout-title">Already know the basics?</div>
+        <p>Jump straight to <a href="/tutorials/06-first-oapp">Module 6 — Your First OApp</a> if you're comfortable with auth and data concepts. Each module also stands alone as a reference.</p>
+      </div>
+    </div>
+
+    <div class="section-title">Tutorial Series</div>
+
+    <div class="module-grid">
+
+      <a class="module-card" href="/tutorials/01-getting-started">
+        <div class="module-num">MODULE 01</div>
+        <h3>Quick Start — Your First API Call</h3>
+        <p>Install the WEB4 SDK, make your first authenticated request and understand the OASIS response format in under 15 minutes.</p>
+        <div class="module-card-footer">
+          <span class="badge badge-beginner">Beginner</span>
+          <span class="badge badge-time">⏱ 15 min</span>
+        </div>
+      </a>
+
+      <a class="module-card" href="/tutorials/02-avatar-identity">
+        <div class="module-num">MODULE 02</div>
+        <h3>Avatar &amp; Identity — SSO Across Every Platform</h3>
+        <p>Register avatars, authenticate with JWT, manage profiles, inventory and sessions using the cross-platform SSO system.</p>
+        <div class="module-card-footer">
+          <span class="badge badge-beginner">Beginner</span>
+          <span class="badge badge-time">⏱ 25 min</span>
+        </div>
+      </a>
+
+      <a class="module-card" href="/tutorials/03-karma-reputation">
+        <div class="module-num">MODULE 03</div>
+        <h3>Karma &amp; Reputation — Incentivise Good Behaviour</h3>
+        <p>Award and track karma points, query the Akashic Records, weight karma categories and build reputation-gated features.</p>
+        <div class="module-card-footer">
+          <span class="badge badge-beginner">Beginner</span>
+          <span class="badge badge-time">⏱ 20 min</span>
+        </div>
+      </a>
+
+      <a class="module-card" href="/tutorials/04-nft-wallet">
+        <div class="module-num">MODULE 04</div>
+        <h3>NFTs &amp; Wallet — Multi-Chain Digital Assets</h3>
+        <p>Create NFT collections, mint tokens, collect GeoNFTs and bridge Web3 assets into the OASIS using the provider-agnostic wallet layer.</p>
+        <div class="module-card-footer">
+          <span class="badge badge-intermediate">Intermediate</span>
+          <span class="badge badge-time">⏱ 30 min</span>
+        </div>
+      </a>
+
+      <a class="module-card" href="/tutorials/05-data-holons">
+        <div class="module-num">MODULE 05</div>
+        <h3>Data &amp; Holons — The Universal Data Model</h3>
+        <p>Store structured data with the Holon system, query across providers, use the HyperDrive for large files and understand multi-provider replication.</p>
+        <div class="module-card-footer">
+          <span class="badge badge-intermediate">Intermediate</span>
+          <span class="badge badge-time">⏱ 30 min</span>
+        </div>
+      </a>
+
+      <a class="module-card" href="/tutorials/06-first-oapp">
+        <div class="module-num">MODULE 06</div>
+        <h3>Your First OApp — Build a Complete App</h3>
+        <p>Combine auth, karma, NFTs and data into a working end-to-end OApp with a web UI, published to the OASIS ecosystem.</p>
+        <div class="module-card-footer">
+          <span class="badge badge-intermediate">Intermediate</span>
+          <span class="badge badge-time">⏱ 45 min</span>
+        </div>
+      </a>
+
+      <a class="module-card" href="/tutorials/07-metaverse-game">
+        <div class="module-num">MODULE 07</div>
+        <h3>Metaverse &amp; Game Development</h3>
+        <p>Place GeoNFTs on the Our World map, create Celestial Bodies, design quests and missions, and integrate with the OGEngine game framework.</p>
+        <div class="module-card-footer">
+          <span class="badge badge-advanced">Advanced</span>
+          <span class="badge badge-time">⏱ 40 min</span>
+        </div>
+      </a>
+
+      <a class="module-card" href="/tutorials/08-providers-production">
+        <div class="module-num">MODULE 08</div>
+        <h3>Providers &amp; Production Deployment</h3>
+        <p>Understand the OASIS provider system, configure auto-failover and load balancing, deploy to Railway or Docker and harden for production.</p>
+        <div class="module-card-footer">
+          <span class="badge badge-advanced">Advanced</span>
+          <span class="badge badge-time">⏱ 35 min</span>
+        </div>
+      </a>
+
+    </div>
+
+    <h2 id="what-is-oasis" style="margin-top:56px;">What is the OASIS?</h2>
+    <p>The <strong>Open Avatar Social Interoperability Standard (OASIS)</strong> is a layer that sits beneath every web, game, social and metaverse platform and gives each user one persistent identity — their <strong>Avatar</strong> — along with a unified wallet, karma score, NFT collection and data store that travels with them everywhere.</p>
+    <p>It exposes APIs from <strong>WEB4</strong> (decentralised identity and NFTs) through to <strong>WEB10</strong> (collective consciousness and singularity), backed by a hot-swappable provider architecture that routes data across Holochain, IPFS, Solana, MongoDB, Ethereum and more — automatically, with no single point of failure.</p>
+
+    <h2 id="web-levels">The WEB4–WEB6 Stack at a Glance</h2>
+    <div class="api-table-wrap">
+      <table>
+        <thead><tr><th>Level</th><th>Name</th><th>What it adds</th><th>npm package</th></tr></thead>
+        <tbody>
+          <tr><td><code>WEB4</code></td><td>Decentralised Core</td><td>Avatar SSO, NFTs (mint, collect, GeoNFTs, bridge), karma, multi-chain wallet, holons, HyperDrive, search, map</td><td><code>@oasisomniverse/web4-api</code></td></tr>
+          <tr><td><code>WEB5</code></td><td>STAR / Metaverse</td><td>Celestial bodies, game worlds, quests, missions, inventory items, STARNET app &amp; asset store, OGEngine integration</td><td><code>@oasisomniverse/web5-api</code></td></tr>
+          <tr><td><code>WEB6</code></td><td>AI &amp; Intelligence</td><td>Holonic memory, holonic braid, embeddings, completions, ML inference, reasoning networks, DID, context &amp; orchestration</td><td><code>@oasisomniverse/web6-api</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout-note">
+      <div class="callout-icon">📡</div>
+      <div class="callout-body">
+        <div class="callout-title">Live API base URLs</div>
+        <p>WEB4 (primary): <code>https://api.oasisweb4.one</code> · WEB5: <code>https://api.web5.oasisomniverse.one</code> · and so on up to WEB10. All accept Bearer JWT tokens issued by WEB4 auth.</p>
+      </div>
+    </div>
+
+    <h2 id="sdk-install">Install in 30 seconds</h2>
+    <div class="terminal-block code-block">
+      <div class="code-block-header"><span class="code-lang">terminal</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="prompt"># Node / npm</span>
+<span class="cmd">npm install @oasisomniverse/web4-api</span>
+
+<span class="prompt"># yarn</span>
+<span class="cmd">yarn add @oasisomniverse/web4-api</span>
+
+<span class="prompt"># Browser (CDN — no build step needed)</span>
+<span class="out">&lt;script src="https://cdn.jsdelivr.net/npm/@oasisomniverse/web4-api/dist/oasis-web4-sdk.js"&gt;&lt;/script&gt;</span></pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">hello-oasis.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">import</span> { OASISClient } <span class="kw">from</span> <span class="str">'@oasisomniverse/web4-api'</span>;
+
+<span class="kw">const</span> oasis = <span class="kw">new</span> <span class="cls">OASISClient</span>();
+
+<span class="kw">const</span> result = <span class="kw">await</span> oasis.auth.<span class="fn">login</span>({
+  username: <span class="str">'you@example.com'</span>,
+  password: <span class="str">'your-password'</span>
+});
+
+console.<span class="fn">log</span>(<span class="str">'Logged in as'</span>, result.session.username);
+<span class="cmt">// → Logged in as YourAvatarName</span></pre>
+    </div>
+
+    <p>Ready to dive deeper? Start with <a href="/tutorials/01-getting-started">Module 1 →</a></p>
+
+  </main>
+</div>
+
+<script src="assets/js/site.js"></script>
+</body>
+</html>

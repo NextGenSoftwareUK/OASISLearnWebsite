@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 2: Avatar &amp; Identity — OASIS Learn</title>
+<meta name="description" content="Register avatars, manage profiles, sessions and inventory using the OASIS cross-platform SSO system.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Titillium+Web:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<button class="mobile-menu-btn">☰</button>
+<div class="layout">
+  <aside class="sidebar">
+    <a class="sidebar-logo" href="/"><div class="sidebar-logo-icon">O</div><div class="sidebar-logo-text"><span class="site-name">OASIS LEARN</span><span class="site-sub">Developer Tutorials</span></div></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Getting Started</div>
+      <a class="nav-item" href="/">Overview</a>
+      <a class="nav-item" href="/tutorials/01-getting-started"><span class="step-num">1</span> Quick Start</a>
+      <div class="nav-section-title">Core Concepts</div>
+      <a class="nav-item active" href="/tutorials/02-avatar-identity"><span class="step-num">2</span> Avatar &amp; Identity</a>
+      <a class="nav-item" href="/tutorials/03-karma-reputation"><span class="step-num">3</span> Karma &amp; Reputation</a>
+      <a class="nav-item" href="/tutorials/04-nft-wallet"><span class="step-num">4</span> NFTs &amp; Wallet</a>
+      <a class="nav-item" href="/tutorials/05-data-holons"><span class="step-num">5</span> Data &amp; Holons</a>
+      <div class="nav-section-title">Building Apps</div>
+      <a class="nav-item" href="/tutorials/06-first-oapp"><span class="step-num">6</span> Your First OApp</a>
+      <a class="nav-item" href="/tutorials/07-metaverse-game"><span class="step-num">7</span> Metaverse &amp; Games</a>
+      <a class="nav-item" href="/tutorials/08-providers-production"><span class="step-num">8</span> Providers &amp; Production</a>
+      <div class="nav-section-title">Reference</div>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS" target="_blank">GitHub ↗</a>
+      <a class="nav-item" href="https://oasisomniverse.gitbook.io/oasis-platform" target="_blank">GitBook Docs ↗</a>
+      <a class="nav-item" href="https://oportal.oasisomniverse.one/developer" target="_blank">Dev Portal ↗</a>
+    </nav>
+    <div class="sidebar-footer"><a href="https://oasisomniverse.one" target="_blank">oasisomniverse.one</a><a href="https://discord.gg/oasis" target="_blank">Discord Community</a></div>
+  </aside>
+
+  <main class="main">
+    <div class="progress-bar-wrap"><div class="progress-bar" style="width:25%"></div></div>
+
+    <div class="page-header">
+      <div class="breadcrumb"><a href="/">OASIS Learn</a><span class="breadcrumb-sep">/</span><span>Module 2</span></div>
+      <div class="page-meta">
+        <span class="badge badge-beginner">Beginner</span>
+        <span class="badge badge-time">⏱ 25 min</span>
+      </div>
+      <h1 class="page-title">Avatar &amp; Identity — SSO Across Every Platform</h1>
+      <p class="page-desc">The Avatar is the cornerstone of OASIS. One identity, one wallet, one karma score — carried seamlessly across every game, app and metaverse built on the platform.</p>
+    </div>
+
+    <div class="build-summary">
+      <h4>What you'll learn</h4>
+      <ul>
+        <li>How OASIS Avatar SSO works and why it matters</li>
+        <li>Register, authenticate, update and delete avatars via the SDK</li>
+        <li>Read and write the avatar's inventory</li>
+        <li>Manage multiple concurrent sessions</li>
+        <li>Look up avatars by email, username or ID</li>
+      </ul>
+    </div>
+
+    <h2 id="concepts">How Avatar SSO Works</h2>
+    <p>When a user logs into any OASIS-connected app, they receive a <strong>JWT token</strong> tied to their Avatar ID. That same JWT is valid across every OASIS API — WEB4 through WEB10 — and every OApp that trusts the OASIS identity layer. There's no OAuth dance between your apps; the token is issued once and accepted everywhere.</p>
+
+    <div class="callout callout-usecase">
+      <div class="callout-icon">🌍</div>
+      <div class="callout-body">
+        <div class="callout-title">Real-world use case — cross-game identity</div>
+        <p>A player earns a rare sword NFT in <em>Our World</em> (the flagship OASIS game). When they log into your indie game built on OASIS, their wallet — and that sword — are already there. Your game queries <code>oasis.avatar.getAvatarInventory()</code> and renders it without any special integration with Our World. That's the power of shared identity.</p>
+      </div>
+    </div>
+
+    <h2 id="register">Registering an Avatar</h2>
+    <p>Call <code>oasis.auth.register()</code>. If you need raw control (e.g. setting provider-specific fields), use <code>oasis.avatar.register()</code> directly — but for most apps the auth helper is the right choice.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">register-avatar.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">import</span> { oasis } <span class="kw">from</span> <span class="str">'./oasis.js'</span>;
+
+<span class="kw">const</span> result = <span class="kw">await</span> oasis.auth.<span class="fn">register</span>({
+  title:           <span class="str">'Dr'</span>,              <span class="cmt">// Mr, Mrs, Ms, Dr, Prof, Rev, Mx…</span>
+  firstName:       <span class="str">'Ada'</span>,
+  lastName:        <span class="str">'Lovelace'</span>,
+  email:           <span class="str">'ada@example.com'</span>,
+  password:        <span class="str">'SecurePassw0rd!'</span>,
+  confirmPassword: <span class="str">'SecurePassw0rd!'</span>,
+  username:        <span class="str">'ada_lovelace'</span>,
+  avatarType:      <span class="str">'User'</span>,           <span class="cmt">// 'User' | 'Wizard' | 'God'</span>
+  acceptTerms:     <span class="kw">true</span>
+});
+
+console.<span class="fn">log</span>(result.session.avatarId);   <span class="cmt">// GUID — store this!</span></pre>
+    </div>
+
+    <h3>Avatar types</h3>
+    <div class="api-table-wrap">
+      <table>
+        <thead><tr><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>User</code></td><td>Standard end-user account. Start here for all player/user registrations.</td></tr>
+          <tr><td><code>Wizard</code></td><td>Developer/builder account with elevated OApp publishing permissions.</td></tr>
+          <tr><td><code>God</code></td><td>Platform administrator. Do not create programmatically.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="lookup">Looking Up Avatars</h2>
+    <p>You can fetch any avatar by ID, email or username. ID lookups are fastest; prefer them in hot paths.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-lang">javascript</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="cmt">// By ID (fastest)</span>
+<span class="kw">const</span> { result: avatar } = <span class="kw">await</span> oasis.avatar.<span class="fn">getAvatarDetail</span>({ id: avatarId });
+
+<span class="cmt">// By email</span>
+<span class="kw">const</span> { result: byEmail } = <span class="kw">await</span> oasis.avatar.<span class="fn">getAvatarDetailByEmail</span>({ email: <span class="str">'ada@example.com'</span> });
+
+<span class="cmt">// By username</span>
+<span class="kw">const</span> { result: byUsername } = <span class="kw">await</span> oasis.avatar.<span class="fn">getAvatarDetailByUsername</span>({ username: <span class="str">'ada_lovelace'</span> });
+
+<span class="cmt">// List all avatars (admin only)</span>
+<span class="kw">const</span> { result: all } = <span class="kw">await</span> oasis.avatar.<span class="fn">getAll</span>();
+
+<span class="cmt">// Get avatar names for a leaderboard (lightweight)</span>
+<span class="kw">const</span> { result: names } = <span class="kw">await</span> oasis.avatar.<span class="fn">getAllAvatarNames</span>({
+  includeUsernames: <span class="kw">true</span>,
+  includeIds: <span class="kw">true</span>
+});</pre>
+    </div>
+
+    <h3>The Avatar object</h3>
+    <div class="api-table-wrap">
+      <table>
+        <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>id</code></td><td>GUID</td><td>Unique avatar identifier</td></tr>
+          <tr><td><code>username</code></td><td>string</td><td>Display name</td></tr>
+          <tr><td><code>email</code></td><td>string</td><td>Login email</td></tr>
+          <tr><td><code>firstName</code> / <code>lastName</code></td><td>string</td><td>Real name</td></tr>
+          <tr><td><code>karma</code></td><td>number</td><td>Current total karma score</td></tr>
+          <tr><td><code>level</code></td><td>number</td><td>Avatar level (derived from XP)</td></tr>
+          <tr><td><code>xp</code></td><td>number</td><td>Experience points</td></tr>
+          <tr><td><code>avatarType</code></td><td>enum</td><td>User / Wizard / God</td></tr>
+          <tr><td><code>createdDate</code></td><td>ISO date</td><td>Account creation timestamp</td></tr>
+          <tr><td><code>jwtToken</code></td><td>string</td><td>Current session token (auth responses only)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="update">Updating an Avatar</h2>
+    <p>Use <code>oasis.avatar.update()</code> to change profile fields. You must be authenticated as the avatar you're updating, or hold admin credentials.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-lang">javascript</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">const</span> result = <span class="kw">await</span> oasis.avatar.<span class="fn">update</span>({
+  id:        avatarId,
+  firstName: <span class="str">'Augusta'</span>,
+  username:  <span class="str">'countess_lovelace'</span>
+  <span class="cmt">// Only include fields you want to change</span>
+});
+
+<span class="kw">if</span> (!result.isError) console.<span class="fn">log</span>(<span class="str">'Profile updated!'</span>);</pre>
+    </div>
+
+    <h2 id="inventory">Managing Inventory</h2>
+    <p>Every avatar has a persistent inventory — a list of items they hold across all games and apps. Your app can read it, add to it and query individual items.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-lang">javascript</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="cmt">// Fetch the full inventory list</span>
+<span class="kw">const</span> { result: inventory } = <span class="kw">await</span> oasis.avatar.<span class="fn">getAvatarInventory</span>();
+
+inventory.<span class="fn">forEach</span>(item =&gt; {
+  console.<span class="fn">log</span>(`${item.name} (x${item.quantity}) — ${item.description}`);
+});
+
+<span class="cmt">// Check if avatar already has a specific item (by ID)</span>
+<span class="kw">const</span> { result: has } = <span class="kw">await</span> oasis.avatar.<span class="fn">avatarHasItem</span>({ itemId: <span class="str">'sword-of-light-001'</span> });
+
+<span class="cmt">// Add an item (e.g. after a purchase or quest reward)</span>
+<span class="kw">const</span> added = <span class="kw">await</span> oasis.avatar.<span class="fn">addItemToAvatarInventory</span>({
+  itemId:      <span class="str">'health-potion-sm'</span>,
+  name:        <span class="str">'Small Health Potion'</span>,
+  description: <span class="str">'Restores 50 HP'</span>,
+  quantity:    <span class="num">3</span>
+});</pre>
+    </div>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <div class="callout-title">Inventory vs NFT wallet</div>
+        <p>Inventory items are lightweight in-game objects (potions, keys, cosmetics). <strong>NFTs</strong> live in the avatar's on-chain wallet and represent ownership of unique digital assets. A sword earned in-game might start as an inventory item and be "minted" into an NFT later. See <a href="/tutorials/04-nft-wallet">Module 4</a>.</p>
+      </div>
+    </div>
+
+    <h2 id="sessions">Sessions &amp; Token Management</h2>
+    <p>The SDK handles token storage for you, but you'll sometimes need to inspect or manage sessions directly:</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-lang">javascript</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="cmt">// Check if currently authenticated</span>
+<span class="kw">if</span> (oasis.auth.<span class="fn">isAuthenticated</span>()) {
+  <span class="kw">const</span> session = oasis.auth.<span class="fn">getSession</span>();
+  console.<span class="fn">log</span>(<span class="str">'Logged in as:'</span>, session.username, session.avatarId);
+}
+
+<span class="cmt">// Use a token your server already has (SSR/edge scenarios)</span>
+oasis.<span class="fn">setToken</span>(existingJwt, { username: <span class="str">'ada_lovelace'</span>, avatarId });
+
+<span class="cmt">// Create a named session (multi-device tracking)</span>
+<span class="kw">await</span> oasis.avatar.<span class="fn">createAvatarSession</span>({ avatarId, deviceName: <span class="str">'iPhone 15'</span> });
+
+<span class="cmt">// Revoke token on logout</span>
+<span class="kw">await</span> oasis.auth.<span class="fn">logout</span>();   <span class="cmt">// clears local store and calls revoke-token</span></pre>
+    </div>
+
+    <h2 id="password">Password Reset Flow</h2>
+    <p>OASIS has a built-in forgot-password flow your app can hook into:</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-lang">javascript</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="cmt">// Step 1 — request reset email</span>
+<span class="kw">await</span> oasis.avatar.<span class="fn">forgotPassword</span>({ email: <span class="str">'ada@example.com'</span> });
+
+<span class="cmt">// Step 2 — user clicks email link → your app receives the reset token
+// Step 3 — submit new password with reset token</span>
+<span class="kw">await</span> oasis.avatar.<span class="fn">resetPassword</span>({
+  token:           resetToken,
+  password:        <span class="str">'NewSecurePass1!'</span>,
+  confirmPassword: <span class="str">'NewSecurePass1!'</span>
+});</pre>
+    </div>
+
+    <h2 id="xp">Awarding XP</h2>
+    <p>Your app can grant experience points for in-game actions. XP automatically increases the avatar's level at thresholds set by the OASIS platform.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-lang">javascript</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">const</span> result = <span class="kw">await</span> oasis.avatar.<span class="fn">addXp</span>({
+  avatarId,
+  xpAmount: <span class="num">500</span>,
+  reason:   <span class="str">'Completed the first quest'</span>
+});
+
+console.<span class="fn">log</span>(<span class="str">'New XP total:'</span>, result.result.xp);
+console.<span class="fn">log</span>(<span class="str">'New level:'</span>,   result.result.level);</pre>
+    </div>
+
+    <h2 id="api-reference">Avatar API Quick Reference</h2>
+    <ul class="method-list">
+      <li><span class="method-name">oasis.auth.register(data)</span><span class="method-desc">Register a new avatar, auto-stores JWT</span></li>
+      <li><span class="method-name">oasis.auth.login({username, password})</span><span class="method-desc">Authenticate, auto-stores JWT</span></li>
+      <li><span class="method-name">oasis.auth.logout()</span><span class="method-desc">Revoke token and clear session</span></li>
+      <li><span class="method-name">oasis.auth.getSession()</span><span class="method-desc">Returns current session object or null</span></li>
+      <li><span class="method-name">oasis.avatar.getAvatarDetail({id})</span><span class="method-desc">Full avatar profile by GUID</span></li>
+      <li><span class="method-name">oasis.avatar.getAvatarDetailByEmail({email})</span><span class="method-desc">Full profile by email</span></li>
+      <li><span class="method-name">oasis.avatar.getAvatarDetailByUsername({username})</span><span class="method-desc">Full profile by username</span></li>
+      <li><span class="method-name">oasis.avatar.update({id, ...fields})</span><span class="method-desc">Update profile fields</span></li>
+      <li><span class="method-name">oasis.avatar.getAvatarInventory()</span><span class="method-desc">Returns authenticated avatar's item list</span></li>
+      <li><span class="method-name">oasis.avatar.addItemToAvatarInventory({itemId, name, quantity})</span><span class="method-desc">Add an item to inventory</span></li>
+      <li><span class="method-name">oasis.avatar.addXp({avatarId, xpAmount, reason})</span><span class="method-desc">Award experience points</span></li>
+      <li><span class="method-name">oasis.avatar.addKarmaToAvatar({avatarId})</span><span class="method-desc">Award karma (see Module 3)</span></li>
+      <li><span class="method-name">oasis.avatar.forgotPassword({email})</span><span class="method-desc">Trigger password reset email</span></li>
+      <li><span class="method-name">oasis.avatar.delete({id})</span><span class="method-desc">Delete avatar (irreversible)</span></li>
+    </ul>
+
+    <div class="tutorial-nav">
+      <a href="/tutorials/01-getting-started">
+        <div class="nav-direction">← Previous</div>
+        <div class="nav-title">Quick Start</div>
+      </a>
+      <a class="next" href="/tutorials/03-karma-reputation">
+        <div class="nav-direction">Next →</div>
+        <div class="nav-title">Karma &amp; Reputation</div>
+      </a>
+    </div>
+  </main>
+
+  <aside class="rail">
+    <div class="rail-title">On This Page</div>
+    <nav class="rail-nav">
+      <a href="#concepts">How SSO Works</a>
+      <a href="#register">Registering</a>
+      <a href="#lookup">Looking Up Avatars</a>
+      <a href="#update">Updating</a>
+      <a href="#inventory">Inventory</a>
+      <a href="#sessions">Sessions</a>
+      <a href="#password">Password Reset</a>
+      <a href="#xp">Awarding XP</a>
+      <a href="#api-reference">API Reference</a>
+    </nav>
+  </aside>
+</div>
+<script src="../assets/js/site.js"></script>
+</body>
+</html>

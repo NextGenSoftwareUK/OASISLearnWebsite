@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 5: Data &amp; Holons — OASIS Learn</title>
+<meta name="description" content="Store structured data with the Holon system, query across providers and use HyperDrive for large files.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Titillium+Web:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<button class="mobile-menu-btn">☰</button>
+<div class="layout">
+  <aside class="sidebar">
+    <a class="sidebar-logo" href="/"><div class="sidebar-logo-icon">O</div><div class="sidebar-logo-text"><span class="site-name">OASIS LEARN</span><span class="site-sub">Developer Tutorials</span></div></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Getting Started</div>
+      <a class="nav-item" href="/">Overview</a>
+      <a class="nav-item" href="/tutorials/01-getting-started"><span class="step-num">1</span> Quick Start</a>
+      <div class="nav-section-title">Core Concepts</div>
+      <a class="nav-item" href="/tutorials/02-avatar-identity"><span class="step-num">2</span> Avatar &amp; Identity</a>
+      <a class="nav-item" href="/tutorials/03-karma-reputation"><span class="step-num">3</span> Karma &amp; Reputation</a>
+      <a class="nav-item" href="/tutorials/04-nft-wallet"><span class="step-num">4</span> NFTs &amp; Wallet</a>
+      <a class="nav-item active" href="/tutorials/05-data-holons"><span class="step-num">5</span> Data &amp; Holons</a>
+      <div class="nav-section-title">Building Apps</div>
+      <a class="nav-item" href="/tutorials/06-first-oapp"><span class="step-num">6</span> Your First OApp</a>
+      <a class="nav-item" href="/tutorials/07-metaverse-game"><span class="step-num">7</span> Metaverse &amp; Games</a>
+      <a class="nav-item" href="/tutorials/08-providers-production"><span class="step-num">8</span> Providers &amp; Production</a>
+      <div class="nav-section-title">Reference</div>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS" target="_blank">GitHub ↗</a>
+      <a class="nav-item" href="https://oasisomniverse.gitbook.io/oasis-platform" target="_blank">GitBook Docs ↗</a>
+      <a class="nav-item" href="https://oportal.oasisomniverse.one/developer" target="_blank">Dev Portal ↗</a>
+    </nav>
+    <div class="sidebar-footer"><a href="https://oasisomniverse.one" target="_blank">oasisomniverse.one</a><a href="https://discord.gg/oasis" target="_blank">Discord Community</a></div>
+  </aside>
+
+  <main class="main">
+    <div class="progress-bar-wrap"><div class="progress-bar" style="width:62.5%"></div></div>
+
+    <div class="page-header">
+      <div class="breadcrumb"><a href="/">OASIS Learn</a><span class="breadcrumb-sep">/</span><span>Module 5</span></div>
+      <div class="page-meta">
+        <span class="badge badge-intermediate">Intermediate</span>
+        <span class="badge badge-time">⏱ 30 min</span>
+      </div>
+      <h1 class="page-title">Data &amp; Holons — The Universal Data Model</h1>
+      <p class="page-desc">Holons are OASIS' universal data objects — structured records that replicate across multiple storage providers automatically. Store game state, user content, app config and large files without locking yourself into a single database.</p>
+    </div>
+
+    <div class="build-summary">
+      <h4>What you'll learn</h4>
+      <ul>
+        <li>What Holons are and how they differ from traditional database records</li>
+        <li>Save, load, update and delete Holons via the Data API</li>
+        <li>Query Holons by metadata, type and custom fields</li>
+        <li>Store and retrieve large files with HyperDrive</li>
+        <li>Search across all OASIS data</li>
+        <li>Understand multi-provider replication and auto-failover</li>
+      </ul>
+    </div>
+
+    <h2 id="concepts">What is a Holon?</h2>
+    <p>A <strong>Holon</strong> is OASIS' fundamental data unit — a self-describing, self-contained record that knows its own context. Think of it as a document (like MongoDB) with some extra superpowers:</p>
+    <ul>
+      <li><strong>Provider-agnostic</strong> — the same Holon can be stored in MongoDB, Neo4j, Holochain, IPFS or any OASIS provider. Your app doesn't care which.</li>
+      <li><strong>Auto-replicated</strong> — configure multiple providers and OASIS writes to all of them. If one goes down, reads fall over to the next automatically.</li>
+      <li><strong>Avatar-linked</strong> — every Holon has an <code>avatarId</code> that ties it to its creator, enabling per-user data isolation out of the box.</li>
+      <li><strong>Versioned</strong> — Holons track creation and modification dates, and some providers support full history.</li>
+    </ul>
+
+    <div class="callout callout-note">
+      <div class="callout-icon">🧩</div>
+      <div class="callout-body">
+        <div class="callout-title">Holons vs Holon types</div>
+        <p>A raw <strong>Holon</strong> is a generic key-value data bag. The OASIS platform also defines typed subtypes — <strong>Avatar</strong>, <strong>Quest</strong>, <strong>Mission</strong>, <strong>CelestialBody</strong>, <strong>InventoryItem</strong> — all of which extend Holon. In Module 7 we'll use the typed STAR Holons for game worlds. For your own app data, the generic Holon API is what you want.</p>
+      </div>
+    </div>
+
+    <h2 id="save">Saving a Holon</h2>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">save-holon.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">import</span> { oasis } <span class="kw">from</span> <span class="str">'./oasis.js'</span>;
+
+<span class="kw">const</span> { avatarId } = oasis.auth.<span class="fn">getSession</span>();
+
+<span class="cmt">// Save any JSON-serialisable object as a Holon</span>
+<span class="kw">const</span> { result: holon } = <span class="kw">await</span> oasis.data.<span class="fn">saveHolon</span>({
+  name:        <span class="str">'PlayerGameState'</span>,
+  description: <span class="str">'Saved game state for Ada in Campaign Mode'</span>,
+  avatarId,
+  metaData: {
+    <span class="cmt">// Any key-value pairs — fully flexible</span>
+    level:        <span class="num">12</span>,
+    currentZone:  <span class="str">'Elven Forest'</span>,
+    checkpointId: <span class="str">'elf-forest-cp3'</span>,
+    inventory:    [<span class="str">'sword-of-light'</span>, <span class="str">'health-potion-sm'</span>],
+    lastSaved:    <span class="kw">new</span> <span class="cls">Date</span>().<span class="fn">toISOString</span>()
+  }
+});
+
+console.<span class="fn">log</span>(<span class="str">'Saved Holon ID:'</span>, holon.id);   <span class="cmt">// GUID — store this for later</span></pre>
+    </div>
+
+    <h2 id="load">Loading a Holon</h2>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-lang">javascript</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="cmt">// Load by GUID</span>
+<span class="kw">const</span> { result: holon } = <span class="kw">await</span> oasis.data.<span class="fn">loadHolon</span>({ id: holonId });
+
+console.<span class="fn">log</span>(holon.name);             <span class="cmt">// 'PlayerGameState'</span>
+console.<span class="fn">log</span>(holon.metaData.level);   <span class="cmt">// 12</span>
+console.<span class="fn">log</span>(holon.metaData.currentZone); <span class="cmt">// 'Elven Forest'</span>
+console.<span class="fn">log</span>(holon.createdDate);      <span class="cmt">// ISO timestamp</span>
+console.<span class="fn">log</span>(holon.modifiedDate);     <span class="cmt">// ISO timestamp</span></pre>
+    </div>
+
+    <h2 id="query">Querying Holons</h2>
+    <p>Load all Holons for an avatar, or filter by metadata values to find specific records:</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-lang">javascript</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="cmt">// All Holons belonging to the logged-in avatar</span>
+<span class="kw">const</span> { result: myHolons } = <span class="kw">await</span> oasis.data.<span class="fn">loadAllHolonsForAvatar</span>({ avatarId });
+
+<span class="cmt">// Filter by name</span>
+<span class="kw">const</span> gameStates = myHolons.<span class="fn">filter</span>(h =&gt; h.name === <span class="str">'PlayerGameState'</span>);
+
+<span class="cmt">// Load Holons matching specific metadata (server-side filter)</span>
+<span class="kw">const</span> { result: checkpoint3 } = <span class="kw">await</span> oasis.data.<span class="fn">loadHolonsByMetaData</span>({
+  metaData: { checkpointId: <span class="str">'elf-forest-cp3'</span> }
+});
+
+<span class="cmt">// Load all Holons of a specific type across all avatars</span>
+<span class="kw">const</span> { result: allStates } = <span class="kw">await</span> oasis.data.<span class="fn">loadAllHolons</span>({
+  holonType: <span class="str">'PlayerGameState'</span>
+});</pre>
+    </div>
+
+    <h2 id="update">Updating a Holon</h2>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-lang">javascript</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">const</span> { result: updated } = <span class="kw">await</span> oasis.data.<span class="fn">saveHolon</span>({
+  id:   holonId,   <span class="cmt">// include the ID to UPDATE (omit to INSERT)</span>
+  name: <span class="str">'PlayerGameState'</span>,
+  avatarId,
+  metaData: {
+    level:        <span class="num">13</span>,           <span class="cmt">// bumped up</span>
+    currentZone:  <span class="str">'Dark Tower'</span>,
+    checkpointId: <span class="str">'dark-tower-cp1'</span>,
+    lastSaved:    <span class="kw">new</span> <span class="cls">Date</span>().<span class="fn">toISOString</span>()
+  }
+});</pre>
+    </div>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <div class="callout-title">Insert vs Update</div>
+        <p>The <code>saveHolon</code> method handles both. Pass <code>id</code> to update an existing record; omit it (or pass a zero/empty GUID) to create a new one. The OASIS API detects which operation is needed automatically.</p>
+      </div>
+    </div>
+
+    <h2 id="delete">Deleting a Holon</h2>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-lang">javascript</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">const</span> result = <span class="kw">await</span> oasis.data.<span class="fn">deleteHolon</span>({ id: holonId });
+
+<span class="kw">if</span> (!result.isError) console.<span class="fn">log</span>(<span class="str">'Holon deleted.'</span>);</pre>
+    </div>
+
+    <h2 id="hyperdrive">HyperDrive — Large File Storage</h2>
+    <p><strong>HyperDrive</strong> is OASIS' distributed file system layer — built on top of Holochain's Hyperdrive and IPFS — for storing large files (3D assets, videos, audio, game bundles) that don't belong in a document store.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">hyperdrive.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="cmt">// Upload a file to HyperDrive</span>
+<span class="kw">const</span> { result: drive } = <span class="kw">await</span> oasis.hyperDrive.<span class="fn">uploadFile</span>({
+  fileName:    <span class="str">'sword-of-light.glb'</span>,
+  fileContent: fileBuffer,       <span class="cmt">// Buffer or Uint8Array</span>
+  mimeType:    <span class="str">'model/gltf-binary'</span>,
+  avatarId
+});
+
+console.<span class="fn">log</span>(<span class="str">'HyperDrive URI:'</span>, drive.uri);   <span class="cmt">// hyper://... or ipfs://...</span>
+console.<span class="fn">log</span>(<span class="str">'CDN URL:'</span>, drive.cdnUrl);       <span class="cmt">// https:// accessible URL</span>
+
+<span class="cmt">// Download a file</span>
+<span class="kw">const</span> { result: file } = <span class="kw">await</span> oasis.hyperDrive.<span class="fn">downloadFile</span>({ uri: drive.uri });
+
+<span class="cmt">// List all files for an avatar</span>
+<span class="kw">const</span> { result: files } = <span class="kw">await</span> oasis.hyperDrive.<span class="fn">listFiles</span>({ avatarId });
+files.<span class="fn">forEach</span>(f =&gt; console.<span class="fn">log</span>(f.fileName, f.size, f.uri));</pre>
+    </div>
+
+    <h2 id="search">Searching Across All Data</h2>
+    <p>The OASIS Search API spans all data types — Holons, Avatars, OApps, NFTs and map content — from a single endpoint:</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-lang">javascript</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">const</span> { result: hits } = <span class="kw">await</span> oasis.search.<span class="fn">search</span>({
+  searchQuery:  <span class="str">'sword'</span>,
+  searchParams: {
+    searchAvatars:       <span class="kw">false</span>,
+    searchHolons:        <span class="kw">true</span>,
+    searchOAPPs:         <span class="kw">true</span>,
+    searchNFTs:          <span class="kw">true</span>,
+    searchMapPoints:     <span class="kw">false</span>,
+    maxResults:          <span class="num">20</span>
+  }
+});
+
+hits.<span class="fn">forEach</span>(hit =&gt; {
+  console.<span class="fn">log</span>(`[${hit.type}] ${hit.name} — score: ${hit.relevanceScore}`);
+});</pre>
+    </div>
+
+    <div class="callout callout-usecase">
+      <div class="callout-icon">🌍</div>
+      <div class="callout-body">
+        <div class="callout-title">Real-world use case — cloud save across platforms</div>
+        <p>A mobile game stores each player's save state as a Holon. When the player switches from iOS to Android (or to the PC version), their save loads instantly — no account linking, no platform-specific cloud APIs. The same avatar ID fetches the same Holon from whichever provider is fastest geographically. This is also fully offline-capable: providers can sync when connectivity returns.</p>
+      </div>
+    </div>
+
+    <h2 id="providers">Choosing a Storage Provider</h2>
+    <p>You can override the default provider per-request to control where a Holon is stored:</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-lang">javascript</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="cmt">// Store this Holon specifically on MongoDB</span>
+<span class="kw">const</span> result = <span class="kw">await</span> oasis.data.<span class="fn">saveHolon</span>({
+  name:         <span class="str">'HighScores'</span>,
+  metaData:     { score: <span class="num">99999</span> },
+  providerType: <span class="str">'MongoDBOASIS'</span>,  <span class="cmt">// override global default</span>
+  setGlobally:  <span class="kw">false</span>            <span class="cmt">// only for this request</span>
+});
+
+<span class="cmt">// Available providerType values:
+// 'MongoDBOASIS', 'HoloOASIS', 'IPFSOASIS', 'Neo4jOASIS',
+// 'SQLLiteDBOASIS', 'SolanaOASIS', 'EthereumOASIS', 'ThreeFoldOASIS'</span></pre>
+    </div>
+
+    <h2 id="api-reference">Data API Quick Reference</h2>
+    <ul class="method-list">
+      <li><span class="method-name">oasis.data.saveHolon({id?, name, metaData, avatarId, ...})</span><span class="method-desc">Create or update a Holon</span></li>
+      <li><span class="method-name">oasis.data.loadHolon({id})</span><span class="method-desc">Load a single Holon by GUID</span></li>
+      <li><span class="method-name">oasis.data.loadAllHolons({holonType?})</span><span class="method-desc">Load all Holons, optionally filtered by type</span></li>
+      <li><span class="method-name">oasis.data.loadAllHolonsForAvatar({avatarId})</span><span class="method-desc">Load all Holons for a specific avatar</span></li>
+      <li><span class="method-name">oasis.data.loadHolonsByMetaData({metaData})</span><span class="method-desc">Filter Holons by metadata key-values</span></li>
+      <li><span class="method-name">oasis.data.deleteHolon({id})</span><span class="method-desc">Delete a Holon</span></li>
+      <li><span class="method-name">oasis.hyperDrive.uploadFile({fileName, fileContent, mimeType, avatarId})</span><span class="method-desc">Upload a file to distributed storage</span></li>
+      <li><span class="method-name">oasis.hyperDrive.downloadFile({uri})</span><span class="method-desc">Download a file by its HyperDrive URI</span></li>
+      <li><span class="method-name">oasis.hyperDrive.listFiles({avatarId})</span><span class="method-desc">List all files for an avatar</span></li>
+      <li><span class="method-name">oasis.search.search({searchQuery, searchParams})</span><span class="method-desc">Full-text search across all data types</span></li>
+    </ul>
+
+    <div class="tutorial-nav">
+      <a href="/tutorials/04-nft-wallet">
+        <div class="nav-direction">← Previous</div>
+        <div class="nav-title">NFTs &amp; Wallet</div>
+      </a>
+      <a class="next" href="/tutorials/06-first-oapp">
+        <div class="nav-direction">Next →</div>
+        <div class="nav-title">Your First OApp</div>
+      </a>
+    </div>
+  </main>
+
+  <aside class="rail">
+    <div class="rail-title">On This Page</div>
+    <nav class="rail-nav">
+      <a href="#concepts">What is a Holon?</a>
+      <a href="#save">Saving</a>
+      <a href="#load">Loading</a>
+      <a href="#query">Querying</a>
+      <a href="#update">Updating</a>
+      <a href="#delete">Deleting</a>
+      <a href="#hyperdrive">HyperDrive</a>
+      <a href="#search">Search</a>
+      <a href="#providers">Storage Providers</a>
+      <a href="#api-reference">API Reference</a>
+    </nav>
+  </aside>
+</div>
+<script src="../assets/js/site.js"></script>
+</body>
+</html>

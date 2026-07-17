@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 3: Karma &amp; Reputation — OASIS Learn</title>
+<meta name="description" content="Award and track karma points, query the Akashic Records and build reputation-gated features in your OASIS app.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Titillium+Web:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<button class="mobile-menu-btn">☰</button>
+<div class="layout">
+  <aside class="sidebar">
+    <a class="sidebar-logo" href="/"><div class="sidebar-logo-icon">O</div><div class="sidebar-logo-text"><span class="site-name">OASIS LEARN</span><span class="site-sub">Developer Tutorials</span></div></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Getting Started</div>
+      <a class="nav-item" href="/">Overview</a>
+      <a class="nav-item" href="/tutorials/01-getting-started"><span class="step-num">1</span> Quick Start</a>
+      <div class="nav-section-title">Core Concepts</div>
+      <a class="nav-item" href="/tutorials/02-avatar-identity"><span class="step-num">2</span> Avatar &amp; Identity</a>
+      <a class="nav-item active" href="/tutorials/03-karma-reputation"><span class="step-num">3</span> Karma &amp; Reputation</a>
+      <a class="nav-item" href="/tutorials/04-nft-wallet"><span class="step-num">4</span> NFTs &amp; Wallet</a>
+      <a class="nav-item" href="/tutorials/05-data-holons"><span class="step-num">5</span> Data &amp; Holons</a>
+      <div class="nav-section-title">Building Apps</div>
+      <a class="nav-item" href="/tutorials/06-first-oapp"><span class="step-num">6</span> Your First OApp</a>
+      <a class="nav-item" href="/tutorials/07-metaverse-game"><span class="step-num">7</span> Metaverse &amp; Games</a>
+      <a class="nav-item" href="/tutorials/08-providers-production"><span class="step-num">8</span> Providers &amp; Production</a>
+      <div class="nav-section-title">Reference</div>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS" target="_blank">GitHub ↗</a>
+      <a class="nav-item" href="https://oasisomniverse.gitbook.io/oasis-platform" target="_blank">GitBook Docs ↗</a>
+      <a class="nav-item" href="https://oportal.oasisomniverse.one/developer" target="_blank">Dev Portal ↗</a>
+    </nav>
+    <div class="sidebar-footer"><a href="https://oasisomniverse.one" target="_blank">oasisomniverse.one</a><a href="https://discord.gg/oasis" target="_blank">Discord Community</a></div>
+  </aside>
+
+  <main class="main">
+    <div class="progress-bar-wrap"><div class="progress-bar" style="width:37.5%"></div></div>
+
+    <div class="page-header">
+      <div class="breadcrumb"><a href="/">OASIS Learn</a><span class="breadcrumb-sep">/</span><span>Module 3</span></div>
+      <div class="page-meta">
+        <span class="badge badge-beginner">Beginner</span>
+        <span class="badge badge-time">⏱ 20 min</span>
+      </div>
+      <h1 class="page-title">Karma &amp; Reputation — Incentivise Good Behaviour</h1>
+      <p class="page-desc">OASIS karma is a platform-wide reputation score that persists across every app. Award it for positive actions, track history via the Akashic Records, and use it to gate features or rewards.</p>
+    </div>
+
+    <div class="build-summary">
+      <h4>What you'll learn</h4>
+      <ul>
+        <li>The OASIS karma model — positive, negative and weighted categories</li>
+        <li>Award and remove karma from within your app</li>
+        <li>Query a user's karma score, history and Akashic Records</li>
+        <li>Community-voted weighting for karma categories</li>
+        <li>Build a karma-gated feature (e.g. unlock a reward at karma ≥ 500)</li>
+      </ul>
+    </div>
+
+    <h2 id="concepts">The Karma Model</h2>
+    <p>Karma in OASIS is a <strong>persistent, platform-wide reputation score</strong>. Unlike in-app point systems that reset per game, OASIS karma accumulates across every OApp a user interacts with. A player who helps others in your game, contributes to open-source OASIS tools, and mentors new players in Our World all earn karma — and that karma is visible to every other OApp they use.</p>
+
+    <p>Karma comes in two flavours:</p>
+    <ul>
+      <li><strong>Positive karma</strong> — awarded for helpful, creative or constructive actions (e.g. completing a quest, helping another player, publishing an OApp)</li>
+      <li><strong>Negative karma</strong> — awarded for harmful or destructive actions (e.g. griefing, spam, cheating)</li>
+    </ul>
+
+    <p>Each karma type has a <strong>weighting</strong> — a multiplier that the community can vote on to reflect how much a given action matters relative to others. The platform aggregates votes and applies the result automatically.</p>
+
+    <div class="callout callout-note">
+      <div class="callout-icon">📜</div>
+      <div class="callout-body">
+        <div class="callout-title">The Akashic Records</div>
+        <p>Every karma event is written to the <strong>Akashic Records</strong> — an immutable, distributed audit log stored across multiple OASIS providers. Any app can query the full karma history for any avatar. Think of it as a permanent, transparent record of a user's contributions to the ecosystem.</p>
+      </div>
+    </div>
+
+    <h2 id="read-karma">Reading Karma</h2>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">karma-read.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">import</span> { oasis } <span class="kw">from</span> <span class="str">'./oasis.js'</span>;
+
+<span class="kw">const</span> { avatarId } = oasis.auth.<span class="fn">getSession</span>();
+
+<span class="cmt">// Simple total karma score</span>
+<span class="kw">const</span> { result: karma } = <span class="kw">await</span> oasis.karma.<span class="fn">getKarmaForAvatar</span>({ avatarId });
+console.<span class="fn">log</span>(<span class="str">'Total karma:'</span>, karma);
+
+<span class="cmt">// Detailed breakdown</span>
+<span class="kw">const</span> { result: stats } = <span class="kw">await</span> oasis.karma.<span class="fn">getKarmaStats</span>({ avatarId });
+console.<span class="fn">log</span>(stats);
+<span class="cmt">// → { total: 1240, positive: 1350, negative: 110, level: 'Champion' }</span>
+
+<span class="cmt">// Full karma history (every event)</span>
+<span class="kw">const</span> { result: history } = <span class="kw">await</span> oasis.karma.<span class="fn">getKarmaHistory</span>({ avatarId });
+history.<span class="fn">forEach</span>(event =&gt; {
+  console.<span class="fn">log</span>(`${event.date} | ${event.type} | +${event.amount} | ${event.reason}`);
+});
+
+<span class="cmt">// Akashic Records — immutable distributed log</span>
+<span class="kw">const</span> { result: akashic } = <span class="kw">await</span> oasis.karma.<span class="fn">getKarmaAkashicRecordsForAvatar</span>({ avatarId });
+console.<span class="fn">log</span>(<span class="str">'Akashic entries:'</span>, akashic.length);</pre>
+    </div>
+
+    <h2 id="award-karma">Awarding Karma</h2>
+    <p>Call <code>oasis.karma.addKarmaToAvatar()</code> when a user does something positive in your app. You specify the karma type — this determines the base weighting.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">award-karma.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="cmt">// Award karma for a positive action</span>
+<span class="kw">const</span> result = <span class="kw">await</span> oasis.karma.<span class="fn">addKarmaToAvatar</span>({
+  avatarId,
+  karmaType:  <span class="str">'CompletingQuest'</span>,    <span class="cmt">// positive karma type</span>
+  karmaSource: <span class="str">'MyAwesomeOApp'</span>,       <span class="cmt">// your app name (shown in Akashic Records)</span>
+  karmaSourceId: <span class="str">'quest-001'</span>,         <span class="cmt">// optional ID of the triggering event</span>
+  karmaSourceTitle: <span class="str">'The Lost Sword'</span>  <span class="cmt">// human-readable label</span>
+});
+
+console.<span class="fn">log</span>(<span class="str">'Karma awarded:'</span>, result.result?.karmaAwarded);
+console.<span class="fn">log</span>(<span class="str">'New total:'</span>, result.result?.newTotal);</pre>
+    </div>
+
+    <h3>Positive karma types</h3>
+    <div class="api-table-wrap">
+      <table>
+        <thead><tr><th>KarmaType</th><th>Typical use case</th></tr></thead>
+        <tbody>
+          <tr><td><code>CompletingQuest</code></td><td>Player finishes a quest or mission</td></tr>
+          <tr><td><code>HelpingOthers</code></td><td>Assisting another player in-game</td></tr>
+          <tr><td><code>CreatingOApp</code></td><td>Publishing a new OApp to the ecosystem</td></tr>
+          <tr><td><code>SharingKnowledge</code></td><td>Contributing docs, tutorials or guides</td></tr>
+          <tr><td><code>BeingInspiring</code></td><td>Content or action that others rate highly</td></tr>
+          <tr><td><code>EvolveAndGrow</code></td><td>Levelling up, completing learning milestones</td></tr>
+          <tr><td><code>Meditate</code></td><td>Completing mindfulness or wellbeing activities</td></tr>
+          <tr><td><code>BeAGoodSamaritan</code></td><td>Helping new users get started</td></tr>
+          <tr><td><code>DoingGoodDeeds</code></td><td>Real-world charitable actions verified on-chain</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="remove-karma">Removing Karma</h2>
+    <p>Use this sparingly and always log the reason — negative karma events are also written to the Akashic Records and are visible to other apps.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-lang">javascript</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">await</span> oasis.karma.<span class="fn">removeKarmaFromAvatar</span>({
+  avatarId,
+  karmaType:        <span class="str">'Cheating'</span>,
+  karmaSource:      <span class="str">'MyAwesomeOApp'</span>,
+  karmaSourceId:    <span class="str">'cheat-detection-event-007'</span>,
+  karmaSourceTitle: <span class="str">'Speed-hack detected in Race Zone'</span>
+});</pre>
+    </div>
+
+    <h2 id="weighting">Karma Weighting &amp; Community Voting</h2>
+    <p>Each karma type has a <strong>weighting multiplier</strong>. The raw karma awarded for, say, <code>CompletingQuest</code> is multiplied by this weight. The community can vote to adjust weightings over time.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-lang">javascript</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="cmt">// Read current weighting for a positive type</span>
+<span class="kw">const</span> { result: w } = <span class="kw">await</span> oasis.karma.<span class="fn">getPositiveKarmaWeighting</span>({ karmaType: <span class="str">'CompletingQuest'</span> });
+console.<span class="fn">log</span>(<span class="str">'CompletingQuest weighting:'</span>, w);
+
+<span class="cmt">// Vote to increase the weighting for a type (community governance)</span>
+<span class="kw">await</span> oasis.karma.<span class="fn">voteForPositiveKarmaWeighting</span>({
+  karmaType: <span class="str">'SharingKnowledge'</span>,
+  weighting:  <span class="num">2.5</span>    <span class="cmt">// your suggested multiplier</span>
+});</pre>
+    </div>
+
+    <div class="callout callout-usecase">
+      <div class="callout-icon">🌍</div>
+      <div class="callout-body">
+        <div class="callout-title">Real-world use case — karma-gated content</div>
+        <p>An educational platform built on OASIS locks advanced course modules behind a karma threshold of 500. Users who've helped others across <em>any</em> OASIS app — not just this platform — already have that karma and get immediate access. New users are motivated to contribute because the karma they earn unlocks value everywhere, not just here.</p>
+      </div>
+    </div>
+
+    <h2 id="gating">Building a Karma Gate</h2>
+    <p>Here's a complete pattern for gating a feature behind a minimum karma score:</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">karma-gate.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">import</span> { oasis } <span class="kw">from</span> <span class="str">'./oasis.js'</span>;
+
+<span class="kw">const</span> KARMA_THRESHOLD = <span class="num">500</span>;
+
+<span class="kw">async function</span> <span class="fn">canAccessPremiumFeature</span>(avatarId) {
+  <span class="kw">const</span> { result: karma, isError } = <span class="kw">await</span> oasis.karma.<span class="fn">getKarmaForAvatar</span>({ avatarId });
+  <span class="kw">if</span> (isError) <span class="kw">return false</span>;
+  <span class="kw">return</span> karma &gt;= KARMA_THRESHOLD;
+}
+
+<span class="cmt">// In your app route / component:</span>
+<span class="kw">const</span> { avatarId } = oasis.auth.<span class="fn">getSession</span>();
+<span class="kw">const</span> hasAccess = <span class="kw">await</span> <span class="fn">canAccessPremiumFeature</span>(avatarId);
+
+<span class="kw">if</span> (hasAccess) {
+  <span class="fn">showPremiumContent</span>();
+} <span class="kw">else</span> {
+  <span class="fn">showKarmaPrompt</span>(<span class="str">`You need ${KARMA_THRESHOLD} karma to unlock this. Keep contributing!`</span>);
+}</pre>
+    </div>
+
+    <h2 id="leaderboard">Building a Karma Leaderboard</h2>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">leaderboard.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">import</span> { oasis } <span class="kw">from</span> <span class="str">'./oasis.js'</span>;
+
+<span class="kw">async function</span> <span class="fn">buildLeaderboard</span>(avatarIds) {
+  <span class="kw">const</span> entries = <span class="kw">await</span> Promise.<span class="fn">all</span>(
+    avatarIds.<span class="fn">map</span>(<span class="kw">async</span> id =&gt; {
+      <span class="kw">const</span> [avatarRes, karmaRes] = <span class="kw">await</span> Promise.<span class="fn">all</span>([
+        oasis.avatar.<span class="fn">getAvatarDetail</span>({ id }),
+        oasis.karma.<span class="fn">getKarmaForAvatar</span>({ avatarId: id })
+      ]);
+      <span class="kw">return</span> {
+        username: avatarRes.result?.username,
+        karma:    karmaRes.result ?? <span class="num">0</span>
+      };
+    })
+  );
+  <span class="kw">return</span> entries.<span class="fn">sort</span>((a, b) =&gt; b.karma - a.karma);
+}
+
+<span class="kw">const</span> board = <span class="kw">await</span> <span class="fn">buildLeaderboard</span>(myPlayerIds);
+board.<span class="fn">forEach</span>((entry, i) =&gt;
+  console.<span class="fn">log</span>(`#${i+<span class="num">1</span>} ${entry.username} — ${entry.karma} karma`)
+);</pre>
+    </div>
+
+    <h2 id="api-reference">Karma API Quick Reference</h2>
+    <ul class="method-list">
+      <li><span class="method-name">oasis.karma.getKarmaForAvatar({avatarId})</span><span class="method-desc">Returns total karma score (number)</span></li>
+      <li><span class="method-name">oasis.karma.getKarmaStats({avatarId})</span><span class="method-desc">Returns {total, positive, negative, level}</span></li>
+      <li><span class="method-name">oasis.karma.getKarmaHistory({avatarId})</span><span class="method-desc">Returns list of all karma events</span></li>
+      <li><span class="method-name">oasis.karma.getKarmaAkashicRecordsForAvatar({avatarId})</span><span class="method-desc">Immutable distributed audit log</span></li>
+      <li><span class="method-name">oasis.karma.addKarmaToAvatar({avatarId, karmaType, karmaSource, ...})</span><span class="method-desc">Award positive karma</span></li>
+      <li><span class="method-name">oasis.karma.removeKarmaFromAvatar({avatarId, karmaType, karmaSource, ...})</span><span class="method-desc">Apply negative karma</span></li>
+      <li><span class="method-name">oasis.karma.getPositiveKarmaWeighting({karmaType})</span><span class="method-desc">Get current multiplier for a type</span></li>
+      <li><span class="method-name">oasis.karma.voteForPositiveKarmaWeighting({karmaType, weighting})</span><span class="method-desc">Submit community vote on weighting</span></li>
+    </ul>
+
+    <div class="tutorial-nav">
+      <a href="/tutorials/02-avatar-identity">
+        <div class="nav-direction">← Previous</div>
+        <div class="nav-title">Avatar &amp; Identity</div>
+      </a>
+      <a class="next" href="/tutorials/04-nft-wallet">
+        <div class="nav-direction">Next →</div>
+        <div class="nav-title">NFTs &amp; Wallet</div>
+      </a>
+    </div>
+  </main>
+
+  <aside class="rail">
+    <div class="rail-title">On This Page</div>
+    <nav class="rail-nav">
+      <a href="#concepts">The Karma Model</a>
+      <a href="#read-karma">Reading Karma</a>
+      <a href="#award-karma">Awarding Karma</a>
+      <a href="#remove-karma">Removing Karma</a>
+      <a href="#weighting">Weighting &amp; Voting</a>
+      <a href="#gating">Karma Gate Pattern</a>
+      <a href="#leaderboard">Leaderboard</a>
+      <a href="#api-reference">API Reference</a>
+    </nav>
+  </aside>
+</div>
+<script src="../assets/js/site.js"></script>
+</body>
+</html>
