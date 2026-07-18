@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 12: Missions &amp; Quests — OASIS Learn</title>
+<meta name="description" content="Build structured game progression with the OASIS WEB5 Missions and Quests API — objectives, rewards, karma triggers and cross-game quest chains.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Titillium+Web:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<button class="mobile-menu-btn">☰</button>
+<div class="layout">
+  <aside class="sidebar">
+    <a class="sidebar-logo" href="/"><div class="sidebar-logo-icon">O</div><div class="sidebar-logo-text"><span class="site-name">OASIS LEARN</span><span class="site-sub">Developer Tutorials</span></div></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Getting Started</div>
+      <a class="nav-item" href="/">Overview</a>
+      <a class="nav-item" href="/tutorials/01-getting-started"><span class="step-num">1</span> Quick Start</a>
+      <div class="nav-section-title">WEB4 Core</div>
+      <a class="nav-item" href="/tutorials/02-avatar-identity"><span class="step-num">2</span> Avatar &amp; Identity</a>
+      <a class="nav-item" href="/tutorials/03-karma-reputation"><span class="step-num">3</span> Karma &amp; Reputation</a>
+      <a class="nav-item" href="/tutorials/04-nft-wallet"><span class="step-num">4</span> NFTs &amp; Wallet</a>
+      <a class="nav-item" href="/tutorials/05-data-holons"><span class="step-num">5</span> Data &amp; Holons</a>
+      <div class="nav-section-title">Building Apps</div>
+      <a class="nav-item" href="/tutorials/06-first-oapp"><span class="step-num">6</span> Your First OApp</a>
+      <a class="nav-item" href="/tutorials/07-metaverse-game"><span class="step-num">7</span> Metaverse &amp; Games</a>
+      <a class="nav-item" href="/tutorials/08-providers-production"><span class="step-num">8</span> Providers &amp; Production</a>
+      <div class="nav-section-title">WEB4 Deep Dives</div>
+      <a class="nav-item" href="/tutorials/09-hyperdrive"><span class="step-num">9</span> HyperDrive Storage</a>
+      <a class="nav-item" href="/tutorials/10-onet-p2p"><span class="step-num">10</span> ONET &amp; P2P</a>
+      <div class="nav-section-title">WEB5 STAR API</div>
+      <a class="nav-item" href="/tutorials/11-web5-intro"><span class="step-num">11</span> WEB5 Introduction</a>
+      <a class="nav-item active" href="/tutorials/12-missions-quests"><span class="step-num">12</span> Missions &amp; Quests</a>
+      <a class="nav-item" href="/tutorials/13-celestial-spaces"><span class="step-num">13</span> Celestial Spaces</a>
+      <a class="nav-item" href="/tutorials/14-geonft-ar"><span class="step-num">14</span> GeoNFTs &amp; AR</a>
+      <div class="nav-section-title">WEB6 AI Layer</div>
+      <a class="nav-item" href="/tutorials/15-web6-ai-intro"><span class="step-num">15</span> WEB6 AI Intro</a>
+      <a class="nav-item" href="/tutorials/16-fahrn-agents"><span class="step-num">16</span> FAHRN Multi-Agent</a>
+      <a class="nav-item" href="/tutorials/17-holonic-memory"><span class="step-num">17</span> Holonic Memory</a>
+      <div class="nav-section-title">Case Studies</div>
+      <a class="nav-item" href="/case-studies/trust-site">🏛️ SovereignTrust</a>
+      <a class="nav-item" href="/case-studies/nft-founders">🎖️ Founder NFTs</a>
+      <a class="nav-item" href="/case-studies/oportal">🌐 OPORTAL</a>
+      <a class="nav-item" href="/case-studies/our-world">🌍 Our World</a>
+      <a class="nav-item" href="/case-studies/odoom">💀 ODOOM</a>
+      <a class="nav-item" href="/case-studies/oquake">⚡ OQuake</a>
+      <div class="nav-section-title">API Reference</div>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB4%20OASIS%20API" target="_blank">WEB4 API Ref ↗</a>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB5%20STAR%20API" target="_blank">WEB5 STAR Ref ↗</a>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB6" target="_blank">WEB6 AI Ref ↗</a>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS" target="_blank">GitHub ↗</a>
+      <a class="nav-item" href="https://oportal.oasisomniverse.one/developer" target="_blank">Dev Portal ↗</a>
+    </nav>
+    <div class="sidebar-footer"><a href="https://oasisomniverse.one" target="_blank">oasisomniverse.one</a><a href="https://discord.gg/oasis" target="_blank">Discord Community</a></div>
+  </aside>
+
+  <main class="main">
+    <div class="progress-bar-wrap"><div class="progress-bar" style="width:69%"></div></div>
+    <div class="page-header">
+      <div class="breadcrumb"><a href="/">OASIS Learn</a><span class="breadcrumb-sep">/</span><span>Module 12</span></div>
+      <div class="page-meta">
+        <span class="badge badge-intermediate">Intermediate</span>
+        <span class="badge badge-time">⏱ 35 min</span>
+        <span class="badge" style="background:rgba(124,58,237,.18);color:#a78bfa">WEB5</span>
+      </div>
+      <h1 class="page-title">Missions &amp; Quests</h1>
+      <p class="page-desc">Missions are the structured goal units of the OASIS — each with objectives, completion conditions, karma rewards and optional NFT drops. Quests are the narrative arcs that chain missions together. Both work cross-game: an objective completed in OQuake can advance a mission in Our World.</p>
+    </div>
+
+    <div class="build-summary">
+      <h4>What you'll build</h4>
+      <ul>
+        <li>Create a mission with multiple objectives and a karma reward</li>
+        <li>Track objective completion and auto-award karma on mission finish</li>
+        <li>Chain missions into a multi-stage quest</li>
+        <li>Query a player's active and completed quests</li>
+        <li>Use the STARAPIClient C interface for cross-game quest hooks (ODOOM / OQuake)</li>
+      </ul>
+    </div>
+
+    <div class="callout callout-note">
+      <div class="callout-icon">📦</div>
+      <div class="callout-body">
+        <div class="callout-title">API references</div>
+        <p><a href="https://github.com/NextGenSoftwareUK/OASIS/blob/master/Docs/Devs/API%20Documentation/WEB5%20STAR%20API/Missions-API.md" target="_blank">Missions-API.md ↗</a> · <a href="https://github.com/NextGenSoftwareUK/OASIS/blob/master/Docs/Devs/API%20Documentation/WEB5%20STAR%20API/Quests-API.md" target="_blank">Quests-API.md ↗</a> · npm: <a href="https://www.npmjs.com/package/@oasisomniverse/web5-api" target="_blank"><code>@oasisomniverse/web5-api</code> ↗</a></p>
+      </div>
+    </div>
+
+    <h2 id="create-mission">Creating a Mission</h2>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">create-mission.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">import</span> { star } <span class="kw">from</span> <span class="str">'./star.js'</span>;
+
+<span class="kw">const</span> { result: mission } = <span class="kw">await</span> star.missions.<span class="fn">createMission</span>({
+  name:        <span class="str">'Retrieve the Crimson Key'</span>,
+  description: <span class="str">'Find the red key hidden in the ruined citadel and return it to the armoury.'</span>,
+  objectives: [
+    { name: <span class="str">'Enter the citadel'</span>,    karmaReward: <span class="num">10</span> },
+    { name: <span class="str">'Locate the red key'</span>,   karmaReward: <span class="num">25</span> },
+    { name: <span class="str">'Survive the guardian'</span>,  karmaReward: <span class="num">50</span> },
+    { name: <span class="str">'Return to armoury'</span>,     karmaReward: <span class="num">15</span> },
+  ],
+  completionKarmaReward: <span class="num">200</span>,
+  nftRewardId: <span class="str">'crimson-key-nft-id'</span>,   <span class="cmt">// optional — mint NFT on completion</span>
+  expiresAt:   <span class="str">'2027-01-01T00:00:00Z'</span>,
+});
+
+console.<span class="fn">log</span>(<span class="str">'Mission created:'</span>, mission.id);</pre>
+    </div>
+
+    <h2 id="complete-objective">Completing Objectives</h2>
+    <p>Call <code>completeObjective</code> from your game or app when the player meets a condition. Karma is awarded automatically and the mission status updates.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">complete-objective.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="cmt">// Player entered the citadel — complete objective index 0</span>
+<span class="kw">const</span> { result } = <span class="kw">await</span> star.missions.<span class="fn">completeObjective</span>({
+  missionId:   mission.id,
+  objectiveIndex: <span class="num">0</span>,
+  avatarId:    currentAvatarId,
+});
+
+console.<span class="fn">log</span>(<span class="str">'Progress:'</span>, result.completedObjectives, <span class="str">'/'</span>, result.totalObjectives);
+console.<span class="fn">log</span>(<span class="str">'Karma awarded:'</span>, result.karmaAwarded);
+console.<span class="fn">log</span>(<span class="str">'Mission complete:'</span>, result.missionComplete);
+
+<span class="kw">if</span> (result.missionComplete) {
+  console.<span class="fn">log</span>(<span class="str">'🎉 NFT minted:'</span>, result.nftMintedId);
+}</pre>
+    </div>
+
+    <h2 id="quests">Building a Quest</h2>
+    <p>A Quest chains multiple missions in order. Players must complete each mission before the next unlocks.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">create-quest.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">const</span> { result: quest } = <span class="kw">await</span> star.quests.<span class="fn">createQuest</span>({
+  name:        <span class="str">'The Key Hunters Trilogy'</span>,
+  description: <span class="str">'Three missions across three worlds — ODOOM, OQuake and Our World.'</span>,
+  missions: [
+    { missionId: crimsonKeyMissionId,  order: <span class="num">1</span> },
+    { missionId: blueKeyMissionId,     order: <span class="num">2</span> },
+    { missionId: goldenKeyMissionId,   order: <span class="num">3</span> },
+  ],
+  completionKarmaReward: <span class="num">1000</span>,
+  completionNftRewardId: <span class="str">'master-key-nft-id'</span>,
+});
+
+console.<span class="fn">log</span>(<span class="str">'Quest created:'</span>, quest.id);</pre>
+    </div>
+
+    <h2 id="query">Querying Player Progress</h2>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">quest-progress.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="cmt">// Active quests for this avatar</span>
+<span class="kw">const</span> { result: active } = <span class="kw">await</span> star.quests.<span class="fn">getActiveQuests</span>({ avatarId });
+<span class="kw">const</span> { result: completed } = <span class="kw">await</span> star.quests.<span class="fn">getCompletedQuests</span>({ avatarId });
+
+console.<span class="fn">log</span>(<span class="str">'Active:'</span>, active.length, <span class="str">'Completed:'</span>, completed.length);
+
+<span class="kw">for</span> (<span class="kw">const</span> q <span class="kw">of</span> active) {
+  console.<span class="fn">log</span>(`  ${q.name}  progress=${q.completedMissions}/${q.totalMissions}`);
+}</pre>
+    </div>
+
+    <h2 id="c-api">Cross-Game Quests via STARAPIClient (C/C++)</h2>
+    <p>For native games like ODOOM and OQuake, the <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/OASIS%20Omniverse/STARAPIClient" target="_blank">STARAPIClient</a> exposes the same quest system as a C ABI — no HTTP calls in your game code, just a thin <code>star_api_*</code> call:</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-lang">c</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="cmt">// In your C/C++ game — called when player completes an objective</span>
+<span class="kw">#include</span> <span class="str">"star_api.h"</span>
+
+<span class="cmt">// Check if a quest objective is done (e.g. for HUD display)</span>
+<span class="kw">bool</span> <span class="fn">has_key</span> = <span class="fn">star_api_has_item</span>(<span class="str">"crimson_key"</span>);
+
+<span class="cmt">// Record objective completion (triggers karma + quest progress server-side)</span>
+<span class="fn">star_api_complete_objective</span>(quest_id, objective_index, avatar_id);</pre>
+    </div>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <div class="callout-title">Cross-game quest chains in the wild</div>
+        <p>The Key Hunters Trilogy quest that spans ODOOM → OQuake → Our World is the flagship cross-game demo. See the <a href="/case-studies/odoom">ODOOM</a> and <a href="/case-studies/oquake">OQuake</a> case studies for step-by-step integration guides.</p>
+      </div>
+    </div>
+
+    <div class="next-steps">
+      <h3>Next steps</h3>
+      <ul>
+        <li><a href="/tutorials/13-celestial-spaces">Module 13: Celestial Bodies &amp; Spaces →</a></li>
+        <li><a href="https://github.com/NextGenSoftwareUK/OASIS/blob/master/Docs/Devs/API%20Documentation/WEB5%20STAR%20API/Missions-API.md" target="_blank">Missions API Reference ↗</a></li>
+        <li><a href="https://github.com/NextGenSoftwareUK/OASIS/blob/master/Docs/Devs/API%20Documentation/WEB5%20STAR%20API/Quests-API.md" target="_blank">Quests API Reference ↗</a></li>
+        <li><a href="/case-studies/our-world">Case Study: Our World (missions in production) →</a></li>
+      </ul>
+    </div>
+  </main>
+</div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

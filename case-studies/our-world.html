@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study: Our World — OASIS Learn</title>
+<meta name="description" content="How Our World AR was built on OASIS WEB4 and WEB5 — a Unity Pokémon-GO-style geolocation game with Avatar SSO, cross-game inventory, GeoNFTs, missions and a full AR layer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Titillium+Web:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<button class="mobile-menu-btn">☰</button>
+<div class="layout">
+  <aside class="sidebar">
+    <a class="sidebar-logo" href="/"><div class="sidebar-logo-icon">O</div><div class="sidebar-logo-text"><span class="site-name">OASIS LEARN</span><span class="site-sub">Developer Tutorials</span></div></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Getting Started</div>
+      <a class="nav-item" href="/">Overview</a>
+      <a class="nav-item" href="/tutorials/01-getting-started"><span class="step-num">1</span> Quick Start</a>
+      <div class="nav-section-title">WEB4 Core</div>
+      <a class="nav-item" href="/tutorials/02-avatar-identity"><span class="step-num">2</span> Avatar &amp; Identity</a>
+      <a class="nav-item" href="/tutorials/03-karma-reputation"><span class="step-num">3</span> Karma &amp; Reputation</a>
+      <a class="nav-item" href="/tutorials/04-nft-wallet"><span class="step-num">4</span> NFTs &amp; Wallet</a>
+      <a class="nav-item" href="/tutorials/05-data-holons"><span class="step-num">5</span> Data &amp; Holons</a>
+      <div class="nav-section-title">Building Apps</div>
+      <a class="nav-item" href="/tutorials/06-first-oapp"><span class="step-num">6</span> Your First OApp</a>
+      <a class="nav-item" href="/tutorials/07-metaverse-game"><span class="step-num">7</span> Metaverse &amp; Games</a>
+      <a class="nav-item" href="/tutorials/08-providers-production"><span class="step-num">8</span> Providers &amp; Production</a>
+      <div class="nav-section-title">WEB4 Deep Dives</div>
+      <a class="nav-item" href="/tutorials/09-hyperdrive"><span class="step-num">9</span> HyperDrive Storage</a>
+      <a class="nav-item" href="/tutorials/10-onet-p2p"><span class="step-num">10</span> ONET &amp; P2P</a>
+      <div class="nav-section-title">WEB5 STAR API</div>
+      <a class="nav-item" href="/tutorials/11-web5-intro"><span class="step-num">11</span> WEB5 Introduction</a>
+      <a class="nav-item" href="/tutorials/12-missions-quests"><span class="step-num">12</span> Missions &amp; Quests</a>
+      <a class="nav-item" href="/tutorials/13-celestial-spaces"><span class="step-num">13</span> Celestial Spaces</a>
+      <a class="nav-item" href="/tutorials/14-geonft-ar"><span class="step-num">14</span> GeoNFTs &amp; AR</a>
+      <div class="nav-section-title">WEB6 AI Layer</div>
+      <a class="nav-item" href="/tutorials/15-web6-ai-intro"><span class="step-num">15</span> WEB6 AI Intro</a>
+      <a class="nav-item" href="/tutorials/16-fahrn-agents"><span class="step-num">16</span> FAHRN Multi-Agent</a>
+      <a class="nav-item" href="/tutorials/17-holonic-memory"><span class="step-num">17</span> Holonic Memory</a>
+      <div class="nav-section-title">Case Studies</div>
+      <a class="nav-item" href="/case-studies/trust-site">🏛️ SovereignTrust</a>
+      <a class="nav-item" href="/case-studies/nft-founders">🎖️ Founder NFTs</a>
+      <a class="nav-item" href="/case-studies/oportal">🌐 OPORTAL</a>
+      <a class="nav-item active" href="/case-studies/our-world">🌍 Our World</a>
+      <a class="nav-item" href="/case-studies/odoom">💀 ODOOM</a>
+      <a class="nav-item" href="/case-studies/oquake">⚡ OQuake</a>
+      <div class="nav-section-title">API Reference</div>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB4%20OASIS%20API" target="_blank">WEB4 API Ref ↗</a>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB5%20STAR%20API" target="_blank">WEB5 STAR Ref ↗</a>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB6" target="_blank">WEB6 AI Ref ↗</a>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS" target="_blank">GitHub ↗</a>
+      <a class="nav-item" href="https://oportal.oasisomniverse.one/developer" target="_blank">Dev Portal ↗</a>
+    </nav>
+    <div class="sidebar-footer"><a href="https://oasisomniverse.one" target="_blank">oasisomniverse.one</a><a href="https://discord.gg/oasis" target="_blank">Discord Community</a></div>
+  </aside>
+
+  <main class="main">
+    <div class="page-header">
+      <div class="breadcrumb"><a href="/">OASIS Learn</a><span class="breadcrumb-sep">/</span><a href="/">Case Studies</a><span class="breadcrumb-sep">/</span><span>Our World</span></div>
+      <div class="page-meta">
+        <span class="badge badge-advanced">Advanced</span>
+        <span class="badge badge-time">⏱ 90 min</span>
+        <span class="badge" style="background:rgba(56,189,248,.15);color:#7dd3fc">WEB4</span>
+        <span class="badge" style="background:rgba(124,58,237,.18);color:#a78bfa">WEB5</span>
+        <span class="badge" style="background:#1e3a5f;color:#7dd3fc">Unity</span>
+      </div>
+      <h1 class="page-title">🌍 Case Study: Our World</h1>
+      <p class="page-desc">Our World is a Pokémon-GO-style AR geolocation game built in Unity on OASIS WEB4 and WEB5. Players explore the real world to discover GeoNFTs, complete location-based missions, battle creatures at AR hotspots, and share cross-game inventory with ODOOM and OQuake. Earth itself is registered as an OASIS CelestialBody — every GPS coordinate maps into the Omniverse.</p>
+    </div>
+
+    <div class="build-summary">
+      <h4>Tech stack</h4>
+      <ul>
+        <li><strong>Engine:</strong> Unity 2022+ (C#), ARFoundation, GPS/location services</li>
+        <li><strong>OASIS WEB4:</strong> Avatar SSO, cross-game Inventory, Karma, HyperDrive player data, ONET multiplayer</li>
+        <li><strong>OASIS WEB5:</strong> GeoNFTs, GeoHotSpots, Missions, Quests, CelestialBodies (Earth as planet), WEB5 STAR API</li>
+        <li><strong>Unity SDK:</strong> <code>NextGenSoftware.OASIS.API.OASISUnitySDK</code> (NuGet)</li>
+      </ul>
+    </div>
+
+    <h2 id="architecture">Architecture</h2>
+    <div class="code-block">
+      <div class="code-block-header"><span>Our World integration architecture</span></div>
+      <pre>Unity App (C#)
+  │
+  ├─ OASISAvatarManager  ──► WEB4 Avatar SSO + Karma
+  ├─ OASISGeoManager     ──► WEB5 GeoNFTs + GeoHotSpots (GPS → AR spawn)
+  ├─ OASISMissionManager ──► WEB5 Missions + Quests (objectives + rewards)
+  ├─ OASISInventory      ──► WEB5 Cross-game inventory (shared with ODOOM/OQuake)
+  ├─ OASISMultiplayer    ──► WEB4 ONET P2P (real-time player positions)
+  └─ OASISHyperDrive     ──► WEB4 Player save data (persistent across devices)</pre>
+    </div>
+
+    <h2 id="step1">Step 1 — Avatar Login (Unity)</h2>
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-lang">csharp</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">using</span> NextGenSoftware.OASIS.API.OASISUnitySDK;
+<span class="kw">using</span> NextGenSoftware.OASIS.API.OASISUnitySDK.Avatar;
+
+<span class="kw">public class</span> OurWorldAuthManager : MonoBehaviour
+{
+    <span class="kw">async void</span> <span class="fn">Start</span>()
+    {
+        <span class="kw">var</span> result = <span class="kw">await</span> OASISDNA.Managers.Avatar
+            .<span class="fn">AuthenticateAsync</span>(email, password);
+
+        <span class="kw">if</span> (result.IsError)
+        {
+            Debug.<span class="fn">LogError</span>($<span class="str">"Login failed: {result.Message}"</span>);
+            <span class="kw">return</span>;
+        }
+
+        OASISDNA.CurrentAvatar = result.Result;
+        Debug.<span class="fn">Log</span>($<span class="str">"Logged in as {result.Result.Username}, karma={result.Result.Karma}"</span>);
+        <span class="fn">LoadGame</span>();
+    }
+}</pre>
+    </div>
+
+    <h2 id="step2">Step 2 — Earth as a CelestialBody</h2>
+    <p>Earth is registered as an OASIS CelestialBody. Real GPS coordinates map to positions on the Earth body — GeoNFTs dropped at a GPS location appear in AR at exactly that spot.</p>
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-lang">csharp</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="cmt">// On startup — ensure Earth is registered and warp avatar to it</span>
+<span class="kw">var</span> earthBody = <span class="kw">await</span> OASISDNA.Managers.Star
+    .<span class="fn">GetCelestialBodyByNameAsync</span>(<span class="str">"Earth"</span>);
+
+<span class="kw">await</span> OASISDNA.Managers.Star.Avatar
+    .<span class="fn">WarpToAsync</span>(OASISDNA.CurrentAvatar.Id, earthBody.Id);</pre>
+    </div>
+
+    <h2 id="step3">Step 3 — Spawning GeoNFTs in AR</h2>
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-lang">csharp</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">public class</span> OASISGeoManager : MonoBehaviour
+{
+    <span class="kw">async void</span> <span class="fn">Update</span>()
+    {
+        <span class="kw">var</span> loc = Input.location.lastData;
+
+        <span class="cmt">// Poll nearby GeoNFTs every 10 seconds</span>
+        <span class="kw">if</span> (Time.time - lastPoll > <span class="num">10f</span>)
+        {
+            lastPoll = Time.time;
+            <span class="kw">var</span> nearby = <span class="kw">await</span> OASISDNA.Managers.Star.GeoNFTs
+                .<span class="fn">GetNearbyAsync</span>(loc.latitude, loc.longitude, radiusMetres: <span class="num">500</span>);
+
+            <span class="kw">foreach</span> (<span class="kw">var</span> geoNft <span class="kw">in</span> nearby)
+                <span class="fn">SpawnARObject</span>(geoNft);
+        }
+    }
+
+    <span class="kw">void</span> <span class="fn">SpawnARObject</span>(GeoNFT geoNft)
+    {
+        <span class="kw">var</span> arPos = <span class="fn">GpsToARPosition</span>(geoNft.Latitude, geoNft.Longitude);
+        <span class="kw">var</span> go    = Instantiate(geoNftPrefab, arPos, Quaternion.identity);
+        go.GetComponent&lt;GeoNFTDisplay&gt;().<span class="fn">SetData</span>(geoNft);
+    }
+
+    <span class="kw">public async void</span> <span class="fn">OnPlayerTapGeoNFT</span>(GeoNFT geoNft)
+    {
+        <span class="kw">var</span> result = <span class="kw">await</span> OASISDNA.Managers.Star.GeoNFTs
+            .<span class="fn">CollectAsync</span>(geoNft.Id, OASISDNA.CurrentAvatar.Id);
+
+        <span class="kw">if</span> (!result.IsError)
+            UIManager.<span class="fn">ShowReward</span>($<span class="str">"Collected! +{result.Result.KarmaAwarded} karma"</span>);
+    }
+}</pre>
+    </div>
+
+    <h2 id="step4">Step 4 — Missions &amp; Objectives</h2>
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-lang">csharp</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="cmt">// Called when player enters a GeoHotSpot radius</span>
+<span class="kw">async void</span> <span class="fn">OnHotSpotEntered</span>(GeoHotSpot hotSpot)
+{
+    <span class="kw">if</span> (hotSpot.HotSpotType == <span class="str">"MissionCheckpoint"</span>)
+    {
+        <span class="kw">await</span> OASISDNA.Managers.Star.Missions
+            .<span class="fn">CompleteObjectiveAsync</span>(hotSpot.MissionId, hotSpot.ObjectiveIndex,
+                                   OASISDNA.CurrentAvatar.Id);
+
+        UIManager.<span class="fn">ShowObjectiveComplete</span>(hotSpot.ObjectiveIndex);
+    }
+}</pre>
+    </div>
+
+    <h2 id="step5">Step 5 — Cross-Game Inventory</h2>
+    <p>Items collected in Our World appear in the player's inventory in ODOOM and OQuake — the inventory is stored in WEB5 and is game-agnostic.</p>
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-lang">csharp</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="cmt">// Load cross-game inventory (shared with ODOOM/OQuake)</span>
+<span class="kw">var</span> inventory = <span class="kw">await</span> OASISDNA.Managers.Star.Inventory
+    .<span class="fn">GetItemsAsync</span>(OASISDNA.CurrentAvatar.Id);
+
+<span class="cmt">// Check if player has the Crimson Key (found in ODOOM)</span>
+<span class="kw">bool</span> hasCrimsonKey = inventory.Items
+    .<span class="fn">Any</span>(i => i.Name == <span class="str">"Crimson Key"</span>);
+
+<span class="kw">if</span> (hasCrimsonKey)
+    <span class="fn">UnlockSecretArea</span>(); <span class="cmt">// A door in Our World that only ODOOM players can open</span></pre>
+    </div>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <div class="callout-title">Source code</div>
+        <p>Browse the Our World Unity project at <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/ARWorld" target="_blank">github.com/NextGenSoftwareUK/OASIS/tree/master/ARWorld ↗</a></p>
+      </div>
+    </div>
+
+    <div class="next-steps">
+      <h3>Related case studies</h3>
+      <ul>
+        <li><a href="/case-studies/odoom">ODOOM — cross-game with Our World (C/OGEngine) →</a></li>
+        <li><a href="/case-studies/oquake">OQuake — cross-game with Our World (Vulkan/OGEngine) →</a></li>
+        <li><a href="/tutorials/14-geonft-ar">Module 14: GeoNFTs &amp; AR →</a></li>
+        <li><a href="/tutorials/12-missions-quests">Module 12: Missions &amp; Quests →</a></li>
+      </ul>
+    </div>
+  </main>
+</div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

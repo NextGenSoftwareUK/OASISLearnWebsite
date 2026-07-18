@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 17: Holonic Memory — OASIS Learn</title>
+<meta name="description" content="Give AI agents persistent, fractal memory across sessions, users and groups using the OASIS WEB6 Holonic Memory system — the brain behind SkillOpt and FAHRN.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Titillium+Web:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<button class="mobile-menu-btn">☰</button>
+<div class="layout">
+  <aside class="sidebar">
+    <a class="sidebar-logo" href="/"><div class="sidebar-logo-icon">O</div><div class="sidebar-logo-text"><span class="site-name">OASIS LEARN</span><span class="site-sub">Developer Tutorials</span></div></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Getting Started</div>
+      <a class="nav-item" href="/">Overview</a>
+      <a class="nav-item" href="/tutorials/01-getting-started"><span class="step-num">1</span> Quick Start</a>
+      <div class="nav-section-title">WEB4 Core</div>
+      <a class="nav-item" href="/tutorials/02-avatar-identity"><span class="step-num">2</span> Avatar &amp; Identity</a>
+      <a class="nav-item" href="/tutorials/03-karma-reputation"><span class="step-num">3</span> Karma &amp; Reputation</a>
+      <a class="nav-item" href="/tutorials/04-nft-wallet"><span class="step-num">4</span> NFTs &amp; Wallet</a>
+      <a class="nav-item" href="/tutorials/05-data-holons"><span class="step-num">5</span> Data &amp; Holons</a>
+      <div class="nav-section-title">Building Apps</div>
+      <a class="nav-item" href="/tutorials/06-first-oapp"><span class="step-num">6</span> Your First OApp</a>
+      <a class="nav-item" href="/tutorials/07-metaverse-game"><span class="step-num">7</span> Metaverse &amp; Games</a>
+      <a class="nav-item" href="/tutorials/08-providers-production"><span class="step-num">8</span> Providers &amp; Production</a>
+      <div class="nav-section-title">WEB4 Deep Dives</div>
+      <a class="nav-item" href="/tutorials/09-hyperdrive"><span class="step-num">9</span> HyperDrive Storage</a>
+      <a class="nav-item" href="/tutorials/10-onet-p2p"><span class="step-num">10</span> ONET &amp; P2P</a>
+      <div class="nav-section-title">WEB5 STAR API</div>
+      <a class="nav-item" href="/tutorials/11-web5-intro"><span class="step-num">11</span> WEB5 Introduction</a>
+      <a class="nav-item" href="/tutorials/12-missions-quests"><span class="step-num">12</span> Missions &amp; Quests</a>
+      <a class="nav-item" href="/tutorials/13-celestial-spaces"><span class="step-num">13</span> Celestial Spaces</a>
+      <a class="nav-item" href="/tutorials/14-geonft-ar"><span class="step-num">14</span> GeoNFTs &amp; AR</a>
+      <div class="nav-section-title">WEB6 AI Layer</div>
+      <a class="nav-item" href="/tutorials/15-web6-ai-intro"><span class="step-num">15</span> WEB6 AI Intro</a>
+      <a class="nav-item" href="/tutorials/16-fahrn-agents"><span class="step-num">16</span> FAHRN Multi-Agent</a>
+      <a class="nav-item active" href="/tutorials/17-holonic-memory"><span class="step-num">17</span> Holonic Memory</a>
+      <div class="nav-section-title">Case Studies</div>
+      <a class="nav-item" href="/case-studies/trust-site">🏛️ SovereignTrust</a>
+      <a class="nav-item" href="/case-studies/nft-founders">🎖️ Founder NFTs</a>
+      <a class="nav-item" href="/case-studies/oportal">🌐 OPORTAL</a>
+      <a class="nav-item" href="/case-studies/our-world">🌍 Our World</a>
+      <a class="nav-item" href="/case-studies/odoom">💀 ODOOM</a>
+      <a class="nav-item" href="/case-studies/oquake">⚡ OQuake</a>
+      <div class="nav-section-title">API Reference</div>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB4%20OASIS%20API" target="_blank">WEB4 API Ref ↗</a>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB5%20STAR%20API" target="_blank">WEB5 STAR Ref ↗</a>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB6" target="_blank">WEB6 AI Ref ↗</a>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS" target="_blank">GitHub ↗</a>
+      <a class="nav-item" href="https://oportal.oasisomniverse.one/developer" target="_blank">Dev Portal ↗</a>
+    </nav>
+    <div class="sidebar-footer"><a href="https://oasisomniverse.one" target="_blank">oasisomniverse.one</a><a href="https://discord.gg/oasis" target="_blank">Discord Community</a></div>
+  </aside>
+
+  <main class="main">
+    <div class="progress-bar-wrap"><div class="progress-bar" style="width:100%"></div></div>
+    <div class="page-header">
+      <div class="breadcrumb"><a href="/">OASIS Learn</a><span class="breadcrumb-sep">/</span><span>Module 17</span></div>
+      <div class="page-meta">
+        <span class="badge badge-advanced">Advanced</span>
+        <span class="badge badge-time">⏱ 35 min</span>
+        <span class="badge" style="background:rgba(16,185,129,.15);color:#34d399">WEB6</span>
+      </div>
+      <h1 class="page-title">Holonic Memory</h1>
+      <p class="page-desc">Holonic Memory is the persistent, fractal memory system that backs every WEB6 AI agent. Memory is organised in a four-level hierarchy — Session, Agent, User, Group — where each level inherits context from levels above it. A Leela assistant in SovereignTrust remembers not just the current conversation, but the user's full trust portfolio history, all previous Leela sessions, and shared wisdom from the broader OASIS community.</p>
+    </div>
+
+    <div class="build-summary">
+      <h4>What you'll build</h4>
+      <ul>
+        <li>Understand the four-level holonic memory hierarchy</li>
+        <li>Write and read session-scoped memory (per-conversation context)</li>
+        <li>Write and read agent-scoped memory (persistent agent knowledge)</li>
+        <li>Share memory across users at group level</li>
+        <li>Query memory with semantic search</li>
+        <li>Use memory as automatic system-prompt context injection</li>
+      </ul>
+    </div>
+
+    <div class="callout callout-note">
+      <div class="callout-icon">📦</div>
+      <div class="callout-body">
+        <div class="callout-title">API reference</div>
+        <p><a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB6" target="_blank">WEB6 API Reference — Holonic Memory section ↗</a> · npm: <a href="https://www.npmjs.com/package/@oasisomniverse/web6-api" target="_blank"><code>@oasisomniverse/web6-api</code> ↗</a></p>
+      </div>
+    </div>
+
+    <h2 id="hierarchy">The Holonic Memory Hierarchy</h2>
+
+    <div class="code-block">
+      <div class="code-block-header"><span>Memory levels (outer levels always visible to inner)</span></div>
+      <pre>Group Memory     — shared across all members of a group (community wisdom, org policies)
+ └─ User Memory  — persistent per avatar (preferences, history, long-term context)
+     └─ Agent Memory — per AI agent (domain knowledge, learned patterns)
+         └─ Session Memory — per conversation (current turn context, short-term state)</pre>
+    </div>
+
+    <div class="api-table-wrap">
+      <table>
+        <thead><tr><th>Level</th><th>Scope</th><th>Typical use</th><th>TTL</th></tr></thead>
+        <tbody>
+          <tr><td><code>Session</code></td><td>Single conversation</td><td>Current intent, in-progress task state</td><td>24h</td></tr>
+          <tr><td><code>Agent</code></td><td>All sessions for one agent</td><td>Agent's learned preferences, tool patterns</td><td>Permanent</td></tr>
+          <tr><td><code>User</code></td><td>All sessions for one avatar</td><td>User profile, history, preferences</td><td>Permanent</td></tr>
+          <tr><td><code>Group</code></td><td>All members of a group</td><td>Org policies, shared knowledge base, collective memory</td><td>Permanent</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="write-read">Write &amp; Read Memory</h2>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">memory-write.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">import</span> { ai } <span class="kw">from</span> <span class="str">'./web6.js'</span>;
+
+<span class="cmt">// Write a fact to user-level memory</span>
+<span class="kw">await</span> ai.memory.<span class="fn">write</span>({
+  level:   <span class="str">'User'</span>,
+  ownerId: avatarId,
+  key:     <span class="str">'trustPreferences'</span>,
+  value:   { jurisdiction: <span class="str">'England and Wales'</span>, preferredTrustType: <span class="str">'Discretionary'</span> },
+  tags:    [<span class="str">'legal'</span>, <span class="str">'preferences'</span>],
+});
+
+<span class="cmt">// Write to session memory (current conversation only)</span>
+<span class="kw">await</span> ai.memory.<span class="fn">write</span>({
+  level:     <span class="str">'Session'</span>,
+  sessionId: currentSessionId,
+  key:       <span class="str">'currentDocumentId'</span>,
+  value:     docId,
+});</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">memory-read.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="cmt">// Read a specific key</span>
+<span class="kw">const</span> { result: prefs } = <span class="kw">await</span> ai.memory.<span class="fn">read</span>({
+  level:   <span class="str">'User'</span>,
+  ownerId: avatarId,
+  key:     <span class="str">'trustPreferences'</span>,
+});
+
+console.<span class="fn">log</span>(<span class="str">'Jurisdiction:'</span>, prefs.value.jurisdiction);</pre>
+    </div>
+
+    <h2 id="semantic-search">Semantic Search Over Memory</h2>
+    <p>Memory supports vector search — find relevant context by meaning, not just key lookup.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">memory-search.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="cmt">// Semantic search: "what does this user know about trusts?"</span>
+<span class="kw">const</span> { result: hits } = <span class="kw">await</span> ai.memory.<span class="fn">search</span>({
+  query:   <span class="str">'trust deed jurisdiction preferences'</span>,
+  ownerId: avatarId,
+  levels:  [<span class="str">'User'</span>, <span class="str">'Agent'</span>],   <span class="cmt">// search across these levels</span>
+  topK:    <span class="num">5</span>,
+});
+
+hits.<span class="fn">forEach</span>(h => console.<span class="fn">log</span>(h.key, <span class="str">'('</span> + h.score.<span class="fn">toFixed</span>(<span class="num">2</span>) + <span class="str">')'</span>, h.value));</pre>
+    </div>
+
+    <h2 id="auto-inject">Auto-Injecting Memory into AI Calls</h2>
+    <p>The most powerful pattern: tell WEB6 to automatically prepend relevant memory as system-prompt context on every AI call — no manual lookup needed.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">memory-inject.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">const</span> { result } = <span class="kw">await</span> ai.chat.<span class="fn">complete</span>({
+  messages: [{ role: <span class="str">'user'</span>, content: <span class="str">'Should my trust be discretionary or fixed?'</span> }],
+  provider: <span class="str">'anthropic'</span>,
+  model:    <span class="str">'claude-3-5-sonnet'</span>,
+  memoryContext: {
+    avatarId,
+    sessionId,
+    injectLevels: [<span class="str">'Session'</span>, <span class="str">'User'</span>, <span class="str">'Group'</span>],  <span class="cmt">// inject these automatically</span>
+    topK: <span class="num">8</span>,                                         <span class="cmt">// top 8 relevant memories</span>
+  },
+});
+
+<span class="cmt">// The AI call automatically received the user's jurisdiction preferences,
+// previous trust discussions, and community-wide legal knowledge — without
+// any extra code on your side.</span>
+console.<span class="fn">log</span>(result.content);</pre>
+    </div>
+
+    <h2 id="group-memory">Group Memory — Shared Knowledge Base</h2>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">group-memory.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="cmt">// Write a policy to the SovereignTrust group memory</span>
+<span class="kw">await</span> ai.memory.<span class="fn">write</span>({
+  level:   <span class="str">'Group'</span>,
+  ownerId: sovereignTrustGroupId,
+  key:     <span class="str">'legalPolicy:2026'</span>,
+  value:   <span class="str">'All trust deeds must comply with Trustee Act 2000 and HMRC IHT400 guidance.'</span>,
+  tags:    [<span class="str">'legal'</span>, <span class="str">'compliance'</span>, <span class="str">'2026'</span>],
+});
+
+<span class="cmt">// Any avatar in the group can now benefit from this knowledge
+// when they chat with Leela — it's injected automatically.</span></pre>
+    </div>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <div class="callout-title">You've completed all 17 modules</div>
+        <p>You now know the full OASIS stack — WEB4 identity and storage, WEB5 game mechanics and spatial worlds, and WEB6 AI agents and memory. The next step is picking a case study that matches what you want to build and following it step by step.</p>
+      </div>
+    </div>
+
+    <div class="next-steps">
+      <h3>Explore the case studies</h3>
+      <ul>
+        <li><a href="/case-studies/trust-site">🏛️ SovereignTrust — WEB4 + WEB6 legal platform →</a></li>
+        <li><a href="/case-studies/nft-founders">🎖️ Founder NFTs — WEB4 NFT launch site →</a></li>
+        <li><a href="/case-studies/oportal">🌐 OPORTAL — Full WEB4 + WEB5 + WEB6 portal →</a></li>
+        <li><a href="/case-studies/our-world">🌍 Our World — WEB4 + WEB5 Unity AR game →</a></li>
+        <li><a href="/case-studies/odoom">💀 ODOOM — WEB4/5 C game with OGEngine →</a></li>
+        <li><a href="/case-studies/oquake">⚡ OQuake — WEB4/5 Vulkan game with OGEngine →</a></li>
+        <li><a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB6" target="_blank">WEB6 Complete API Reference ↗</a></li>
+      </ul>
+    </div>
+  </main>
+</div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study: OPORTAL — OASIS Learn</title>
+<meta name="description" content="How OPORTAL was built as the flagship OASIS portal — combining WEB4 identity and data, WEB5 metaverse navigation, and WEB6 AI assistance in a single web application.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Titillium+Web:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<button class="mobile-menu-btn">☰</button>
+<div class="layout">
+  <aside class="sidebar">
+    <a class="sidebar-logo" href="/"><div class="sidebar-logo-icon">O</div><div class="sidebar-logo-text"><span class="site-name">OASIS LEARN</span><span class="site-sub">Developer Tutorials</span></div></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Getting Started</div>
+      <a class="nav-item" href="/">Overview</a>
+      <a class="nav-item" href="/tutorials/01-getting-started"><span class="step-num">1</span> Quick Start</a>
+      <div class="nav-section-title">WEB4 Core</div>
+      <a class="nav-item" href="/tutorials/02-avatar-identity"><span class="step-num">2</span> Avatar &amp; Identity</a>
+      <a class="nav-item" href="/tutorials/03-karma-reputation"><span class="step-num">3</span> Karma &amp; Reputation</a>
+      <a class="nav-item" href="/tutorials/04-nft-wallet"><span class="step-num">4</span> NFTs &amp; Wallet</a>
+      <a class="nav-item" href="/tutorials/05-data-holons"><span class="step-num">5</span> Data &amp; Holons</a>
+      <div class="nav-section-title">Building Apps</div>
+      <a class="nav-item" href="/tutorials/06-first-oapp"><span class="step-num">6</span> Your First OApp</a>
+      <a class="nav-item" href="/tutorials/07-metaverse-game"><span class="step-num">7</span> Metaverse &amp; Games</a>
+      <a class="nav-item" href="/tutorials/08-providers-production"><span class="step-num">8</span> Providers &amp; Production</a>
+      <div class="nav-section-title">WEB4 Deep Dives</div>
+      <a class="nav-item" href="/tutorials/09-hyperdrive"><span class="step-num">9</span> HyperDrive Storage</a>
+      <a class="nav-item" href="/tutorials/10-onet-p2p"><span class="step-num">10</span> ONET &amp; P2P</a>
+      <div class="nav-section-title">WEB5 STAR API</div>
+      <a class="nav-item" href="/tutorials/11-web5-intro"><span class="step-num">11</span> WEB5 Introduction</a>
+      <a class="nav-item" href="/tutorials/12-missions-quests"><span class="step-num">12</span> Missions &amp; Quests</a>
+      <a class="nav-item" href="/tutorials/13-celestial-spaces"><span class="step-num">13</span> Celestial Spaces</a>
+      <a class="nav-item" href="/tutorials/14-geonft-ar"><span class="step-num">14</span> GeoNFTs &amp; AR</a>
+      <div class="nav-section-title">WEB6 AI Layer</div>
+      <a class="nav-item" href="/tutorials/15-web6-ai-intro"><span class="step-num">15</span> WEB6 AI Intro</a>
+      <a class="nav-item" href="/tutorials/16-fahrn-agents"><span class="step-num">16</span> FAHRN Multi-Agent</a>
+      <a class="nav-item" href="/tutorials/17-holonic-memory"><span class="step-num">17</span> Holonic Memory</a>
+      <div class="nav-section-title">Case Studies</div>
+      <a class="nav-item" href="/case-studies/trust-site">🏛️ SovereignTrust</a>
+      <a class="nav-item" href="/case-studies/nft-founders">🎖️ Founder NFTs</a>
+      <a class="nav-item active" href="/case-studies/oportal">🌐 OPORTAL</a>
+      <a class="nav-item" href="/case-studies/our-world">🌍 Our World</a>
+      <a class="nav-item" href="/case-studies/odoom">💀 ODOOM</a>
+      <a class="nav-item" href="/case-studies/oquake">⚡ OQuake</a>
+      <div class="nav-section-title">API Reference</div>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB4%20OASIS%20API" target="_blank">WEB4 API Ref ↗</a>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB5%20STAR%20API" target="_blank">WEB5 STAR Ref ↗</a>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB6" target="_blank">WEB6 AI Ref ↗</a>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS" target="_blank">GitHub ↗</a>
+      <a class="nav-item" href="https://oportal.oasisomniverse.one/developer" target="_blank">Dev Portal ↗</a>
+    </nav>
+    <div class="sidebar-footer"><a href="https://oasisomniverse.one" target="_blank">oasisomniverse.one</a><a href="https://discord.gg/oasis" target="_blank">Discord Community</a></div>
+  </aside>
+
+  <main class="main">
+    <div class="page-header">
+      <div class="breadcrumb"><a href="/">OASIS Learn</a><span class="breadcrumb-sep">/</span><a href="/">Case Studies</a><span class="breadcrumb-sep">/</span><span>OPORTAL</span></div>
+      <div class="page-meta">
+        <span class="badge badge-advanced">Advanced</span>
+        <span class="badge badge-time">⏱ 90 min</span>
+        <span class="badge" style="background:rgba(56,189,248,.15);color:#7dd3fc">WEB4</span>
+        <span class="badge" style="background:rgba(124,58,237,.18);color:#a78bfa">WEB5</span>
+        <span class="badge" style="background:rgba(16,185,129,.15);color:#34d399">WEB6</span>
+      </div>
+      <h1 class="page-title">🌐 Case Study: OPORTAL</h1>
+      <p class="page-desc">OPORTAL is the flagship OASIS web portal — the most complete example of all three API layers working together. It covers Avatar management, the full Omniverse map (WEB5 CelestialBodies), NFT/wallet dashboard, quest log, ONET messaging, and an AI assistant backed by WEB6 FAHRN with Holonic Memory. If you want to understand the full OASIS surface area, OPORTAL is the reference implementation.</p>
+    </div>
+
+    <div class="build-summary">
+      <h4>Tech stack</h4>
+      <ul>
+        <li><strong>Frontend:</strong> Vanilla JS modules, Canvas API (Omniverse map), WebSocket (ONET live)</li>
+        <li><strong>OASIS WEB4:</strong> Avatar SSO, Karma dashboard, NFT wallet, Holon CRUD, HyperDrive, ONET P2P</li>
+        <li><strong>OASIS WEB5:</strong> Celestial body map, Mission/Quest log, GeoNFTs, Inventory</li>
+        <li><strong>OASIS WEB6:</strong> AI assistant (FAHRN Parallel), Holonic Memory, MCP tool palette</li>
+        <li><strong>npm:</strong> <code>@oasisomniverse/web4-api</code>, <code>@oasisomniverse/web5-api</code>, <code>@oasisomniverse/web6-api</code></li>
+      </ul>
+    </div>
+
+    <h2 id="modules">Portal Modules</h2>
+    <div class="api-table-wrap">
+      <table>
+        <thead><tr><th>Module</th><th>API layer</th><th>Key tutorial</th></tr></thead>
+        <tbody>
+          <tr><td>Avatar Dashboard (profile, karma, stats)</td><td>WEB4</td><td><a href="/tutorials/02-avatar-identity">Module 2</a>, <a href="/tutorials/03-karma-reputation">Module 3</a></td></tr>
+          <tr><td>NFT &amp; Wallet</td><td>WEB4</td><td><a href="/tutorials/04-nft-wallet">Module 4</a></td></tr>
+          <tr><td>Holons / Data Explorer</td><td>WEB4</td><td><a href="/tutorials/05-data-holons">Module 5</a></td></tr>
+          <tr><td>HyperDrive File Manager</td><td>WEB4</td><td><a href="/tutorials/09-hyperdrive">Module 9</a></td></tr>
+          <tr><td>ONET Messenger (live)</td><td>WEB4</td><td><a href="/tutorials/10-onet-p2p">Module 10</a></td></tr>
+          <tr><td>Omniverse Map (CelestialBodies)</td><td>WEB5</td><td><a href="/tutorials/13-celestial-spaces">Module 13</a></td></tr>
+          <tr><td>Quest &amp; Mission Log</td><td>WEB5</td><td><a href="/tutorials/12-missions-quests">Module 12</a></td></tr>
+          <tr><td>GeoNFT Map</td><td>WEB5</td><td><a href="/tutorials/14-geonft-ar">Module 14</a></td></tr>
+          <tr><td>AI Assistant</td><td>WEB6</td><td><a href="/tutorials/15-web6-ai-intro">Module 15</a>, <a href="/tutorials/16-fahrn-agents">Module 16</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="bootstrap">Step 1 — Bootstrap All Three Clients</h2>
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">oasis.js — shared client module</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">import</span> { OasisWeb4Client } <span class="kw">from</span> <span class="str">'@oasisomniverse/web4-api'</span>;
+<span class="kw">import</span> { OasisWeb5Client } <span class="kw">from</span> <span class="str">'@oasisomniverse/web5-api'</span>;
+<span class="kw">import</span> { OasisWeb6Client } <span class="kw">from</span> <span class="str">'@oasisomniverse/web6-api'</span>;
+
+<span class="kw">const</span> BASE = <span class="str">'https://api.web4.oasisomniverse.one'</span>;
+
+<span class="kw">export const</span> oasis4 = <span class="kw">new</span> <span class="fn">OasisWeb4Client</span>({ baseUrl: BASE });
+<span class="kw">export const</span> star   = <span class="kw">new</span> <span class="fn">OasisWeb5Client</span>({ baseUrl: BASE });
+<span class="kw">export const</span> ai     = <span class="kw">new</span> <span class="fn">OasisWeb6Client</span>({ baseUrl: BASE });
+
+<span class="kw">export async function</span> <span class="fn">initSession</span>(email, password) {
+  <span class="kw">const</span> { result } = <span class="kw">await</span> oasis4.avatar.<span class="fn">authenticate</span>({ email, password });
+  [oasis4, star, ai].<span class="fn">forEach</span>(c => c.auth.<span class="fn">setToken</span>(result.token));
+  <span class="kw">return</span> result.avatar;
+}</pre>
+    </div>
+
+    <h2 id="omniverse-map">Step 2 — The Omniverse Map</h2>
+    <p>The map renders all CelestialBodies as an interactive Canvas scene. Clicking a body loads its missions, GeoNFTs and hotspots.</p>
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">omniverse-map.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">import</span> { star } <span class="kw">from</span> <span class="str">'./oasis.js'</span>;
+
+<span class="kw">async function</span> <span class="fn">loadMap</span>() {
+  <span class="kw">const</span> { result: bodies } = <span class="kw">await</span> star.celestialBodies.<span class="fn">getAll</span>();
+  <span class="kw">const</span> canvas = document.<span class="fn">querySelector</span>(<span class="str">'#omniverse-canvas'</span>);
+  <span class="kw">const</span> ctx = canvas.<span class="fn">getContext</span>(<span class="str">'2d'</span>);
+
+  bodies.<span class="fn">forEach</span>(body => {
+    <span class="cmt">// Draw each body as a circle scaled by type</span>
+    ctx.fillStyle = <span class="fn">bodyColor</span>(body.celestialBodyType);
+    ctx.<span class="fn">beginPath</span>();
+    ctx.<span class="fn">arc</span>(body.mapX, body.mapY, <span class="fn">bodyRadius</span>(body.celestialBodyType), <span class="num">0</span>, Math.PI * <span class="num">2</span>);
+    ctx.<span class="fn">fill</span>();
+  });
+}
+
+canvas.<span class="fn">addEventListener</span>(<span class="str">'click'</span>, async e => {
+  <span class="kw">const</span> body = <span class="fn">hitTest</span>(e.offsetX, e.offsetY, bodies);
+  <span class="kw">if</span> (body) <span class="kw">await</span> <span class="fn">loadBodyDetail</span>(body.id);
+});</pre>
+    </div>
+
+    <h2 id="onet-live">Step 3 — Live ONET Messaging</h2>
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">onet-chat.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">import</span> { oasis4 } <span class="kw">from</span> <span class="str">'./oasis.js'</span>;
+
+<span class="kw">const</span> ws = oasis4.onet.<span class="fn">connectWebSocket</span>();
+
+ws.<span class="fn">onMessage</span>(({ from, content }) => {
+  <span class="fn">appendMessage</span>(from.username, content);
+});
+
+<span class="kw">async function</span> <span class="fn">sendMessage</span>(toAvatarId, text) {
+  <span class="kw">await</span> oasis4.onet.<span class="fn">sendMessage</span>({ toAvatarId, message: text });
+}</pre>
+    </div>
+
+    <h2 id="ai-assistant">Step 4 — AI Assistant (FAHRN Parallel)</h2>
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">ai-assistant.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">import</span> { ai } <span class="kw">from</span> <span class="str">'./oasis.js'</span>;
+
+<span class="kw">async function</span> <span class="fn">askAssistant</span>(question, avatarId, sessionId) {
+  <span class="kw">const</span> { result } = <span class="kw">await</span> ai.fahrn.<span class="fn">run</span>({
+    mode: <span class="str">'Parallel'</span>,
+    agents: [
+      { name: <span class="str">'GPT'</span>,    provider: <span class="str">'openai'</span>,    model: <span class="str">'gpt-4o'</span>            },
+      { name: <span class="str">'Claude'</span>, provider: <span class="str">'anthropic'</span>, model: <span class="str">'claude-3-5-sonnet'</span> },
+    ],
+    mergeStrategy: <span class="str">'bestOf'</span>,
+    input: question,
+    memoryContext: { avatarId, sessionId, injectLevels: [<span class="str">'Session'</span>, <span class="str">'User'</span>], topK: <span class="num">5</span> },
+  });
+  <span class="kw">return</span> result.finalOutput;
+}</pre>
+    </div>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <div class="callout-title">Source code</div>
+        <p>Browse the full OPORTAL source at <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/OPORTAL-JS" target="_blank">github.com/NextGenSoftwareUK/OASIS/tree/master/OPORTAL-JS ↗</a></p>
+      </div>
+    </div>
+
+    <div class="next-steps">
+      <h3>Related resources</h3>
+      <ul>
+        <li><a href="/case-studies/our-world">Our World — WEB4 + WEB5 Unity AR game →</a></li>
+        <li><a href="/case-studies/trust-site">SovereignTrust — WEB4 + WEB6 →</a></li>
+        <li><a href="https://oportal.oasisomniverse.one" target="_blank">Live OPORTAL ↗</a></li>
+      </ul>
+    </div>
+  </main>
+</div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

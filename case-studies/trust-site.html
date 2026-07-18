@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study: SovereignTrust — OASIS Learn</title>
+<meta name="description" content="How SovereignTrust was built on OASIS WEB4 and WEB6 — avatar SSO, holonic trust document storage, Stripe payments, and the Leela AI legal assistant powered by FAHRN Debate mode.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Titillium+Web:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<button class="mobile-menu-btn">☰</button>
+<div class="layout">
+  <aside class="sidebar">
+    <a class="sidebar-logo" href="/"><div class="sidebar-logo-icon">O</div><div class="sidebar-logo-text"><span class="site-name">OASIS LEARN</span><span class="site-sub">Developer Tutorials</span></div></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Getting Started</div>
+      <a class="nav-item" href="/">Overview</a>
+      <a class="nav-item" href="/tutorials/01-getting-started"><span class="step-num">1</span> Quick Start</a>
+      <div class="nav-section-title">WEB4 Core</div>
+      <a class="nav-item" href="/tutorials/02-avatar-identity"><span class="step-num">2</span> Avatar &amp; Identity</a>
+      <a class="nav-item" href="/tutorials/03-karma-reputation"><span class="step-num">3</span> Karma &amp; Reputation</a>
+      <a class="nav-item" href="/tutorials/04-nft-wallet"><span class="step-num">4</span> NFTs &amp; Wallet</a>
+      <a class="nav-item" href="/tutorials/05-data-holons"><span class="step-num">5</span> Data &amp; Holons</a>
+      <div class="nav-section-title">Building Apps</div>
+      <a class="nav-item" href="/tutorials/06-first-oapp"><span class="step-num">6</span> Your First OApp</a>
+      <a class="nav-item" href="/tutorials/07-metaverse-game"><span class="step-num">7</span> Metaverse &amp; Games</a>
+      <a class="nav-item" href="/tutorials/08-providers-production"><span class="step-num">8</span> Providers &amp; Production</a>
+      <div class="nav-section-title">WEB4 Deep Dives</div>
+      <a class="nav-item" href="/tutorials/09-hyperdrive"><span class="step-num">9</span> HyperDrive Storage</a>
+      <a class="nav-item" href="/tutorials/10-onet-p2p"><span class="step-num">10</span> ONET &amp; P2P</a>
+      <div class="nav-section-title">WEB5 STAR API</div>
+      <a class="nav-item" href="/tutorials/11-web5-intro"><span class="step-num">11</span> WEB5 Introduction</a>
+      <a class="nav-item" href="/tutorials/12-missions-quests"><span class="step-num">12</span> Missions &amp; Quests</a>
+      <a class="nav-item" href="/tutorials/13-celestial-spaces"><span class="step-num">13</span> Celestial Spaces</a>
+      <a class="nav-item" href="/tutorials/14-geonft-ar"><span class="step-num">14</span> GeoNFTs &amp; AR</a>
+      <div class="nav-section-title">WEB6 AI Layer</div>
+      <a class="nav-item" href="/tutorials/15-web6-ai-intro"><span class="step-num">15</span> WEB6 AI Intro</a>
+      <a class="nav-item" href="/tutorials/16-fahrn-agents"><span class="step-num">16</span> FAHRN Multi-Agent</a>
+      <a class="nav-item" href="/tutorials/17-holonic-memory"><span class="step-num">17</span> Holonic Memory</a>
+      <div class="nav-section-title">Case Studies</div>
+      <a class="nav-item active" href="/case-studies/trust-site">🏛️ SovereignTrust</a>
+      <a class="nav-item" href="/case-studies/nft-founders">🎖️ Founder NFTs</a>
+      <a class="nav-item" href="/case-studies/oportal">🌐 OPORTAL</a>
+      <a class="nav-item" href="/case-studies/our-world">🌍 Our World</a>
+      <a class="nav-item" href="/case-studies/odoom">💀 ODOOM</a>
+      <a class="nav-item" href="/case-studies/oquake">⚡ OQuake</a>
+      <div class="nav-section-title">API Reference</div>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB4%20OASIS%20API" target="_blank">WEB4 API Ref ↗</a>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB5%20STAR%20API" target="_blank">WEB5 STAR Ref ↗</a>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB6" target="_blank">WEB6 AI Ref ↗</a>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS" target="_blank">GitHub ↗</a>
+      <a class="nav-item" href="https://oportal.oasisomniverse.one/developer" target="_blank">Dev Portal ↗</a>
+    </nav>
+    <div class="sidebar-footer"><a href="https://oasisomniverse.one" target="_blank">oasisomniverse.one</a><a href="https://discord.gg/oasis" target="_blank">Discord Community</a></div>
+  </aside>
+
+  <main class="main">
+    <div class="page-header">
+      <div class="breadcrumb"><a href="/">OASIS Learn</a><span class="breadcrumb-sep">/</span><a href="/">Case Studies</a><span class="breadcrumb-sep">/</span><span>SovereignTrust</span></div>
+      <div class="page-meta">
+        <span class="badge badge-advanced">Advanced</span>
+        <span class="badge badge-time">⏱ 60 min</span>
+        <span class="badge" style="background:rgba(56,189,248,.15);color:#7dd3fc">WEB4</span>
+        <span class="badge" style="background:rgba(16,185,129,.15);color:#34d399">WEB6</span>
+      </div>
+      <h1 class="page-title">🏛️ Case Study: SovereignTrust</h1>
+      <p class="page-desc">SovereignTrust is a legal trust management platform built entirely on OASIS WEB4 and WEB6. Users authenticate via their OASIS Avatar, store trust deeds as encrypted Holons, pay via Stripe, and get legal guidance from Leela — an AI assistant powered by FAHRN Debate mode across three AI providers. This case study walks through every integration step-by-step.</p>
+    </div>
+
+    <div class="build-summary">
+      <h4>Tech stack</h4>
+      <ul>
+        <li><strong>Frontend:</strong> Vanilla JS, html2canvas, pdf-lib, docx</li>
+        <li><strong>OASIS WEB4:</strong> Avatar SSO, Holon storage (trust deeds), HyperDrive encryption, Karma rewards</li>
+        <li><strong>OASIS WEB6:</strong> Leela AI assistant, FAHRN Debate mode, Holonic Memory (user + group)</li>
+        <li><strong>Payments:</strong> Stripe Checkout + webhooks</li>
+        <li><strong>npm:</strong> <code>@oasisomniverse/web4-api</code>, <code>@oasisomniverse/web6-api</code></li>
+      </ul>
+    </div>
+
+    <h2 id="overview">Architecture Overview</h2>
+    <div class="code-block">
+      <div class="code-block-header"><span>Request flow</span></div>
+      <pre>Browser
+  │
+  ├─ Avatar login (WEB4)  ─────────────────► OASIS ONODE API
+  │                                           ├─ Avatar SSO
+  │                                           ├─ JWT issued
+  │                                           └─ Karma score loaded
+  │
+  ├─ Trust deed creation
+  │   ├─ docx generation (client-side)
+  │   ├─ pdf-lib rendering
+  │   └─ Holon save (WEB4 HyperDrive)  ──────► Encrypted across providers
+  │
+  ├─ Stripe checkout  ────────────────────────► Stripe API → webhook → unlock features
+  │
+  └─ Leela AI chat (WEB6 FAHRN Debate)  ─────► 3 AI providers debate → judge synthesis
+                                               └─ Holonic Memory auto-injected</pre>
+    </div>
+
+    <h2 id="step1">Step 1 — Avatar SSO</h2>
+    <p>SovereignTrust uses the OASIS Avatar as the single identity — no separate auth system needed.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">auth.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">import</span> { OasisWeb4Client } <span class="kw">from</span> <span class="str">'@oasisomniverse/web4-api'</span>;
+
+<span class="kw">const</span> oasis4 = <span class="kw">new</span> <span class="fn">OasisWeb4Client</span>({ baseUrl: <span class="str">'https://api.web4.oasisomniverse.one'</span> });
+
+<span class="kw">async function</span> <span class="fn">login</span>(email, password) {
+  <span class="kw">const</span> { result, isError, message } = <span class="kw">await</span> oasis4.avatar.<span class="fn">authenticate</span>({ email, password });
+  <span class="kw">if</span> (isError) <span class="kw">throw new</span> Error(message);
+  oasis4.auth.<span class="fn">setToken</span>(result.token);
+  localStorage.<span class="fn">setItem</span>(<span class="str">'oasis_token'</span>, result.token);
+  localStorage.<span class="fn">setItem</span>(<span class="str">'avatar_id'</span>, result.avatar.id);
+  <span class="kw">return</span> result.avatar;
+}
+
+<span class="cmt">// On page load — restore session</span>
+<span class="kw">const</span> token = localStorage.<span class="fn">getItem</span>(<span class="str">'oasis_token'</span>);
+<span class="kw">if</span> (token) oasis4.auth.<span class="fn">setToken</span>(token);</pre>
+    </div>
+
+    <p>See <a href="/tutorials/02-avatar-identity">Module 2: Avatar &amp; Identity</a> for full auth patterns.</p>
+
+    <h2 id="step2">Step 2 — Storing Trust Deeds as Holons</h2>
+    <p>Each trust deed is a Holon — a structured, encrypted, provider-agnostic data object stored via HyperDrive.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">trust-holon.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">async function</span> <span class="fn">saveTrustDeed</span>(deed) {
+  <span class="kw">const</span> { result } = <span class="kw">await</span> oasis4.data.<span class="fn">saveHolon</span>({
+    holonType:   <span class="str">'TrustDeed'</span>,
+    name:        deed.trustName,
+    description: deed.description,
+    customData: {
+      settlor:      deed.settlor,
+      trustees:     deed.trustees,
+      beneficiaries: deed.beneficiaries,
+      jurisdiction: deed.jurisdiction,
+      trustType:    deed.trustType,     <span class="cmt">// 'Discretionary' | 'Fixed' | 'Bare'</span>
+      createdAt:    <span class="kw">new</span> Date().<span class="fn">toISOString</span>(),
+    },
+    isEncrypted:  <span class="kw">true</span>,
+    providerType: <span class="str">'HoloOASIS'</span>,        <span class="cmt">// primary; HyperDrive handles failover</span>
+  });
+  <span class="kw">return</span> result.id;
+}</pre>
+    </div>
+
+    <p>See <a href="/tutorials/05-data-holons">Module 5: Data &amp; Holons</a> and <a href="/tutorials/09-hyperdrive">Module 9: HyperDrive Storage</a>.</p>
+
+    <h2 id="step3">Step 3 — PDF &amp; DOCX Generation</h2>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">document-gen.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">import</span> { PDFDocument, StandardFonts } <span class="kw">from</span> <span class="str">'pdf-lib'</span>;
+<span class="kw">import</span> { Document, Packer, Paragraph } <span class="kw">from</span> <span class="str">'docx'</span>;
+
+<span class="kw">async function</span> <span class="fn">generateTrustPDF</span>(deed) {
+  <span class="kw">const</span> pdfDoc = <span class="kw">await</span> PDFDocument.<span class="fn">create</span>();
+  <span class="kw">const</span> font   = <span class="kw">await</span> pdfDoc.<span class="fn">embedFont</span>(StandardFonts.Helvetica);
+  <span class="kw">const</span> page   = pdfDoc.<span class="fn">addPage</span>();
+  page.<span class="fn">drawText</span>(`Trust Deed: ${deed.trustName}`, { x: <span class="num">50</span>, y: <span class="num">750</span>, size: <span class="num">18</span>, font });
+  <span class="cmt">// ... full deed content ...</span>
+  <span class="kw">const</span> pdfBytes = <span class="kw">await</span> pdfDoc.<span class="fn">save</span>();
+
+  <span class="cmt">// Upload PDF to OASIS file storage</span>
+  <span class="kw">await</span> oasis4.files.<span class="fn">upload</span>({
+    fileName:  `${deed.trustName}.pdf`,
+    data:       pdfBytes,
+    holonId:    deed.holonId,   <span class="cmt">// attach to the trust deed holon</span>
+    isPrivate:  <span class="kw">true</span>,
+  });
+}</pre>
+    </div>
+
+    <h2 id="step4">Step 4 — Stripe Payment Integration</h2>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">stripe.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">async function</span> <span class="fn">createCheckoutSession</span>(avatarId, planId) {
+  <span class="cmt">// Your backend creates a Stripe session and stores avatarId in metadata</span>
+  <span class="kw">const</span> res = <span class="kw">await</span> fetch(<span class="str">'/api/stripe/checkout'</span>, {
+    method: <span class="str">'POST'</span>,
+    body: JSON.<span class="fn">stringify</span>({ avatarId, planId }),
+    headers: { <span class="str">'Content-Type'</span>: <span class="str">'application/json'</span> },
+  });
+  <span class="kw">const</span> { url } = <span class="kw">await</span> res.<span class="fn">json</span>();
+  window.location.href = url;
+}
+
+<span class="cmt">// Webhook handler (server-side): on payment.succeeded
+// → save subscription holon via WEB4, award karma to avatar</span>
+<span class="kw">async function</span> <span class="fn">handleStripeWebhook</span>(event) {
+  <span class="kw">if</span> (event.type === <span class="str">'checkout.session.completed'</span>) {
+    <span class="kw">const</span> { avatarId, planId } = event.data.object.metadata;
+    <span class="kw">await</span> oasis4.karma.<span class="fn">award</span>({ avatarId, amount: <span class="num">500</span>, reason: <span class="str">'SovereignTrust subscription'</span> });
+    <span class="kw">await</span> oasis4.data.<span class="fn">saveHolon</span>({ holonType: <span class="str">'Subscription'</span>, customData: { planId, status: <span class="str">'active'</span> }});
+  }
+}</pre>
+    </div>
+
+    <h2 id="step5">Step 5 — Leela: AI Legal Assistant</h2>
+    <p>Leela uses FAHRN Debate mode — three AI providers argue each legal question, and a judge agent synthesises the final answer. Holonic Memory injects the user's trust portfolio automatically.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">leela.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">import</span> { OasisWeb6Client } <span class="kw">from</span> <span class="str">'@oasisomniverse/web6-api'</span>;
+
+<span class="kw">const</span> ai = <span class="kw">new</span> <span class="fn">OasisWeb6Client</span>({ baseUrl: <span class="str">'https://api.web4.oasisomniverse.one'</span> });
+ai.auth.<span class="fn">setToken</span>(oasis4.auth.<span class="fn">getToken</span>());
+
+<span class="kw">async function</span> <span class="fn">askLeela</span>(question, avatarId, sessionId) {
+  <span class="kw">const</span> { result } = <span class="kw">await</span> ai.fahrn.<span class="fn">run</span>({
+    mode:   <span class="str">'Debate'</span>,
+    rounds: <span class="num">2</span>,
+    agents: [
+      { name: <span class="str">'LegalAdvocate'</span>,  provider: <span class="str">'openai'</span>,    model: <span class="str">'gpt-4o'</span>,
+        systemPrompt: <span class="str">'You are a UK trust law specialist. Give the strongest legal interpretation.'</span> },
+      { name: <span class="str">'RiskAdvisor'</span>,    provider: <span class="str">'anthropic'</span>, model: <span class="str">'claude-3-5-sonnet'</span>,
+        systemPrompt: <span class="str">'You identify risks and edge cases in trust structures.'</span> },
+      { name: <span class="str">'TaxCounsel'</span>,    provider: <span class="str">'google'</span>,    model: <span class="str">'gemini-pro'</span>,
+        systemPrompt: <span class="str">'You focus on HMRC and IHT implications of trust decisions.'</span> },
+    ],
+    judge: {
+      provider: <span class="str">'anthropic'</span>, model: <span class="str">'claude-3-5-sonnet'</span>,
+      systemPrompt: <span class="str">'You are Leela, a helpful and precise UK trust law assistant. Synthesise the best answer.'</span>,
+    },
+    input: question,
+    memoryContext: { avatarId, sessionId, injectLevels: [<span class="str">'Session'</span>, <span class="str">'User'</span>, <span class="str">'Group'</span>], topK: <span class="num">6</span> },
+  });
+  <span class="kw">return</span> result.judgeVerdict;
+}</pre>
+    </div>
+
+    <p>See <a href="/tutorials/16-fahrn-agents">Module 16: FAHRN</a> and <a href="/tutorials/17-holonic-memory">Module 17: Holonic Memory</a> for full details.</p>
+
+    <h2 id="karma">Step 6 — Karma Rewards</h2>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">karma.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="cmt">// Award karma when user completes a trust deed — unlocks higher AI tiers</span>
+<span class="kw">await</span> oasis4.karma.<span class="fn">award</span>({
+  avatarId,
+  amount: <span class="num">250</span>,
+  reason: <span class="str">'Trust deed created'</span>,
+  karmaType: <span class="str">'LegalAction'</span>,
+});</pre>
+    </div>
+
+    <p>See <a href="/tutorials/03-karma-reputation">Module 3: Karma &amp; Reputation</a>.</p>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <div class="callout-title">Source code</div>
+        <p>Browse the full SovereignTrust source at <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/trust" target="_blank">github.com/NextGenSoftwareUK/OASIS/tree/master/trust ↗</a></p>
+      </div>
+    </div>
+
+    <div class="next-steps">
+      <h3>Related case studies</h3>
+      <ul>
+        <li><a href="/case-studies/oportal">OPORTAL — WEB4 + WEB5 + WEB6 full portal →</a></li>
+        <li><a href="/case-studies/nft-founders">Founder NFTs — WEB4 NFT launch →</a></li>
+        <li><a href="/tutorials/16-fahrn-agents">Module 16: FAHRN Multi-Agent →</a></li>
+        <li><a href="/tutorials/17-holonic-memory">Module 17: Holonic Memory →</a></li>
+      </ul>
+    </div>
+  </main>
+</div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

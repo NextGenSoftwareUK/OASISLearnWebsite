@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 9: HyperDrive Storage — OASIS Learn</title>
+<meta name="description" content="Deep dive into OASIS HyperDrive — the multi-provider, auto-failover, auto-replicating storage layer that sits under every Holon and file.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Titillium+Web:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<button class="mobile-menu-btn">☰</button>
+<div class="layout">
+  <aside class="sidebar">
+    <a class="sidebar-logo" href="/"><div class="sidebar-logo-icon">O</div><div class="sidebar-logo-text"><span class="site-name">OASIS LEARN</span><span class="site-sub">Developer Tutorials</span></div></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Getting Started</div>
+      <a class="nav-item" href="/">Overview</a>
+      <a class="nav-item" href="/tutorials/01-getting-started"><span class="step-num">1</span> Quick Start</a>
+      <div class="nav-section-title">WEB4 Core</div>
+      <a class="nav-item" href="/tutorials/02-avatar-identity"><span class="step-num">2</span> Avatar &amp; Identity</a>
+      <a class="nav-item" href="/tutorials/03-karma-reputation"><span class="step-num">3</span> Karma &amp; Reputation</a>
+      <a class="nav-item" href="/tutorials/04-nft-wallet"><span class="step-num">4</span> NFTs &amp; Wallet</a>
+      <a class="nav-item" href="/tutorials/05-data-holons"><span class="step-num">5</span> Data &amp; Holons</a>
+      <div class="nav-section-title">Building Apps</div>
+      <a class="nav-item" href="/tutorials/06-first-oapp"><span class="step-num">6</span> Your First OApp</a>
+      <a class="nav-item" href="/tutorials/07-metaverse-game"><span class="step-num">7</span> Metaverse &amp; Games</a>
+      <a class="nav-item" href="/tutorials/08-providers-production"><span class="step-num">8</span> Providers &amp; Production</a>
+      <div class="nav-section-title">WEB4 Deep Dives</div>
+      <a class="nav-item active" href="/tutorials/09-hyperdrive"><span class="step-num">9</span> HyperDrive Storage</a>
+      <a class="nav-item" href="/tutorials/10-onet-p2p"><span class="step-num">10</span> ONET &amp; P2P</a>
+      <div class="nav-section-title">WEB5 STAR API</div>
+      <a class="nav-item" href="/tutorials/11-web5-intro"><span class="step-num">11</span> WEB5 Introduction</a>
+      <a class="nav-item" href="/tutorials/12-missions-quests"><span class="step-num">12</span> Missions &amp; Quests</a>
+      <a class="nav-item" href="/tutorials/13-celestial-spaces"><span class="step-num">13</span> Celestial Spaces</a>
+      <a class="nav-item" href="/tutorials/14-geonft-ar"><span class="step-num">14</span> GeoNFTs &amp; AR</a>
+      <div class="nav-section-title">WEB6 AI Layer</div>
+      <a class="nav-item" href="/tutorials/15-web6-ai-intro"><span class="step-num">15</span> WEB6 AI Intro</a>
+      <a class="nav-item" href="/tutorials/16-fahrn-agents"><span class="step-num">16</span> FAHRN Multi-Agent</a>
+      <a class="nav-item" href="/tutorials/17-holonic-memory"><span class="step-num">17</span> Holonic Memory</a>
+      <div class="nav-section-title">Case Studies</div>
+      <a class="nav-item" href="/case-studies/trust-site">🏛️ SovereignTrust</a>
+      <a class="nav-item" href="/case-studies/nft-founders">🎖️ Founder NFTs</a>
+      <a class="nav-item" href="/case-studies/oportal">🌐 OPORTAL</a>
+      <a class="nav-item" href="/case-studies/our-world">🌍 Our World</a>
+      <a class="nav-item" href="/case-studies/odoom">💀 ODOOM</a>
+      <a class="nav-item" href="/case-studies/oquake">⚡ OQuake</a>
+      <div class="nav-section-title">API Reference</div>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB4%20OASIS%20API" target="_blank">WEB4 API Ref ↗</a>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB5%20STAR%20API" target="_blank">WEB5 STAR Ref ↗</a>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB6" target="_blank">WEB6 AI Ref ↗</a>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS" target="_blank">GitHub ↗</a>
+      <a class="nav-item" href="https://oportal.oasisomniverse.one/developer" target="_blank">Dev Portal ↗</a>
+    </nav>
+    <div class="sidebar-footer"><a href="https://oasisomniverse.one" target="_blank">oasisomniverse.one</a><a href="https://discord.gg/oasis" target="_blank">Discord Community</a></div>
+  </aside>
+
+  <main class="main">
+    <div class="progress-bar-wrap"><div class="progress-bar" style="width:52%"></div></div>
+
+    <div class="page-header">
+      <div class="breadcrumb"><a href="/">OASIS Learn</a><span class="breadcrumb-sep">/</span><span>Module 9</span></div>
+      <div class="page-meta">
+        <span class="badge badge-intermediate">Intermediate</span>
+        <span class="badge badge-time">⏱ 35 min</span>
+        <span class="badge" style="background:rgba(0,212,255,.12);color:var(--accent)">WEB4</span>
+      </div>
+      <h1 class="page-title">HyperDrive Storage — Deep Dive</h1>
+      <p class="page-desc">HyperDrive is the storage engine under every Holon and file in the OASIS. It abstracts dozens of storage providers behind a single API, handles auto-failover and auto-replication invisibly, and gives your app a real-time health dashboard to monitor it all.</p>
+    </div>
+
+    <div class="build-summary">
+      <h4>What you'll learn</h4>
+      <ul>
+        <li>How HyperDrive sits between your app and every storage provider</li>
+        <li>Upload and download binary files (images, PDFs, game assets)</li>
+        <li>Read the live HyperDrive dashboard — provider health, latency, throughput</li>
+        <li>Trigger manual failover and inspect replication state</li>
+        <li>Tune auto-failover thresholds in OASISDNA.json</li>
+        <li>Use the <code>Files API</code> for structured file metadata alongside binary storage</li>
+      </ul>
+    </div>
+
+    <div class="callout callout-note">
+      <div class="callout-icon">📦</div>
+      <div class="callout-body">
+        <div class="callout-title">npm package</div>
+        <p>All examples use <a href="https://www.npmjs.com/package/@oasisomniverse/web4-api" target="_blank"><code>@oasisomniverse/web4-api</code></a>. Install with <code>npm install @oasisomniverse/web4-api</code>. Full API reference: <a href="https://github.com/NextGenSoftwareUK/OASIS/blob/master/Docs/Devs/API%20Documentation/WEB4%20OASIS%20API/HyperDrive-API.md" target="_blank">HyperDrive-API.md ↗</a> and <a href="https://github.com/NextGenSoftwareUK/OASIS/blob/master/Docs/Devs/API%20Documentation/WEB4%20OASIS%20API/Files-API.md" target="_blank">Files-API.md ↗</a>.</p>
+      </div>
+    </div>
+
+    <h2 id="architecture">How HyperDrive Works</h2>
+    <p>When your app calls <code>saveFile()</code> or <code>saveHolon()</code>, HyperDrive intercepts the request and fans it out across your configured providers. Reads are served from whichever provider responds first. Writes go to all providers simultaneously when auto-replication is on.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span>Architecture overview</span></div>
+      <pre>Your App
+    │
+    ▼  @oasisomniverse/web4-api
+OASIS ONODE (WEB4 API)
+    │
+    ▼  HyperDrive Engine
+┌───────────────────────────────────────┐
+│  MongoDBOASIS  HoloOASIS  IPFSOASIS   │
+│  SolanaOASIS   Neo4jOASIS SQLLiteOASIS│
+│  ThreeFoldOASIS  AzureCosmosOASIS …  │
+└───────────────────────────────────────┘
+         auto-failover / auto-replication</pre>
+    </div>
+
+    <h2 id="upload">Uploading Files</h2>
+    <p>Use <code>oasis.files.saveFile()</code> to upload binary data. The file is stored on HyperDrive and replicated to all active providers. The response includes a <code>fileId</code> you use to retrieve it later.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">upload.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">import</span> { oasis } <span class="kw">from</span> <span class="str">'./oasis.js'</span>;
+<span class="kw">import</span> { readFileSync } <span class="kw">from</span> <span class="str">'fs'</span>;
+
+<span class="kw">const</span> { avatarId } = oasis.auth.<span class="fn">getSession</span>();
+
+<span class="cmt">// Read a local file</span>
+<span class="kw">const</span> bytes = readFileSync(<span class="str">'./avatar-portrait.png'</span>);
+
+<span class="kw">const</span> { result: file, isError } = <span class="kw">await</span> oasis.files.<span class="fn">saveFile</span>({
+  avatarId,
+  fileName:    <span class="str">'avatar-portrait.png'</span>,
+  mimeType:    <span class="str">'image/png'</span>,
+  description: <span class="str">'Player portrait'</span>,
+  fileData:    bytes.toString(<span class="str">'base64'</span>),   <span class="cmt">// base64-encode the bytes</span>
+  tags:        [<span class="str">'avatar'</span>, <span class="str">'portrait'</span>],
+});
+
+<span class="kw">if</span> (!isError) {
+  console.<span class="fn">log</span>(<span class="str">'Uploaded → fileId:'</span>, file.id);
+  console.<span class="fn">log</span>(<span class="str">'Providers replicated:'</span>, file.replicatedProviders);
+}</pre>
+    </div>
+
+    <h2 id="download">Downloading Files</h2>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">download.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">const</span> { result: file } = <span class="kw">await</span> oasis.files.<span class="fn">loadFile</span>({ fileId: file.id });
+
+<span class="cmt">// fileData is base64-encoded bytes</span>
+<span class="kw">const</span> buf = Buffer.<span class="fn">from</span>(file.fileData, <span class="str">'base64'</span>);
+writeFileSync(<span class="str">'./downloaded-portrait.png'</span>, buf);
+console.<span class="fn">log</span>(<span class="str">'Downloaded'</span>, buf.length, <span class="str">'bytes from provider:'</span>, file.servedFromProvider);</pre>
+    </div>
+
+    <h2 id="dashboard">The HyperDrive Dashboard</h2>
+    <p>The dashboard endpoint gives you a real-time snapshot of every provider's health — latency, throughput, error rate, and replication lag. Use it to build status pages, alerting, or in-app health indicators like the <a href="/case-studies/oportal">OPORTAL status bar</a>.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">dashboard.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">const</span> { result: dash } = <span class="kw">await</span> oasis.hyperDrive.<span class="fn">getDashboard</span>();
+
+console.<span class="fn">log</span>(<span class="str">'Active providers:'</span>, dash.activeProviders);
+console.<span class="fn">log</span>(<span class="str">'Overall health:'</span>, dash.overallHealth); <span class="cmt">// "Healthy" | "Degraded" | "Critical"</span>
+
+<span class="kw">for</span> (<span class="kw">const</span> p <span class="kw">of</span> dash.providerMetrics) {
+  console.<span class="fn">log</span>(`  ${p.providerType}: latency=${p.avgLatencyMs}ms  errors=${p.errorRate}%`);
+}
+
+<span class="cmt">// Active alerts (failover events, quota warnings…)</span>
+<span class="kw">for</span> (<span class="kw">const</span> alert <span class="kw">of</span> dash.alerts) {
+  console.<span class="fn">log</span>(<span class="str">'⚠️  Alert:'</span>, alert.message, <span class="str">'severity:'</span>, alert.severity);
+}</pre>
+    </div>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <div class="callout-title">Poll the dashboard for a live status bar</div>
+        <p>Poll <code>getDashboard()</code> every 30 seconds and update a status indicator in your UI. OPORTAL and the <a href="/case-studies/trust-site">SovereignTrust</a> site both use this pattern. See also <a href="https://github.com/NextGenSoftwareUK/OASIS/blob/master/Docs/Devs/API%20Documentation/WEB4%20OASIS%20API/HyperDrive-API.md" target="_blank">HyperDrive-API.md ↗</a> for the full response schema.</p>
+      </div>
+    </div>
+
+    <h2 id="metrics">Provider Metrics &amp; Performance</h2>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">metrics.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">const</span> { result: metrics } = <span class="kw">await</span> oasis.hyperDrive.<span class="fn">getMetrics</span>();
+
+<span class="cmt">// Aggregate across all providers</span>
+console.<span class="fn">log</span>(<span class="str">'Total requests/sec:'</span>,  metrics.aggregate.requestsPerSec);
+console.<span class="fn">log</span>(<span class="str">'Bytes in/sec:'</span>,        metrics.aggregate.bytesReadPerSec);
+console.<span class="fn">log</span>(<span class="str">'Bytes out/sec:'</span>,       metrics.aggregate.bytesWrittenPerSec);
+
+<span class="cmt">// Per-provider breakdown</span>
+<span class="kw">for</span> (<span class="kw">const</span> [provider, m] <span class="kw">of</span> Object.<span class="fn">entries</span>(metrics.services)) {
+  console.<span class="fn">log</span>(`  ${provider}  peers=${m.peersConnected}  latency=${m.avgLatencyMs}ms`);
+}</pre>
+    </div>
+
+    <h2 id="failover">Manual Failover &amp; Provider Switching</h2>
+    <p>HyperDrive's auto-failover handles outages transparently. But you can also manually switch the active provider — useful for testing, migrations, or per-region routing.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">failover.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="cmt">// Disable a provider (e.g. for maintenance)</span>
+<span class="kw">await</span> oasis.provider.<span class="fn">disableProvider</span>({ providerType: <span class="str">'MongoDBOASIS'</span> });
+
+<span class="cmt">// HyperDrive will immediately route reads/writes to the next priority provider</span>
+<span class="cmt">// Re-enable when ready</span>
+<span class="kw">await</span> oasis.provider.<span class="fn">enableProvider</span>({ providerType: <span class="str">'MongoDBOASIS'</span> });
+
+<span class="cmt">// Change provider priority</span>
+<span class="kw">await</span> oasis.provider.<span class="fn">setProviderPriority</span>({ providerType: <span class="str">'HoloOASIS'</span>, priority: <span class="num">1</span> });</pre>
+    </div>
+
+    <h2 id="config">Tuning Auto-Failover in OASISDNA.json</h2>
+    <p>The ONODE reads failover thresholds from <code>OASISDNA.json</code>. Adjust these to match your SLA requirements:</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">OASISDNA.json (relevant excerpt)</span><button class="copy-btn">Copy</button></div>
+      <pre>{
+  <span class="str">"OASISDNA"</span>: {
+    <span class="str">"HyperDrive"</span>: {
+      <span class="str">"AutoFailOver"</span>:              <span class="kw">true</span>,
+      <span class="str">"AutoReplication"</span>:           <span class="kw">true</span>,
+      <span class="str">"AutoLoadBalance"</span>:           <span class="kw">true</span>,
+      <span class="str">"FailOverRetryAttempts"</span>:     <span class="num">3</span>,
+      <span class="str">"FailOverRetryIntervalMs"</span>:   <span class="num">2000</span>,
+      <span class="str">"FailOverMaxLatencyMs"</span>:      <span class="num">5000</span>,
+      <span class="str">"ReplicationIntervalMs"</span>:     <span class="num">30000</span>
+    }
+  }
+}</pre>
+    </div>
+
+    <div class="callout callout-warning">
+      <div class="callout-icon">⚠️</div>
+      <div class="callout-body">
+        <div class="callout-title">Auto-replication vs auto-failover</div>
+        <p><strong>Auto-replication</strong> writes data to every configured provider. <strong>Auto-failover</strong> silently retries failed reads/writes on the next provider. You can enable both independently — but if you enable auto-replication without auto-failover, a single provider going down during a write will surface as an error.</p>
+      </div>
+    </div>
+
+    <div class="next-steps">
+      <h3>Next steps</h3>
+      <ul>
+        <li><a href="/tutorials/10-onet-p2p">Module 10: ONET &amp; P2P Networking →</a></li>
+        <li><a href="https://github.com/NextGenSoftwareUK/OASIS/blob/master/Docs/Devs/API%20Documentation/WEB4%20OASIS%20API/HyperDrive-API.md" target="_blank">Full HyperDrive API Reference ↗</a></li>
+        <li><a href="https://github.com/NextGenSoftwareUK/OASIS/blob/master/Docs/Devs/API%20Documentation/WEB4%20OASIS%20API/Files-API.md" target="_blank">Files API Reference ↗</a></li>
+        <li><a href="/case-studies/oportal">Case Study: OPORTAL (uses HyperDrive status bar) →</a></li>
+        <li><a href="https://www.npmjs.com/package/@oasisomniverse/web4-api" target="_blank">@oasisomniverse/web4-api on npm ↗</a></li>
+      </ul>
+    </div>
+  </main>
+</div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

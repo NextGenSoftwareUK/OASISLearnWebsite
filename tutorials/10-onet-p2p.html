@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 10: ONET &amp; P2P Networking — OASIS Learn</title>
+<meta name="description" content="Use the OASIS ONET protocol to discover peers, broadcast messages and build real-time decentralised features without a central server.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Titillium+Web:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<button class="mobile-menu-btn">☰</button>
+<div class="layout">
+  <aside class="sidebar">
+    <a class="sidebar-logo" href="/"><div class="sidebar-logo-icon">O</div><div class="sidebar-logo-text"><span class="site-name">OASIS LEARN</span><span class="site-sub">Developer Tutorials</span></div></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Getting Started</div>
+      <a class="nav-item" href="/">Overview</a>
+      <a class="nav-item" href="/tutorials/01-getting-started"><span class="step-num">1</span> Quick Start</a>
+      <div class="nav-section-title">WEB4 Core</div>
+      <a class="nav-item" href="/tutorials/02-avatar-identity"><span class="step-num">2</span> Avatar &amp; Identity</a>
+      <a class="nav-item" href="/tutorials/03-karma-reputation"><span class="step-num">3</span> Karma &amp; Reputation</a>
+      <a class="nav-item" href="/tutorials/04-nft-wallet"><span class="step-num">4</span> NFTs &amp; Wallet</a>
+      <a class="nav-item" href="/tutorials/05-data-holons"><span class="step-num">5</span> Data &amp; Holons</a>
+      <div class="nav-section-title">Building Apps</div>
+      <a class="nav-item" href="/tutorials/06-first-oapp"><span class="step-num">6</span> Your First OApp</a>
+      <a class="nav-item" href="/tutorials/07-metaverse-game"><span class="step-num">7</span> Metaverse &amp; Games</a>
+      <a class="nav-item" href="/tutorials/08-providers-production"><span class="step-num">8</span> Providers &amp; Production</a>
+      <div class="nav-section-title">WEB4 Deep Dives</div>
+      <a class="nav-item" href="/tutorials/09-hyperdrive"><span class="step-num">9</span> HyperDrive Storage</a>
+      <a class="nav-item active" href="/tutorials/10-onet-p2p"><span class="step-num">10</span> ONET &amp; P2P</a>
+      <div class="nav-section-title">WEB5 STAR API</div>
+      <a class="nav-item" href="/tutorials/11-web5-intro"><span class="step-num">11</span> WEB5 Introduction</a>
+      <a class="nav-item" href="/tutorials/12-missions-quests"><span class="step-num">12</span> Missions &amp; Quests</a>
+      <a class="nav-item" href="/tutorials/13-celestial-spaces"><span class="step-num">13</span> Celestial Spaces</a>
+      <a class="nav-item" href="/tutorials/14-geonft-ar"><span class="step-num">14</span> GeoNFTs &amp; AR</a>
+      <div class="nav-section-title">WEB6 AI Layer</div>
+      <a class="nav-item" href="/tutorials/15-web6-ai-intro"><span class="step-num">15</span> WEB6 AI Intro</a>
+      <a class="nav-item" href="/tutorials/16-fahrn-agents"><span class="step-num">16</span> FAHRN Multi-Agent</a>
+      <a class="nav-item" href="/tutorials/17-holonic-memory"><span class="step-num">17</span> Holonic Memory</a>
+      <div class="nav-section-title">Case Studies</div>
+      <a class="nav-item" href="/case-studies/trust-site">🏛️ SovereignTrust</a>
+      <a class="nav-item" href="/case-studies/nft-founders">🎖️ Founder NFTs</a>
+      <a class="nav-item" href="/case-studies/oportal">🌐 OPORTAL</a>
+      <a class="nav-item" href="/case-studies/our-world">🌍 Our World</a>
+      <a class="nav-item" href="/case-studies/odoom">💀 ODOOM</a>
+      <a class="nav-item" href="/case-studies/oquake">⚡ OQuake</a>
+      <div class="nav-section-title">API Reference</div>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB4%20OASIS%20API" target="_blank">WEB4 API Ref ↗</a>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB5%20STAR%20API" target="_blank">WEB5 STAR Ref ↗</a>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB6" target="_blank">WEB6 AI Ref ↗</a>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS" target="_blank">GitHub ↗</a>
+      <a class="nav-item" href="https://oportal.oasisomniverse.one/developer" target="_blank">Dev Portal ↗</a>
+    </nav>
+    <div class="sidebar-footer"><a href="https://oasisomniverse.one" target="_blank">oasisomniverse.one</a><a href="https://discord.gg/oasis" target="_blank">Discord Community</a></div>
+  </aside>
+
+  <main class="main">
+    <div class="progress-bar-wrap"><div class="progress-bar" style="width:58%"></div></div>
+    <div class="page-header">
+      <div class="breadcrumb"><a href="/">OASIS Learn</a><span class="breadcrumb-sep">/</span><span>Module 10</span></div>
+      <div class="page-meta">
+        <span class="badge badge-intermediate">Intermediate</span>
+        <span class="badge badge-time">⏱ 30 min</span>
+        <span class="badge" style="background:rgba(0,212,255,.12);color:var(--accent)">WEB4</span>
+      </div>
+      <h1 class="page-title">ONET &amp; P2P Networking</h1>
+      <p class="page-desc">ONET is the OASIS peer-to-peer mesh network — the layer that lets avatars, nodes and OAPPs talk directly to each other without a centralised server. This module shows you how to discover peers, send messages, and build real-time collaborative features.</p>
+    </div>
+
+    <div class="build-summary">
+      <h4>What you'll learn</h4>
+      <ul>
+        <li>What ONET is and how it differs from a traditional WebSocket server</li>
+        <li>Discover peers on the ONET mesh by avatar ID or node ID</li>
+        <li>Send direct messages and broadcast to groups</li>
+        <li>Subscribe to real-time ONET events in your app</li>
+        <li>Query ONODE network status and connected peer counts</li>
+        <li>Use ONET routing for resilient multi-hop message delivery</li>
+      </ul>
+    </div>
+
+    <div class="callout callout-note">
+      <div class="callout-icon">📦</div>
+      <div class="callout-body">
+        <div class="callout-title">npm &amp; API reference</div>
+        <p>Uses <a href="https://www.npmjs.com/package/@oasisomniverse/web4-api" target="_blank"><code>@oasisomniverse/web4-api</code></a>. Full reference: <a href="https://github.com/NextGenSoftwareUK/OASIS/blob/master/Docs/Devs/API%20Documentation/WEB4%20OASIS%20API/ONET-API.md" target="_blank">ONET-API.md ↗</a> and <a href="https://github.com/NextGenSoftwareUK/OASIS/blob/master/Docs/Devs/API%20Documentation/WEB4%20OASIS%20API/ONODE-API.md" target="_blank">ONODE-API.md ↗</a>.</p>
+      </div>
+    </div>
+
+    <h2 id="what-is-onet">What is ONET?</h2>
+    <p>ONET (OASIS Network) is a decentralised peer mesh that underpins the OASIS Omniverse. Every ONODE — the server process running the WEB4 API — is also an ONET node. Nodes discover each other automatically and form a resilient routing mesh. Your app can use ONET to:</p>
+    <ul>
+      <li><strong>Send messages</strong> directly between avatars without a central broker</li>
+      <li><strong>Broadcast</strong> game state, chat, or events to groups of peers</li>
+      <li><strong>Subscribe</strong> to push notifications from the network (new item received, karma awarded, etc.)</li>
+      <li><strong>Query</strong> which nodes are online and what their health/capacity is</li>
+    </ul>
+
+    <div class="code-block">
+      <div class="code-block-header"><span>ONET topology</span></div>
+      <pre>Your App  ←→  ONODE-A  ←→  ONODE-B  ←→  ONODE-C
+                  ↕               ↕
+              ONODE-D  ←→  ONODE-E
+                          (mesh routing — no single point of failure)</pre>
+    </div>
+
+    <h2 id="discover">Discovering Peers</h2>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">discover-peers.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">import</span> { oasis } <span class="kw">from</span> <span class="str">'./oasis.js'</span>;
+
+<span class="cmt">// Get all currently online nodes in the ONET mesh</span>
+<span class="kw">const</span> { result: nodes } = <span class="kw">await</span> oasis.onet.<span class="fn">getOnlineNodes</span>();
+console.<span class="fn">log</span>(<span class="str">'Online nodes:'</span>, nodes.length);
+nodes.<span class="fn">forEach</span>(n => console.<span class="fn">log</span>(`  ${n.nodeId}  latency=${n.latencyMs}ms  peers=${n.peerCount}`));
+
+<span class="cmt">// Find a specific avatar's node (useful for direct messaging)</span>
+<span class="kw">const</span> { result: peerInfo } = <span class="kw">await</span> oasis.onet.<span class="fn">findAvatarNode</span>({ avatarId: <span class="str">'target-avatar-id'</span> });
+console.<span class="fn">log</span>(<span class="str">'Avatar is on node:'</span>, peerInfo.nodeId, <span class="str">'online:'</span>, peerInfo.isOnline);</pre>
+    </div>
+
+    <h2 id="messaging">Sending Messages</h2>
+    <p>Direct messages are encrypted end-to-end using the recipient avatar's public key and delivered via the shortest ONET path.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">send-message.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="cmt">// Send a direct message to another avatar</span>
+<span class="kw">const</span> { result, isError } = <span class="kw">await</span> oasis.onet.<span class="fn">sendMessage</span>({
+  toAvatarId: <span class="str">'recipient-avatar-id'</span>,
+  subject:    <span class="str">'Key drop'</span>,
+  message:    <span class="str">'I left a red key in the corridor — check your inventory'</span>,
+  metadata:   { itemType: <span class="str">'key'</span>, colour: <span class="str">'red'</span> },
+});
+
+<span class="kw">if</span> (!isError) console.<span class="fn">log</span>(<span class="str">'Delivered via node:'</span>, result.routedThroughNodeId);
+
+<span class="cmt">// Broadcast to a group (all avatars with a given tag or in a mission)</span>
+<span class="kw">await</span> oasis.onet.<span class="fn">broadcastMessage</span>({
+  groupTag: <span class="str">'mission-42-participants'</span>,
+  subject:  <span class="str">'Boss spawned'</span>,
+  message:  <span class="str">'The final boss has appeared at GeoHotSpot 7!'</span>,
+});</pre>
+    </div>
+
+    <h2 id="events">Subscribing to Real-Time Events</h2>
+    <p>Use the ONET event stream to receive push notifications — no polling required.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">subscribe-events.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="cmt">// Subscribe to all ONET events for this avatar</span>
+<span class="kw">const</span> unsub = oasis.onet.<span class="fn">subscribe</span>({
+  events: [<span class="str">'message'</span>, <span class="str">'karma'</span>, <span class="str">'nft_received'</span>, <span class="str">'node_state_change'</span>],
+  onEvent: (event) => {
+    <span class="kw">switch</span> (event.type) {
+      <span class="kw">case</span> <span class="str">'message'</span>:
+        console.<span class="fn">log</span>(<span class="str">'New message from'</span>, event.fromAvatarId, <span class="str">':'</span>, event.subject);
+        <span class="kw">break</span>;
+      <span class="kw">case</span> <span class="str">'karma'</span>:
+        console.<span class="fn">log</span>(<span class="str">'Karma awarded:'</span>, event.amount, <span class="str">'new total:'</span>, event.newTotal);
+        <span class="kw">break</span>;
+      <span class="kw">case</span> <span class="str">'nft_received'</span>:
+        console.<span class="fn">log</span>(<span class="str">'NFT received:'</span>, event.nftId, event.nftTitle);
+        <span class="kw">break</span>;
+    }
+  }
+});
+
+<span class="cmt">// Later: clean up</span>
+<span class="fn">unsub</span>();</pre>
+    </div>
+
+    <h2 id="node-status">Querying ONODE Network Status</h2>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">node-status.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">const</span> { result: status } = <span class="kw">await</span> oasis.onode.<span class="fn">getNodeStatus</span>();
+console.<span class="fn">log</span>(<span class="str">'Node ID:'</span>,      status.nodeId);
+console.<span class="fn">log</span>(<span class="str">'Version:'</span>,      status.version);
+console.<span class="fn">log</span>(<span class="str">'Uptime:'</span>,       status.uptimeSeconds, <span class="str">'s'</span>);
+console.<span class="fn">log</span>(<span class="str">'Connected peers:'</span>, status.connectedPeers);
+console.<span class="fn">log</span>(<span class="str">'Active providers:'</span>, status.activeProviders);</pre>
+    </div>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <div class="callout-title">Use ONET events for cross-game features</div>
+        <p>ODOOM and OQuake both use ONET to share inventory state across games in real time — when you pick up a key in OQuake it appears in your ODOOM inventory within milliseconds. See the <a href="/case-studies/odoom">ODOOM case study</a> and <a href="/case-studies/oquake">OQuake case study</a> for implementation details.</p>
+      </div>
+    </div>
+
+    <div class="next-steps">
+      <h3>Next steps</h3>
+      <ul>
+        <li><a href="/tutorials/11-web5-intro">Module 11: WEB5 &amp; STAR API Introduction →</a></li>
+        <li><a href="https://github.com/NextGenSoftwareUK/OASIS/blob/master/Docs/Devs/API%20Documentation/WEB4%20OASIS%20API/ONET-API.md" target="_blank">ONET API Reference ↗</a></li>
+        <li><a href="https://github.com/NextGenSoftwareUK/OASIS/blob/master/Docs/Devs/API%20Documentation/WEB4%20OASIS%20API/ONODE-API.md" target="_blank">ONODE API Reference ↗</a></li>
+        <li><a href="https://www.npmjs.com/package/@oasisomniverse/web4-api" target="_blank">@oasisomniverse/web4-api on npm ↗</a></li>
+      </ul>
+    </div>
+  </main>
+</div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
