@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 15: WEB6 AI Layer Introduction — OASIS Learn</title>
+<meta name="description" content="Introduction to the OASIS WEB6 AI Abstraction Layer — 56 REST endpoints, 250 MCP tools, 20+ unified AI providers, Karma-Gated tiers and the FAHRN orchestration system.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Titillium+Web:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<button class="mobile-menu-btn">☰</button>
+<div class="layout">
+  <aside class="sidebar">
+    <a class="sidebar-logo" href="/"><div class="sidebar-logo-icon">O</div><div class="sidebar-logo-text"><span class="site-name">OASIS LEARN</span><span class="site-sub">Developer Tutorials</span></div></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Getting Started</div>
+      <a class="nav-item" href="/">Overview</a>
+      <a class="nav-item" href="/tutorials/01-getting-started"><span class="step-num">1</span> Quick Start</a>
+      <div class="nav-section-title">WEB4 Core</div>
+      <a class="nav-item" href="/tutorials/02-avatar-identity"><span class="step-num">2</span> Avatar &amp; Identity</a>
+      <a class="nav-item" href="/tutorials/03-karma-reputation"><span class="step-num">3</span> Karma &amp; Reputation</a>
+      <a class="nav-item" href="/tutorials/04-nft-wallet"><span class="step-num">4</span> NFTs &amp; Wallet</a>
+      <a class="nav-item" href="/tutorials/05-data-holons"><span class="step-num">5</span> Data &amp; Holons</a>
+      <div class="nav-section-title">Building Apps</div>
+      <a class="nav-item" href="/tutorials/06-first-oapp"><span class="step-num">6</span> Your First OApp</a>
+      <a class="nav-item" href="/tutorials/07-metaverse-game"><span class="step-num">7</span> Metaverse &amp; Games</a>
+      <a class="nav-item" href="/tutorials/08-providers-production"><span class="step-num">8</span> Providers &amp; Production</a>
+      <div class="nav-section-title">WEB4 Deep Dives</div>
+      <a class="nav-item" href="/tutorials/09-hyperdrive"><span class="step-num">9</span> HyperDrive Storage</a>
+      <a class="nav-item" href="/tutorials/10-onet-p2p"><span class="step-num">10</span> ONET &amp; P2P</a>
+      <div class="nav-section-title">WEB5 STAR API</div>
+      <a class="nav-item" href="/tutorials/11-web5-intro"><span class="step-num">11</span> WEB5 Introduction</a>
+      <a class="nav-item" href="/tutorials/12-missions-quests"><span class="step-num">12</span> Missions &amp; Quests</a>
+      <a class="nav-item" href="/tutorials/13-celestial-spaces"><span class="step-num">13</span> Celestial Spaces</a>
+      <a class="nav-item" href="/tutorials/14-geonft-ar"><span class="step-num">14</span> GeoNFTs &amp; AR</a>
+      <div class="nav-section-title">WEB6 AI Layer</div>
+      <a class="nav-item active" href="/tutorials/15-web6-ai-intro"><span class="step-num">15</span> WEB6 AI Intro</a>
+      <a class="nav-item" href="/tutorials/16-fahrn-agents"><span class="step-num">16</span> FAHRN Multi-Agent</a>
+      <a class="nav-item" href="/tutorials/17-holonic-memory"><span class="step-num">17</span> Holonic Memory</a>
+      <div class="nav-section-title">Case Studies</div>
+      <a class="nav-item" href="/case-studies/trust-site">🏛️ SovereignTrust</a>
+      <a class="nav-item" href="/case-studies/nft-founders">🎖️ Founder NFTs</a>
+      <a class="nav-item" href="/case-studies/oportal">🌐 OPORTAL</a>
+      <a class="nav-item" href="/case-studies/our-world">🌍 Our World</a>
+      <a class="nav-item" href="/case-studies/odoom">💀 ODOOM</a>
+      <a class="nav-item" href="/case-studies/oquake">⚡ OQuake</a>
+      <div class="nav-section-title">API Reference</div>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB4%20OASIS%20API" target="_blank">WEB4 API Ref ↗</a>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB5%20STAR%20API" target="_blank">WEB5 STAR Ref ↗</a>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB6" target="_blank">WEB6 AI Ref ↗</a>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS" target="_blank">GitHub ↗</a>
+      <a class="nav-item" href="https://oportal.oasisomniverse.one/developer" target="_blank">Dev Portal ↗</a>
+    </nav>
+    <div class="sidebar-footer"><a href="https://oasisomniverse.one" target="_blank">oasisomniverse.one</a><a href="https://discord.gg/oasis" target="_blank">Discord Community</a></div>
+  </aside>
+
+  <main class="main">
+    <div class="progress-bar-wrap"><div class="progress-bar" style="width:87%"></div></div>
+    <div class="page-header">
+      <div class="breadcrumb"><a href="/">OASIS Learn</a><span class="breadcrumb-sep">/</span><span>Module 15</span></div>
+      <div class="page-meta">
+        <span class="badge badge-advanced">Advanced</span>
+        <span class="badge badge-time">⏱ 30 min</span>
+        <span class="badge" style="background:rgba(16,185,129,.15);color:#34d399">WEB6</span>
+      </div>
+      <h1 class="page-title">WEB6: The AI Abstraction Layer</h1>
+      <p class="page-desc">WEB6 is the AI layer of the OASIS — a unified interface to 20+ AI providers (OpenAI, Anthropic, Gemini, Llama, Mistral, Grok, and more) with 56 REST endpoints, 250 Model Context Protocol (MCP) tools, Karma-Gated access tiers, self-evolving SkillOpt agents, and the FAHRN multi-agent orchestration system. One API key, every AI model.</p>
+    </div>
+
+    <div class="build-summary">
+      <h4>What you'll learn</h4>
+      <ul>
+        <li>The WEB6 architecture — providers, tiers, tools, and agents</li>
+        <li>Install and initialise <code>@oasisomniverse/web6-api</code></li>
+        <li>Make your first AI completion call across any provider</li>
+        <li>Understand Karma-Gated access tiers</li>
+        <li>Overview of FAHRN, SkillOpt and Holonic Memory</li>
+      </ul>
+    </div>
+
+    <h2 id="architecture">WEB6 Architecture</h2>
+    <div class="api-table-wrap">
+      <table>
+        <thead><tr><th>Layer</th><th>What it does</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Provider Abstraction</strong></td><td>Single API surfaces OpenAI, Anthropic, Google Gemini, Meta Llama, Mistral, xAI Grok, Cohere, HuggingFace, and 12+ more. Switch providers without changing your code.</td></tr>
+          <tr><td><strong>56 REST Endpoints</strong></td><td>Chat completions, streaming, embeddings, image gen, audio transcription, code analysis, summarisation, translation, sentiment, entity extraction, and more — all provider-agnostic.</td></tr>
+          <tr><td><strong>250 MCP Tools</strong></td><td>Every endpoint also exposed as an MCP tool — drop OASIS AI into any MCP-compatible agent framework (Claude, Cursor, Continue, etc.) instantly.</td></tr>
+          <tr><td><strong>Karma-Gated Tiers</strong></td><td>Avatar karma score gates access to AI compute. Low-karma users get base models; high-karma contributors unlock GPT-4o, Claude 3.5, Gemini Ultra, etc.</td></tr>
+          <tr><td><strong>FAHRN Orchestration</strong></td><td>Multi-agent coordination: Serial, Parallel, Debate and Voting execution modes. See <a href="/tutorials/16-fahrn-agents">Module 16</a>.</td></tr>
+          <tr><td><strong>SkillOpt Agents</strong></td><td>Self-evolving agents that learn from outcomes and refine their own prompts and tool selection over time.</td></tr>
+          <tr><td><strong>Holonic Memory</strong></td><td>Fractal memory hierarchy: Session → Agent → User → Group — context that persists across calls, sessions, and agents. See <a href="/tutorials/17-holonic-memory">Module 17</a>.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="install">Installation</h2>
+
+    <div class="code-block">
+      <div class="code-block-header"><span>Install</span><button class="copy-btn">Copy</button></div>
+      <pre>npm install @oasisomniverse/web6-api @oasisomniverse/web4-api</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">web6.js — initialise</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">import</span> { OasisWeb4Client } <span class="kw">from</span> <span class="str">'@oasisomniverse/web4-api'</span>;
+<span class="kw">import</span> { OasisWeb6Client } <span class="kw">from</span> <span class="str">'@oasisomniverse/web6-api'</span>;
+
+<span class="kw">export const</span> oasis4 = <span class="kw">new</span> <span class="fn">OasisWeb4Client</span>({ baseUrl: <span class="str">'https://api.web4.oasisomniverse.one'</span> });
+<span class="kw">export const</span> ai     = <span class="kw">new</span> <span class="fn">OasisWeb6Client</span>({ baseUrl: <span class="str">'https://api.web4.oasisomniverse.one'</span> });
+
+<span class="kw">const</span> { result } = <span class="kw">await</span> oasis4.avatar.<span class="fn">authenticate</span>({ email, password });
+oasis4.auth.<span class="fn">setToken</span>(result.token);
+ai.auth.<span class="fn">setToken</span>(result.token);   <span class="cmt">// same JWT — karma tier applied server-side</span></pre>
+    </div>
+
+    <h2 id="first-call">Your First AI Completion</h2>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">chat.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">import</span> { ai } <span class="kw">from</span> <span class="str">'./web6.js'</span>;
+
+<span class="cmt">// Provider is auto-selected based on karma tier if omitted</span>
+<span class="kw">const</span> { result } = <span class="kw">await</span> ai.chat.<span class="fn">complete</span>({
+  messages: [
+    { role: <span class="str">'system'</span>,    content: <span class="str">'You are a helpful game guide for the OASIS.'</span> },
+    { role: <span class="str">'user'</span>,      content: <span class="str">'Where is the Crimson Key hidden?'</span> },
+  ],
+  provider: <span class="str">'anthropic'</span>,    <span class="cmt">// or 'openai', 'google', 'meta', 'mistral', etc.</span>
+  model:    <span class="str">'claude-3-5-sonnet'</span>,
+  maxTokens: <span class="num">512</span>,
+});
+
+console.<span class="fn">log</span>(result.content);</pre>
+    </div>
+
+    <h2 id="streaming">Streaming Responses</h2>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">stream.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">const</span> stream = <span class="kw">await</span> ai.chat.<span class="fn">stream</span>({
+  messages: [{ role: <span class="str">'user'</span>, content: <span class="str">'Write a lore entry for Nexara Prime.'</span> }],
+  provider: <span class="str">'openai'</span>,
+  model:    <span class="str">'gpt-4o'</span>,
+});
+
+<span class="kw">for await</span> (<span class="kw">const</span> chunk <span class="kw">of</span> stream) {
+  process.stdout.<span class="fn">write</span>(chunk.delta);
+}</pre>
+    </div>
+
+    <h2 id="karma-tiers">Karma-Gated Access Tiers</h2>
+    <p>WEB6 maps an avatar's karma score to an AI compute tier automatically. You don't need to manage this — just call the API and the right model is selected.</p>
+
+    <div class="api-table-wrap">
+      <table>
+        <thead><tr><th>Karma Range</th><th>Tier</th><th>Models Available</th></tr></thead>
+        <tbody>
+          <tr><td>0 – 999</td><td>Seed</td><td>Llama 3 8B, Mistral 7B, GPT-3.5</td></tr>
+          <tr><td>1,000 – 9,999</td><td>Sprout</td><td>+ Gemini Flash, Claude Haiku, GPT-4o Mini</td></tr>
+          <tr><td>10,000 – 49,999</td><td>Growth</td><td>+ GPT-4o, Claude 3.5 Sonnet, Gemini Pro</td></tr>
+          <tr><td>50,000 – 249,999</td><td>Bloom</td><td>+ Claude 3.5 Opus, Gemini Ultra, GPT-4 Turbo</td></tr>
+          <tr><td>250,000+</td><td>Luminary</td><td>All models + priority queue + dedicated capacity</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="providers">Supported AI Providers</h2>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">list-providers.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">const</span> { result: providers } = <span class="kw">await</span> ai.<span class="fn">getProviders</span>();
+providers.<span class="fn">forEach</span>(p => console.<span class="fn">log</span>(p.name, <span class="str">'—'</span>, p.models.join(<span class="str">', '</span>)));
+
+<span class="cmt">// Example output:
+// openai — gpt-4o, gpt-4-turbo, gpt-3.5-turbo
+// anthropic — claude-3-5-sonnet, claude-3-5-haiku, claude-3-opus
+// google — gemini-ultra, gemini-pro, gemini-flash
+// meta — llama-3-70b, llama-3-8b
+// mistral — mistral-large, mistral-7b
+// xai — grok-2, grok-1
+// cohere — command-r-plus, command-r
+// ... and 12 more</span></pre>
+    </div>
+
+    <div class="callout callout-note">
+      <div class="callout-icon">🏛️</div>
+      <div class="callout-body">
+        <div class="callout-title">WEB6 powers the Leela AI assistant in SovereignTrust</div>
+        <p>The <a href="/case-studies/trust-site">SovereignTrust</a> case study shows WEB6 in production — the Leela legal assistant uses FAHRN Debate mode to cross-check trust document analysis across multiple AI providers before surfacing an answer.</p>
+      </div>
+    </div>
+
+    <div class="next-steps">
+      <h3>Next steps</h3>
+      <ul>
+        <li><a href="/tutorials/16-fahrn-agents">Module 16: FAHRN Multi-Agent Orchestration →</a></li>
+        <li><a href="/tutorials/17-holonic-memory">Module 17: Holonic Memory →</a></li>
+        <li><a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB6" target="_blank">Full WEB6 API Reference ↗</a></li>
+        <li><a href="https://www.npmjs.com/package/@oasisomniverse/web6-api" target="_blank">@oasisomniverse/web6-api on npm ↗</a></li>
+        <li><a href="/case-studies/trust-site">Case Study: SovereignTrust (WEB6 in production) →</a></li>
+        <li><a href="/case-studies/oportal">Case Study: OPORTAL (WEB4 + WEB5 + WEB6) →</a></li>
+      </ul>
+    </div>
+  </main>
+</div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 16: FAHRN Multi-Agent Orchestration — OASIS Learn</title>
+<meta name="description" content="Orchestrate multiple AI agents in Serial, Parallel, Debate and Voting modes using the OASIS WEB6 FAHRN system. Build self-improving SkillOpt pipelines with karma-aware routing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Titillium+Web:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<button class="mobile-menu-btn">☰</button>
+<div class="layout">
+  <aside class="sidebar">
+    <a class="sidebar-logo" href="/"><div class="sidebar-logo-icon">O</div><div class="sidebar-logo-text"><span class="site-name">OASIS LEARN</span><span class="site-sub">Developer Tutorials</span></div></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Getting Started</div>
+      <a class="nav-item" href="/">Overview</a>
+      <a class="nav-item" href="/tutorials/01-getting-started"><span class="step-num">1</span> Quick Start</a>
+      <div class="nav-section-title">WEB4 Core</div>
+      <a class="nav-item" href="/tutorials/02-avatar-identity"><span class="step-num">2</span> Avatar &amp; Identity</a>
+      <a class="nav-item" href="/tutorials/03-karma-reputation"><span class="step-num">3</span> Karma &amp; Reputation</a>
+      <a class="nav-item" href="/tutorials/04-nft-wallet"><span class="step-num">4</span> NFTs &amp; Wallet</a>
+      <a class="nav-item" href="/tutorials/05-data-holons"><span class="step-num">5</span> Data &amp; Holons</a>
+      <div class="nav-section-title">Building Apps</div>
+      <a class="nav-item" href="/tutorials/06-first-oapp"><span class="step-num">6</span> Your First OApp</a>
+      <a class="nav-item" href="/tutorials/07-metaverse-game"><span class="step-num">7</span> Metaverse &amp; Games</a>
+      <a class="nav-item" href="/tutorials/08-providers-production"><span class="step-num">8</span> Providers &amp; Production</a>
+      <div class="nav-section-title">WEB4 Deep Dives</div>
+      <a class="nav-item" href="/tutorials/09-hyperdrive"><span class="step-num">9</span> HyperDrive Storage</a>
+      <a class="nav-item" href="/tutorials/10-onet-p2p"><span class="step-num">10</span> ONET &amp; P2P</a>
+      <div class="nav-section-title">WEB5 STAR API</div>
+      <a class="nav-item" href="/tutorials/11-web5-intro"><span class="step-num">11</span> WEB5 Introduction</a>
+      <a class="nav-item" href="/tutorials/12-missions-quests"><span class="step-num">12</span> Missions &amp; Quests</a>
+      <a class="nav-item" href="/tutorials/13-celestial-spaces"><span class="step-num">13</span> Celestial Spaces</a>
+      <a class="nav-item" href="/tutorials/14-geonft-ar"><span class="step-num">14</span> GeoNFTs &amp; AR</a>
+      <div class="nav-section-title">WEB6 AI Layer</div>
+      <a class="nav-item" href="/tutorials/15-web6-ai-intro"><span class="step-num">15</span> WEB6 AI Intro</a>
+      <a class="nav-item active" href="/tutorials/16-fahrn-agents"><span class="step-num">16</span> FAHRN Multi-Agent</a>
+      <a class="nav-item" href="/tutorials/17-holonic-memory"><span class="step-num">17</span> Holonic Memory</a>
+      <div class="nav-section-title">Case Studies</div>
+      <a class="nav-item" href="/case-studies/trust-site">🏛️ SovereignTrust</a>
+      <a class="nav-item" href="/case-studies/nft-founders">🎖️ Founder NFTs</a>
+      <a class="nav-item" href="/case-studies/oportal">🌐 OPORTAL</a>
+      <a class="nav-item" href="/case-studies/our-world">🌍 Our World</a>
+      <a class="nav-item" href="/case-studies/odoom">💀 ODOOM</a>
+      <a class="nav-item" href="/case-studies/oquake">⚡ OQuake</a>
+      <div class="nav-section-title">API Reference</div>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB4%20OASIS%20API" target="_blank">WEB4 API Ref ↗</a>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB5%20STAR%20API" target="_blank">WEB5 STAR Ref ↗</a>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB6" target="_blank">WEB6 AI Ref ↗</a>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS" target="_blank">GitHub ↗</a>
+      <a class="nav-item" href="https://oportal.oasisomniverse.one/developer" target="_blank">Dev Portal ↗</a>
+    </nav>
+    <div class="sidebar-footer"><a href="https://oasisomniverse.one" target="_blank">oasisomniverse.one</a><a href="https://discord.gg/oasis" target="_blank">Discord Community</a></div>
+  </aside>
+
+  <main class="main">
+    <div class="progress-bar-wrap"><div class="progress-bar" style="width:93%"></div></div>
+    <div class="page-header">
+      <div class="breadcrumb"><a href="/">OASIS Learn</a><span class="breadcrumb-sep">/</span><span>Module 16</span></div>
+      <div class="page-meta">
+        <span class="badge badge-advanced">Advanced</span>
+        <span class="badge badge-time">⏱ 40 min</span>
+        <span class="badge" style="background:rgba(16,185,129,.15);color:#34d399">WEB6</span>
+      </div>
+      <h1 class="page-title">FAHRN: Multi-Agent Orchestration</h1>
+      <p class="page-desc">FAHRN (Federated Autonomous Holonic Reasoning Network) is the OASIS multi-agent orchestration system. It coordinates multiple AI agents — potentially running different models from different providers — in four execution modes: Serial, Parallel, Debate and Voting. Each agent gets its own Holonic Memory context, and SkillOpt agents evolve their prompts based on outcome feedback.</p>
+    </div>
+
+    <div class="build-summary">
+      <h4>What you'll build</h4>
+      <ul>
+        <li>Understand the four FAHRN execution modes</li>
+        <li>Run a Parallel pipeline across three AI providers simultaneously</li>
+        <li>Build a Debate pipeline where agents challenge each other's reasoning</li>
+        <li>Use Voting mode to select the best response by consensus</li>
+        <li>Wire up a SkillOpt self-improving agent with outcome feedback</li>
+      </ul>
+    </div>
+
+    <div class="callout callout-note">
+      <div class="callout-icon">📦</div>
+      <div class="callout-body">
+        <div class="callout-title">API reference</div>
+        <p><a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB6" target="_blank">WEB6 API Reference — FAHRN section ↗</a> · npm: <a href="https://www.npmjs.com/package/@oasisomniverse/web6-api" target="_blank"><code>@oasisomniverse/web6-api</code> ↗</a></p>
+      </div>
+    </div>
+
+    <h2 id="modes">The Four FAHRN Execution Modes</h2>
+
+    <div class="api-table-wrap">
+      <table>
+        <thead><tr><th>Mode</th><th>How it works</th><th>Best for</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Serial</strong></td><td>Agents run one after another. Output of agent N is input of agent N+1.</td><td>Pipelines: draft → review → refine → format</td></tr>
+          <tr><td><strong>Parallel</strong></td><td>All agents run simultaneously. Results collected and merged.</td><td>Speed: generate multiple answers fast, pick the best</td></tr>
+          <tr><td><strong>Debate</strong></td><td>Agents argue for/against a proposition over multiple rounds. A judge agent synthesises the winner.</td><td>High-stakes decisions, legal / medical review, trust document analysis</td></tr>
+          <tr><td><strong>Voting</strong></td><td>Agents vote on a ranked set of answers. Plurality or weighted-karma winner selected.</td><td>Creative tasks: choose the best story, dialogue or plan by consensus</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="serial">Serial Pipeline</h2>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">serial-pipeline.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">import</span> { ai } <span class="kw">from</span> <span class="str">'./web6.js'</span>;
+
+<span class="kw">const</span> { result } = <span class="kw">await</span> ai.fahrn.<span class="fn">run</span>({
+  mode: <span class="str">'Serial'</span>,
+  agents: [
+    {
+      name:     <span class="str">'Drafter'</span>,
+      provider: <span class="str">'openai'</span>,
+      model:    <span class="str">'gpt-4o'</span>,
+      systemPrompt: <span class="str">'Draft a first version of the answer.'</span>,
+    },
+    {
+      name:     <span class="str">'Critic'</span>,
+      provider: <span class="str">'anthropic'</span>,
+      model:    <span class="str">'claude-3-5-sonnet'</span>,
+      systemPrompt: <span class="str">'Identify flaws and gaps in the draft. Be harsh.'</span>,
+    },
+    {
+      name:     <span class="str">'Refiner'</span>,
+      provider: <span class="str">'google'</span>,
+      model:    <span class="str">'gemini-pro'</span>,
+      systemPrompt: <span class="str">'Produce a polished final answer addressing all criticisms.'</span>,
+    },
+  ],
+  input: <span class="str">'Explain how OASIS HyperDrive auto-failover works.'</span>,
+});
+
+console.<span class="fn">log</span>(<span class="str">'Final answer:'</span>, result.finalOutput);</pre>
+    </div>
+
+    <h2 id="parallel">Parallel Pipeline</h2>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">parallel-pipeline.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">const</span> { result } = <span class="kw">await</span> ai.fahrn.<span class="fn">run</span>({
+  mode: <span class="str">'Parallel'</span>,
+  agents: [
+    { name: <span class="str">'OpenAI'</span>,    provider: <span class="str">'openai'</span>,     model: <span class="str">'gpt-4o'</span>            },
+    { name: <span class="str">'Anthropic'</span>, provider: <span class="str">'anthropic'</span>,  model: <span class="str">'claude-3-5-sonnet'</span> },
+    { name: <span class="str">'Google'</span>,    provider: <span class="str">'google'</span>,     model: <span class="str">'gemini-pro'</span>        },
+  ],
+  input: <span class="str">'Generate a unique quest name for a volcanic planet.'</span>,
+  mergeStrategy: <span class="str">'bestOf'</span>,   <span class="cmt">// 'concat' | 'bestOf' | 'custom'</span>
+});
+
+<span class="cmt">// result.outputs contains one response per agent</span>
+result.outputs.<span class="fn">forEach</span>(o => console.<span class="fn">log</span>(o.agentName, <span class="str">':'</span>, o.content));</pre>
+    </div>
+
+    <h2 id="debate">Debate Mode</h2>
+    <p>Debate is the most powerful mode for high-stakes decisions. Agents argue across multiple rounds before a judge synthesises a final verdict.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">debate-pipeline.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">const</span> { result } = <span class="kw">await</span> ai.fahrn.<span class="fn">run</span>({
+  mode:   <span class="str">'Debate'</span>,
+  rounds: <span class="num">3</span>,
+  agents: [
+    {
+      name:     <span class="str">'Advocate'</span>,
+      provider: <span class="str">'openai'</span>,
+      model:    <span class="str">'gpt-4o'</span>,
+      systemPrompt: <span class="str">'You argue IN FAVOUR of the proposition. Be persuasive.'</span>,
+    },
+    {
+      name:     <span class="str">'Opposition'</span>,
+      provider: <span class="str">'anthropic'</span>,
+      model:    <span class="str">'claude-3-5-sonnet'</span>,
+      systemPrompt: <span class="str">'You argue AGAINST the proposition. Find flaws.'</span>,
+    },
+  ],
+  judge: {
+    provider: <span class="str">'google'</span>,
+    model:    <span class="str">'gemini-ultra'</span>,
+    systemPrompt: <span class="str">'You are an impartial judge. Weigh the arguments and give a final verdict.'</span>,
+  },
+  input: <span class="str">'Should the Crimson Key NFT be transferable between games?'</span>,
+});
+
+console.<span class="fn">log</span>(<span class="str">'Verdict:'</span>, result.judgeVerdict);
+console.<span class="fn">log</span>(<span class="str">'Winning side:'</span>, result.winner);</pre>
+    </div>
+
+    <h2 id="voting">Voting Mode</h2>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">voting-pipeline.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">const</span> { result } = <span class="kw">await</span> ai.fahrn.<span class="fn">run</span>({
+  mode: <span class="str">'Voting'</span>,
+  agents: [
+    { name: <span class="str">'Agent1'</span>, provider: <span class="str">'openai'</span>,    model: <span class="str">'gpt-4o'</span>            },
+    { name: <span class="str">'Agent2'</span>, provider: <span class="str">'anthropic'</span>, model: <span class="str">'claude-3-5-sonnet'</span> },
+    { name: <span class="str">'Agent3'</span>, provider: <span class="str">'meta'</span>,      model: <span class="str">'llama-3-70b'</span>       },
+    { name: <span class="str">'Agent4'</span>, provider: <span class="str">'mistral'</span>,   model: <span class="str">'mistral-large'</span>     },
+  ],
+  votingMethod: <span class="str">'plurality'</span>,   <span class="cmt">// 'plurality' | 'ranked' | 'karma-weighted'</span>
+  input: <span class="str">'What should the final boss of the Key Hunters quest be called?'</span>,
+});
+
+console.<span class="fn">log</span>(<span class="str">'Winning answer:'</span>, result.winner);
+console.<span class="fn">log</span>(<span class="str">'Vote breakdown:'</span>, result.votes);</pre>
+    </div>
+
+    <h2 id="skillopt">SkillOpt — Self-Evolving Agents</h2>
+    <p>SkillOpt agents record outcome feedback and use it to refine their own system prompts over time. Each run improves the next.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">skillopt.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="cmt">// Create a SkillOpt agent — it self-refines based on feedback</span>
+<span class="kw">const</span> { result: agent } = <span class="kw">await</span> ai.skillOpt.<span class="fn">createAgent</span>({
+  name:         <span class="str">'QuestNarrator'</span>,
+  initialPrompt: <span class="str">'You write engaging quest narratives for the OASIS.'</span>,
+  provider:     <span class="str">'openai'</span>,
+  model:        <span class="str">'gpt-4o'</span>,
+});
+
+<span class="cmt">// Run the agent</span>
+<span class="kw">const</span> { result: run } = <span class="kw">await</span> ai.skillOpt.<span class="fn">run</span>({
+  agentId: agent.id,
+  input:   <span class="str">'Write an intro for the Crimson Key mission.'</span>,
+});
+
+<span class="cmt">// Feed back outcome — agent learns from this</span>
+<span class="kw">await</span> ai.skillOpt.<span class="fn">recordOutcome</span>({
+  runId:   run.id,
+  score:   <span class="num">0.9</span>,   <span class="cmt">// 0–1</span>
+  feedback: <span class="str">'Great dramatic tone. Too long — trim by 20%.'</span>,
+});</pre>
+    </div>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <div class="callout-title">Debate mode is how Leela works in SovereignTrust</div>
+        <p>The <a href="/case-studies/trust-site">SovereignTrust</a> legal assistant uses FAHRN Debate mode with three AI providers cross-checking each other's trust document interpretation before surfacing the final advice to the user.</p>
+      </div>
+    </div>
+
+    <div class="next-steps">
+      <h3>Next steps</h3>
+      <ul>
+        <li><a href="/tutorials/17-holonic-memory">Module 17: Holonic Memory →</a></li>
+        <li><a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB6" target="_blank">WEB6 API Reference ↗</a></li>
+        <li><a href="/case-studies/trust-site">Case Study: SovereignTrust (FAHRN in production) →</a></li>
+        <li><a href="/case-studies/oportal">Case Study: OPORTAL (FAHRN + Holonic Memory) →</a></li>
+      </ul>
+    </div>
+  </main>
+</div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

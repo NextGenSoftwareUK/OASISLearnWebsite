@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 11: WEB5 &amp; STAR API Introduction — OASIS Learn</title>
+<meta name="description" content="Step up from WEB4 to WEB5 — the STAR API layer that adds game mechanics, metaverse worlds, on-chain OAPPs and the full celestial body system.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Titillium+Web:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<button class="mobile-menu-btn">☰</button>
+<div class="layout">
+  <aside class="sidebar">
+    <a class="sidebar-logo" href="/"><div class="sidebar-logo-icon">O</div><div class="sidebar-logo-text"><span class="site-name">OASIS LEARN</span><span class="site-sub">Developer Tutorials</span></div></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Getting Started</div>
+      <a class="nav-item" href="/">Overview</a>
+      <a class="nav-item" href="/tutorials/01-getting-started"><span class="step-num">1</span> Quick Start</a>
+      <div class="nav-section-title">WEB4 Core</div>
+      <a class="nav-item" href="/tutorials/02-avatar-identity"><span class="step-num">2</span> Avatar &amp; Identity</a>
+      <a class="nav-item" href="/tutorials/03-karma-reputation"><span class="step-num">3</span> Karma &amp; Reputation</a>
+      <a class="nav-item" href="/tutorials/04-nft-wallet"><span class="step-num">4</span> NFTs &amp; Wallet</a>
+      <a class="nav-item" href="/tutorials/05-data-holons"><span class="step-num">5</span> Data &amp; Holons</a>
+      <div class="nav-section-title">Building Apps</div>
+      <a class="nav-item" href="/tutorials/06-first-oapp"><span class="step-num">6</span> Your First OApp</a>
+      <a class="nav-item" href="/tutorials/07-metaverse-game"><span class="step-num">7</span> Metaverse &amp; Games</a>
+      <a class="nav-item" href="/tutorials/08-providers-production"><span class="step-num">8</span> Providers &amp; Production</a>
+      <div class="nav-section-title">WEB4 Deep Dives</div>
+      <a class="nav-item" href="/tutorials/09-hyperdrive"><span class="step-num">9</span> HyperDrive Storage</a>
+      <a class="nav-item" href="/tutorials/10-onet-p2p"><span class="step-num">10</span> ONET &amp; P2P</a>
+      <div class="nav-section-title">WEB5 STAR API</div>
+      <a class="nav-item active" href="/tutorials/11-web5-intro"><span class="step-num">11</span> WEB5 Introduction</a>
+      <a class="nav-item" href="/tutorials/12-missions-quests"><span class="step-num">12</span> Missions &amp; Quests</a>
+      <a class="nav-item" href="/tutorials/13-celestial-spaces"><span class="step-num">13</span> Celestial Spaces</a>
+      <a class="nav-item" href="/tutorials/14-geonft-ar"><span class="step-num">14</span> GeoNFTs &amp; AR</a>
+      <div class="nav-section-title">WEB6 AI Layer</div>
+      <a class="nav-item" href="/tutorials/15-web6-ai-intro"><span class="step-num">15</span> WEB6 AI Intro</a>
+      <a class="nav-item" href="/tutorials/16-fahrn-agents"><span class="step-num">16</span> FAHRN Multi-Agent</a>
+      <a class="nav-item" href="/tutorials/17-holonic-memory"><span class="step-num">17</span> Holonic Memory</a>
+      <div class="nav-section-title">Case Studies</div>
+      <a class="nav-item" href="/case-studies/trust-site">🏛️ SovereignTrust</a>
+      <a class="nav-item" href="/case-studies/nft-founders">🎖️ Founder NFTs</a>
+      <a class="nav-item" href="/case-studies/oportal">🌐 OPORTAL</a>
+      <a class="nav-item" href="/case-studies/our-world">🌍 Our World</a>
+      <a class="nav-item" href="/case-studies/odoom">💀 ODOOM</a>
+      <a class="nav-item" href="/case-studies/oquake">⚡ OQuake</a>
+      <div class="nav-section-title">API Reference</div>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB4%20OASIS%20API" target="_blank">WEB4 API Ref ↗</a>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB5%20STAR%20API" target="_blank">WEB5 STAR Ref ↗</a>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB6" target="_blank">WEB6 AI Ref ↗</a>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS" target="_blank">GitHub ↗</a>
+      <a class="nav-item" href="https://oportal.oasisomniverse.one/developer" target="_blank">Dev Portal ↗</a>
+    </nav>
+    <div class="sidebar-footer"><a href="https://oasisomniverse.one" target="_blank">oasisomniverse.one</a><a href="https://discord.gg/oasis" target="_blank">Discord Community</a></div>
+  </aside>
+
+  <main class="main">
+    <div class="progress-bar-wrap"><div class="progress-bar" style="width:63%"></div></div>
+    <div class="page-header">
+      <div class="breadcrumb"><a href="/">OASIS Learn</a><span class="breadcrumb-sep">/</span><span>Module 11</span></div>
+      <div class="page-meta">
+        <span class="badge badge-intermediate">Intermediate</span>
+        <span class="badge badge-time">⏱ 25 min</span>
+        <span class="badge" style="background:rgba(124,58,237,.18);color:#a78bfa">WEB5</span>
+      </div>
+      <h1 class="page-title">WEB5 &amp; the STAR API</h1>
+      <p class="page-desc">WEB5 is the STAR (Spatial Topology &amp; Augmented Reality) layer — everything you need to build immersive game worlds, on-chain OAPPs, metaverse spaces, AR experiences and quest systems. It sits on top of WEB4, so everything you learned in modules 1–10 still applies.</p>
+    </div>
+
+    <div class="build-summary">
+      <h4>What you'll learn</h4>
+      <ul>
+        <li>How WEB5 extends WEB4 — what's new, what's the same</li>
+        <li>Install and configure <code>@oasisomniverse/web5-api</code></li>
+        <li>Understand the WEB5 data model: CelestialBodies, Zomes, OAPPs, Missions, Quests</li>
+        <li>Create your first WEB5-enabled OAPP</li>
+        <li>Overview of every WEB5 API module with links to full references</li>
+      </ul>
+    </div>
+
+    <h2 id="web4-vs-web5">WEB4 vs WEB5 — What Changes?</h2>
+    <div class="api-table-wrap">
+      <table>
+        <thead><tr><th>Capability</th><th>WEB4</th><th>WEB5</th></tr></thead>
+        <tbody>
+          <tr><td>Avatar SSO &amp; Identity</td><td>✅</td><td>✅ (same)</td></tr>
+          <tr><td>Karma &amp; Reputation</td><td>✅</td><td>✅ (extended)</td></tr>
+          <tr><td>NFTs &amp; Wallet</td><td>✅</td><td>✅ + GeoNFTs</td></tr>
+          <tr><td>Data Holons &amp; Files</td><td>✅</td><td>✅ + typed game holons</td></tr>
+          <tr><td>HyperDrive Storage</td><td>✅</td><td>✅ (same)</td></tr>
+          <tr><td>Missions &amp; Quests</td><td>❌</td><td>✅</td></tr>
+          <tr><td>Celestial Bodies &amp; Spaces</td><td>❌</td><td>✅</td></tr>
+          <tr><td>GeoNFTs &amp; AR Hotspots</td><td>❌</td><td>✅</td></tr>
+          <tr><td>Inventory &amp; Items</td><td>❌</td><td>✅</td></tr>
+          <tr><td>On-chain OAPPs (Zomes)</td><td>❌</td><td>✅</td></tr>
+          <tr><td>Competitions</td><td>❌</td><td>✅</td></tr>
+          <tr><td>Chat &amp; Social</td><td>Messaging only</td><td>✅ Full social graph</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="install">Installation</h2>
+
+    <div class="code-block">
+      <div class="code-block-header"><span>Install</span><button class="copy-btn">Copy</button></div>
+      <pre>npm install @oasisomniverse/web5-api @oasisomniverse/web4-api</pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">star.js — initialise WEB5 client</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">import</span> { OasisWeb4Client } <span class="kw">from</span> <span class="str">'@oasisomniverse/web4-api'</span>;
+<span class="kw">import</span> { OasisWeb5Client } <span class="kw">from</span> <span class="str">'@oasisomniverse/web5-api'</span>;
+
+<span class="cmt">// WEB5 wraps WEB4 — pass the same base URL</span>
+<span class="kw">export const</span> oasis4 = <span class="kw">new</span> <span class="fn">OasisWeb4Client</span>({ baseUrl: <span class="str">'https://api.web4.oasisomniverse.one'</span> });
+<span class="kw">export const</span> star   = <span class="kw">new</span> <span class="fn">OasisWeb5Client</span>({ baseUrl: <span class="str">'https://api.web4.oasisomniverse.one'</span> });
+
+<span class="cmt">// Authenticate once via WEB4 — token works for both</span>
+<span class="kw">const</span> { result } = <span class="kw">await</span> oasis4.avatar.<span class="fn">authenticate</span>({ email, password });
+oasis4.auth.<span class="fn">setToken</span>(result.token);
+star.auth.<span class="fn">setToken</span>(result.token);   <span class="cmt">// same JWT works across all layers</span></pre>
+    </div>
+
+    <h2 id="data-model">The WEB5 Data Model</h2>
+    <p>WEB5 introduces typed holons — structured game/metaverse objects that extend the base Holon with domain-specific fields:</p>
+
+    <div class="api-table-wrap">
+      <table>
+        <thead><tr><th>Type</th><th>Description</th><th>API Ref</th></tr></thead>
+        <tbody>
+          <tr><td><code>CelestialBody</code></td><td>A star, planet, moon or space region — the spatial container for a metaverse world</td><td><a href="https://github.com/NextGenSoftwareUK/OASIS/blob/master/Docs/Devs/API%20Documentation/WEB5%20STAR%20API/CelestialBodies-API.md" target="_blank">CelestialBodies-API ↗</a></td></tr>
+          <tr><td><code>CelestialSpace</code></td><td>A named region within or between celestial bodies — galaxies, solar systems, nebulae</td><td><a href="https://github.com/NextGenSoftwareUK/OASIS/blob/master/Docs/Devs/API%20Documentation/WEB5%20STAR%20API/CelestialSpaces-API.md" target="_blank">CelestialSpaces-API ↗</a></td></tr>
+          <tr><td><code>Mission</code></td><td>A structured goal with objectives, rewards and karma triggers</td><td><a href="https://github.com/NextGenSoftwareUK/OASIS/blob/master/Docs/Devs/API%20Documentation/WEB5%20STAR%20API/Missions-API.md" target="_blank">Missions-API ↗</a></td></tr>
+          <tr><td><code>Quest</code></td><td>A sequence of missions forming a larger narrative arc</td><td><a href="https://github.com/NextGenSoftwareUK/OASIS/blob/master/Docs/Devs/API%20Documentation/WEB5%20STAR%20API/Quests-API.md" target="_blank">Quests-API ↗</a></td></tr>
+          <tr><td><code>GeoNFT</code></td><td>An NFT pinned to a real-world GPS coordinate — discoverable via AR</td><td><a href="https://github.com/NextGenSoftwareUK/OASIS/blob/master/Docs/Devs/API%20Documentation/WEB5%20STAR%20API/GeoNFTs-API.md" target="_blank">GeoNFTs-API ↗</a></td></tr>
+          <tr><td><code>GeoHotSpot</code></td><td>A location-based trigger (spawn point, checkpoint, portal) without an NFT</td><td><a href="https://github.com/NextGenSoftwareUK/OASIS/blob/master/Docs/Devs/API%20Documentation/WEB5%20STAR%20API/GeoHotSpots-API.md" target="_blank">GeoHotSpots-API ↗</a></td></tr>
+          <tr><td><code>InventoryItem</code></td><td>A collectible item attached to an avatar's cross-game inventory</td><td><a href="https://github.com/NextGenSoftwareUK/OASIS/blob/master/Docs/Devs/API%20Documentation/WEB5%20STAR%20API/InventoryItems-API.md" target="_blank">InventoryItems-API ↗</a></td></tr>
+          <tr><td><code>Zome</code></td><td>A module of on-chain logic — the building block of OAPPs</td><td><a href="https://github.com/NextGenSoftwareUK/OASIS/blob/master/Docs/Devs/API%20Documentation/WEB5%20STAR%20API/Zomes-API.md" target="_blank">Zomes-API ↗</a></td></tr>
+          <tr><td><code>OAPP</code></td><td>An On-chain Application — a composable bundle of Zomes deployed via STAR</td><td><a href="https://github.com/NextGenSoftwareUK/OASIS/blob/master/Docs/Devs/API%20Documentation/WEB5%20STAR%20API/OAPPs-API.md" target="_blank">OAPPs-API ↗</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="first-star-call">Your First WEB5 Call</h2>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">first-star-call.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">import</span> { star } <span class="kw">from</span> <span class="str">'./star.js'</span>;
+
+<span class="cmt">// Load all celestial bodies the current avatar has access to</span>
+<span class="kw">const</span> { result: bodies } = <span class="kw">await</span> star.celestialBodies.<span class="fn">getAll</span>();
+console.<span class="fn">log</span>(<span class="str">'Celestial bodies:'</span>, bodies.length);
+bodies.<span class="fn">forEach</span>(b => console.<span class="fn">log</span>(`  ${b.name}  type=${b.celestialBodyType}  owner=${b.createdByAvatarId}`));
+
+<span class="cmt">// Get the active avatar's cross-game inventory</span>
+<span class="kw">const</span> { avatarId } = oasis4.auth.<span class="fn">getSession</span>();
+<span class="kw">const</span> { result: items } = <span class="kw">await</span> star.inventory.<span class="fn">getItems</span>({ avatarId });
+console.<span class="fn">log</span>(<span class="str">'Inventory items:'</span>, items.length);</pre>
+    </div>
+
+    <div class="callout callout-note">
+      <div class="callout-icon">🌟</div>
+      <div class="callout-body">
+        <div class="callout-title">WEB5 is how Our World, ODOOM and OQuake are built</div>
+        <p>The OASIS's flagship apps — <a href="/case-studies/our-world">Our World AR</a>, <a href="/case-studies/odoom">ODOOM</a> and <a href="/case-studies/oquake">OQuake</a> — all use the WEB5 STAR API for missions, cross-game inventory, and GeoNFTs. Reading their case studies is the fastest way to see WEB5 in production.</p>
+      </div>
+    </div>
+
+    <div class="next-steps">
+      <h3>Next steps</h3>
+      <ul>
+        <li><a href="/tutorials/12-missions-quests">Module 12: Missions &amp; Quests →</a></li>
+        <li><a href="/tutorials/13-celestial-spaces">Module 13: Celestial Bodies &amp; Spaces →</a></li>
+        <li><a href="/tutorials/14-geonft-ar">Module 14: GeoNFTs &amp; AR →</a></li>
+        <li><a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB5%20STAR%20API" target="_blank">Full WEB5 STAR API Reference ↗</a></li>
+        <li><a href="https://www.npmjs.com/package/@oasisomniverse/web5-api" target="_blank">@oasisomniverse/web5-api on npm ↗</a></li>
+      </ul>
+    </div>
+  </main>
+</div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

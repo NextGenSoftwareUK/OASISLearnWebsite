@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study: Founder NFTs — OASIS Learn</title>
+<meta name="description" content="How the OASIS Founder NFT launch site was built on WEB4 — avatar auth, on-chain NFT minting, wallet display, whitelist gating and karma rewards for early adopters.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Titillium+Web:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<button class="mobile-menu-btn">☰</button>
+<div class="layout">
+  <aside class="sidebar">
+    <a class="sidebar-logo" href="/"><div class="sidebar-logo-icon">O</div><div class="sidebar-logo-text"><span class="site-name">OASIS LEARN</span><span class="site-sub">Developer Tutorials</span></div></a>
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Getting Started</div>
+      <a class="nav-item" href="/">Overview</a>
+      <a class="nav-item" href="/tutorials/01-getting-started"><span class="step-num">1</span> Quick Start</a>
+      <div class="nav-section-title">WEB4 Core</div>
+      <a class="nav-item" href="/tutorials/02-avatar-identity"><span class="step-num">2</span> Avatar &amp; Identity</a>
+      <a class="nav-item" href="/tutorials/03-karma-reputation"><span class="step-num">3</span> Karma &amp; Reputation</a>
+      <a class="nav-item" href="/tutorials/04-nft-wallet"><span class="step-num">4</span> NFTs &amp; Wallet</a>
+      <a class="nav-item" href="/tutorials/05-data-holons"><span class="step-num">5</span> Data &amp; Holons</a>
+      <div class="nav-section-title">Building Apps</div>
+      <a class="nav-item" href="/tutorials/06-first-oapp"><span class="step-num">6</span> Your First OApp</a>
+      <a class="nav-item" href="/tutorials/07-metaverse-game"><span class="step-num">7</span> Metaverse &amp; Games</a>
+      <a class="nav-item" href="/tutorials/08-providers-production"><span class="step-num">8</span> Providers &amp; Production</a>
+      <div class="nav-section-title">WEB4 Deep Dives</div>
+      <a class="nav-item" href="/tutorials/09-hyperdrive"><span class="step-num">9</span> HyperDrive Storage</a>
+      <a class="nav-item" href="/tutorials/10-onet-p2p"><span class="step-num">10</span> ONET &amp; P2P</a>
+      <div class="nav-section-title">WEB5 STAR API</div>
+      <a class="nav-item" href="/tutorials/11-web5-intro"><span class="step-num">11</span> WEB5 Introduction</a>
+      <a class="nav-item" href="/tutorials/12-missions-quests"><span class="step-num">12</span> Missions &amp; Quests</a>
+      <a class="nav-item" href="/tutorials/13-celestial-spaces"><span class="step-num">13</span> Celestial Spaces</a>
+      <a class="nav-item" href="/tutorials/14-geonft-ar"><span class="step-num">14</span> GeoNFTs &amp; AR</a>
+      <div class="nav-section-title">WEB6 AI Layer</div>
+      <a class="nav-item" href="/tutorials/15-web6-ai-intro"><span class="step-num">15</span> WEB6 AI Intro</a>
+      <a class="nav-item" href="/tutorials/16-fahrn-agents"><span class="step-num">16</span> FAHRN Multi-Agent</a>
+      <a class="nav-item" href="/tutorials/17-holonic-memory"><span class="step-num">17</span> Holonic Memory</a>
+      <div class="nav-section-title">Case Studies</div>
+      <a class="nav-item" href="/case-studies/trust-site">🏛️ SovereignTrust</a>
+      <a class="nav-item active" href="/case-studies/nft-founders">🎖️ Founder NFTs</a>
+      <a class="nav-item" href="/case-studies/oportal">🌐 OPORTAL</a>
+      <a class="nav-item" href="/case-studies/our-world">🌍 Our World</a>
+      <a class="nav-item" href="/case-studies/odoom">💀 ODOOM</a>
+      <a class="nav-item" href="/case-studies/oquake">⚡ OQuake</a>
+      <div class="nav-section-title">API Reference</div>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB4%20OASIS%20API" target="_blank">WEB4 API Ref ↗</a>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB5%20STAR%20API" target="_blank">WEB5 STAR Ref ↗</a>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB6" target="_blank">WEB6 AI Ref ↗</a>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS" target="_blank">GitHub ↗</a>
+      <a class="nav-item" href="https://oportal.oasisomniverse.one/developer" target="_blank">Dev Portal ↗</a>
+    </nav>
+    <div class="sidebar-footer"><a href="https://oasisomniverse.one" target="_blank">oasisomniverse.one</a><a href="https://discord.gg/oasis" target="_blank">Discord Community</a></div>
+  </aside>
+
+  <main class="main">
+    <div class="page-header">
+      <div class="breadcrumb"><a href="/">OASIS Learn</a><span class="breadcrumb-sep">/</span><a href="/">Case Studies</a><span class="breadcrumb-sep">/</span><span>Founder NFTs</span></div>
+      <div class="page-meta">
+        <span class="badge badge-beginner">Beginner</span>
+        <span class="badge badge-time">⏱ 45 min</span>
+        <span class="badge" style="background:rgba(56,189,248,.15);color:#7dd3fc">WEB4</span>
+      </div>
+      <h1 class="page-title">🎖️ Case Study: Founder NFTs</h1>
+      <p class="page-desc">The OASIS Founder NFT landing page is a focused WEB4 project — a marketing and minting site that lets early adopters claim a limited-edition Founder NFT via their OASIS Avatar. It demonstrates the full NFT lifecycle: avatar auth, whitelist checking, on-chain minting via multiple providers, and wallet display. A great starting point for any NFT launch project.</p>
+    </div>
+
+    <div class="build-summary">
+      <h4>Tech stack</h4>
+      <ul>
+        <li><strong>Frontend:</strong> Vanilla JS, CSS animations, canvas-based particle effects</li>
+        <li><strong>OASIS WEB4:</strong> Avatar SSO, NFT minting (Solana + Ethereum), Wallet, Karma awards for founders</li>
+        <li><strong>npm:</strong> <code>@oasisomniverse/web4-api</code></li>
+      </ul>
+    </div>
+
+    <h2 id="step1">Step 1 — Avatar Login</h2>
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">auth.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">import</span> { OasisWeb4Client } <span class="kw">from</span> <span class="str">'@oasisomniverse/web4-api'</span>;
+
+<span class="kw">const</span> oasis4 = <span class="kw">new</span> <span class="fn">OasisWeb4Client</span>({ baseUrl: <span class="str">'https://api.web4.oasisomniverse.one'</span> });
+
+<span class="kw">export async function</span> <span class="fn">loginOrRegister</span>(email, password, isNew) {
+  <span class="kw">const</span> fn = isNew ? oasis4.avatar.<span class="fn">register</span> : oasis4.avatar.<span class="fn">authenticate</span>;
+  <span class="kw">const</span> { result, isError, message } = <span class="kw">await</span> fn.<span class="fn">call</span>(oasis4.avatar, { email, password });
+  <span class="kw">if</span> (isError) <span class="kw">throw new</span> Error(message);
+  oasis4.auth.<span class="fn">setToken</span>(result.token);
+  <span class="kw">return</span> result.avatar;
+}</pre>
+    </div>
+
+    <h2 id="step2">Step 2 — Whitelist Check</h2>
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">whitelist.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">async function</span> <span class="fn">checkWhitelist</span>(avatarId) {
+  <span class="cmt">// Whitelist is a private Holon containing allowed avatar IDs</span>
+  <span class="kw">const</span> { result: wl } = <span class="kw">await</span> oasis4.data.<span class="fn">loadHolonByCustomKey</span>({ key: <span class="str">'founder-whitelist'</span> });
+  <span class="kw">const</span> isWhitelisted = wl.customData.avatarIds.<span class="fn">includes</span>(avatarId);
+
+  <span class="cmt">// Also check if they've already claimed</span>
+  <span class="kw">const</span> { result: wallet } = <span class="kw">await</span> oasis4.nft.<span class="fn">getWallet</span>({ avatarId });
+  <span class="kw">const</span> alreadyClaimed = wallet.nfts.<span class="fn">some</span>(n => n.collectionId === <span class="str">'founder-2025'</span>);
+
+  <span class="kw">return</span> { isWhitelisted, alreadyClaimed };
+}</pre>
+    </div>
+
+    <h2 id="step3">Step 3 — Mint the Founder NFT</h2>
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">mint.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">async function</span> <span class="fn">claimFounderNFT</span>(avatarId) {
+  <span class="kw">const</span> { isWhitelisted, alreadyClaimed } = <span class="kw">await</span> <span class="fn">checkWhitelist</span>(avatarId);
+  <span class="kw">if</span> (!isWhitelisted) <span class="kw">throw new</span> Error(<span class="str">'Not whitelisted'</span>);
+  <span class="kw">if</span> (alreadyClaimed)  <span class="kw">throw new</span> Error(<span class="str">'Already claimed'</span>);
+
+  <span class="kw">const</span> { result: nft } = <span class="kw">await</span> oasis4.nft.<span class="fn">mint</span>({
+    avatarId,
+    collectionId:  <span class="str">'founder-2025'</span>,
+    title:         <span class="str">'OASIS Founder — Genesis Edition'</span>,
+    description:   <span class="str">'One of 1,000 original OASIS Founders. Grants lifetime Luminary karma tier access.'</span>,
+    imageUrl:      <span class="str">'https://cdn.oasisomniverse.one/nft/founder-genesis.mp4'</span>,
+    providerType:  <span class="str">'SolanaOASIS'</span>,
+    attributes: [
+      { trait: <span class="str">'Edition'</span>,    value: <span class="str">'Genesis'</span> },
+      { trait: <span class="str">'Year'</span>,       value: <span class="str">'2025'</span> },
+      { trait: <span class="str">'Access'</span>,     value: <span class="str">'Luminary'</span> },
+    ],
+  });
+
+  <span class="cmt">// Award founding karma — unlocks Luminary WEB6 AI tier</span>
+  <span class="kw">await</span> oasis4.karma.<span class="fn">award</span>({ avatarId, amount: <span class="num">250000</span>, reason: <span class="str">'Founder NFT claimed'</span> });
+
+  <span class="kw">return</span> nft;
+}</pre>
+    </div>
+
+    <h2 id="step4">Step 4 — Displaying the Wallet</h2>
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">wallet-display.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">async function</span> <span class="fn">renderWallet</span>(avatarId) {
+  <span class="kw">const</span> { result: wallet } = <span class="kw">await</span> oasis4.nft.<span class="fn">getWallet</span>({ avatarId });
+  <span class="kw">const</span> grid = document.<span class="fn">querySelector</span>(<span class="str">'#nft-grid'</span>);
+
+  wallet.nfts.<span class="fn">forEach</span>(nft => {
+    <span class="kw">const</span> card = document.<span class="fn">createElement</span>(<span class="str">'div'</span>);
+    card.className = <span class="str">'nft-card'</span>;
+    card.innerHTML = `
+      &lt;video src="${nft.imageUrl}" autoplay loop muted&gt;&lt;/video&gt;
+      &lt;div class="nft-title"&gt;${nft.title}&lt;/div&gt;
+      &lt;div class="nft-chain"&gt;${nft.providerType}&lt;/div&gt;
+    `;
+    grid.<span class="fn">appendChild</span>(card);
+  });
+}</pre>
+    </div>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <div class="callout-title">Source code</div>
+        <p>Browse the full Founder NFT site at <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/NFTFoundersLandingPage" target="_blank">github.com/NextGenSoftwareUK/OASIS/tree/master/NFTFoundersLandingPage ↗</a></p>
+      </div>
+    </div>
+
+    <div class="next-steps">
+      <h3>Next steps</h3>
+      <ul>
+        <li><a href="/tutorials/04-nft-wallet">Module 4: NFTs &amp; Wallet (full NFT API) →</a></li>
+        <li><a href="/case-studies/oportal">OPORTAL — portal with WEB4 + WEB5 + WEB6 →</a></li>
+        <li><a href="https://github.com/NextGenSoftwareUK/OASIS/blob/master/Docs/Devs/API%20Documentation/WEB4%20OASIS%20API/NFT-API.md" target="_blank">NFT API Reference ↗</a></li>
+      </ul>
+    </div>
+  </main>
+</div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

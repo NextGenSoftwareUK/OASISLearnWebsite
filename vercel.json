@@ -3,6 +3,7 @@
   "trailingSlash": false,
   "rewrites": [
     { "source": "/tutorials/:slug", "destination": "/tutorials/:slug.html" },
+    { "source": "/case-studies/:slug", "destination": "/case-studies/:slug.html" },
     { "source": "/", "destination": "/index.html" }
   ],
   "headers": [
