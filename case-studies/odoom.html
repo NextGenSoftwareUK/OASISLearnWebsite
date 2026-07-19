@@ -67,13 +67,14 @@
         <span class="badge" style="background:#2a1a0e;color:#f97316">C/C++</span>
       </div>
       <h1 class="page-title">💀 Case Study: ODOOM</h1>
-      <p class="page-desc">ODOOM is a fork of UZDoom — the popular Doom source port — extended with full OASIS WEB4 and WEB5 integration via the OGEngine base layer and the STARAPIClient C ABI. Players authenticate as OASIS Avatars, earn karma for kills and completions, carry cross-game inventory shared with OQuake and Our World, and advance quest objectives that persist across all three games. This case study shows exactly how to wire up any C/C++ game to the OASIS stack in minutes.</p>
+      <p class="page-desc">ODOOM is a fork of UZDoom — the popular Doom source port — extended with full OASIS WEB4 and WEB5 integration via <strong>OGLib</strong> (shared C helper layer) and the <strong>STARAPIClient</strong> C ABI. Players authenticate as OASIS Avatars, earn karma for kills and completions, carry cross-game inventory shared with OQuake and Our World, and advance quest objectives that persist across all three games. ODOOM is the reference game for how to integrate any C/C++ title with the OASIS Omniverse in minutes.</p>
     </div>
 
     <div class="build-summary">
       <h4>Tech stack</h4>
       <ul>
         <li><strong>Base engine:</strong> UZDoom (C/C++) extended with OGEngine OASIS layer</li>
+        <li><strong>OGLib:</strong> shared C helper library — config loading, beamin/beamout, session forwarders, cross-game mapping (<code>oglib.h</code>)</li>
         <li><strong>OASIS integration:</strong> STARAPIClient — a C ABI (<code>star_api_*</code> functions) wrapping WEB4 + WEB5</li>
         <li><strong>OASIS WEB4:</strong> Avatar auth, Karma (kills/completions), cross-game Inventory, HyperDrive save data</li>
         <li><strong>OASIS WEB5:</strong> Missions, Quests, Inventory Items (keys/weapons), Cross-game quest chains</li>
@@ -82,31 +83,34 @@
     </div>
 
     <h2 id="ogengine">What is OGEngine?</h2>
-    <p>OGEngine is a thin OASIS integration layer that both ODOOM and OQuake share. It handles startup/shutdown of the STARAPIClient, provides the C API surface for game code, and manages the async callback loop so game engines (which are single-threaded) can receive OASIS responses without blocking the render loop.</p>
+    <p>OGEngine is the full OASIS game integration stack: STARAPIClient (the C# NativeAOT DLL), WEB4, WEB5, and the optional <strong>OGLib</strong> C helper layer that sits on top. OGLib handles the boilerplate every game needs — config loading, session management, beamin/beamout workflow, and cross-game asset mapping — so game-specific code stays lean and only contains engine hooks.</p>
     <div class="code-block">
-      <div class="code-block-header"><span>OGEngine relationship</span></div>
-      <pre>UZDoom game loop
-  └─ OGEngine (OASIS integration layer)
-      ├─ STARAPIClient.dll  (C# → C ABI bridge, P/Invoke from .NET)
-      │   ├─ WEB4 OASIS API   (avatar, karma, inventory, holons)
-      │   └─ WEB5 STAR API    (missions, quests, geo, celestial)
-      └─ star_api.h           (the C header ODOOM game code uses)</pre>
+      <div class="code-block-header"><span>OGEngine stack</span></div>
+      <pre>uzdoom_star_integration.cpp  (ODOOM engine hooks only)
+         ↓  #include "oglib.h"
+    OGLib  (shared C library — config, beamin, session shims, cross-game)
+         ↓  star_api_* calls
+  STARAPIClient  (C# NativeAOT → star_api.dll)
+         ↓  HTTPS
+  WEB4 / WEB5 OASIS APIs</pre>
     </div>
 
     <h2 id="step1">Step 1 — Initialise OASIS at Startup</h2>
     <div class="code-block">
       <div class="code-block-header"><span class="code-lang">c</span><button class="copy-btn">Copy</button></div>
-      <pre><span class="cmt">// doom_main.c — called once at engine init</span>
+      <pre><span class="cmt">// uzdoom_star_integration.cpp — OGLib handles config + session boilerplate</span>
+<span class="kw">#define</span> OGLIB_SESSION_IMPL
+<span class="kw">#define</span> OGLIB_CONFIG_IMPL
+<span class="kw">#define</span> OGLIB_BEAMIN_IMPL
+<span class="kw">#include</span> <span class="str">"oglib.h"</span>   <span class="cmt">// config, beamin, session forwarders, cross-game, JSON/str utils</span>
 <span class="kw">#include</span> <span class="str">"star_api.h"</span>
 
 <span class="kw">void</span> <span class="fn">I_OASISInit</span>(<span class="kw">void</span>)
 {
-    <span class="cmt">// Connect to OASIS ONODE — URL from config</span>
-    <span class="fn">star_api_init</span>(<span class="str">"https://api.web4.oasisomniverse.one"</span>);
-
-    <span class="cmt">// Restore saved session token if player has logged in before</span>
-    <span class="kw">const char</span> *token = <span class="fn">config_get_string</span>(<span class="str">"oasis_token"</span>);
-    <span class="kw">if</span> (token) <span class="fn">star_api_set_token</span>(token);
+    <span class="cmt">// OGLib loads oasisstar.json, sets the API URL, and restores saved JWT</span>
+    <span class="fn">oglib_config_load</span>(&amp;g_star_config, <span class="str">"oasisstar.json"</span>, NULL, NULL);
+    <span class="fn">star_api_init</span>(g_star_config.star_api_url);
+    <span class="fn">oglib_beamin_restore_session</span>(&amp;g_star_config);
 }</pre>
     </div>
 
@@ -193,7 +197,7 @@
       <div class="callout-icon">💡</div>
       <div class="callout-body">
         <div class="callout-title">Source code</div>
-        <p>ODOOM game code: <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/UZDoom" target="_blank">UZDoom fork ↗</a> · OASIS ODOOM integration: <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/OASIS%20Omniverse/ODOOM" target="_blank">OASIS Omniverse/ODOOM ↗</a> · STARAPIClient: <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/OASIS%20Omniverse/STARAPIClient" target="_blank">STARAPIClient ↗</a></p>
+        <p>ODOOM game code: <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/UZDoom" target="_blank">UZDoom fork ↗</a> · OASIS ODOOM integration: <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/OASIS%20Omniverse/ODOOM" target="_blank">OASIS Omniverse/ODOOM ↗</a> · OGLib: <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/OASIS%20Omniverse/OGLib" target="_blank">OASIS Omniverse/OGLib ↗</a> · STARAPIClient: <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/OASIS%20Omniverse/STARAPIClient" target="_blank">STARAPIClient ↗</a></p>
       </div>
     </div>
 
