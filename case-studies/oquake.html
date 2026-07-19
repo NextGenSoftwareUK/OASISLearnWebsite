@@ -68,13 +68,14 @@
         <span class="badge" style="background:#1a1a2e;color:#c084fc">Vulkan</span>
       </div>
       <h1 class="page-title">⚡ Case Study: OQuake</h1>
-      <p class="page-desc">OQuake is a fork of vkQuake — the Vulkan-based Quake source port — extended with full OASIS WEB4 and WEB5 integration via the same OGEngine and STARAPIClient used by ODOOM. It shares the Key Hunters Trilogy cross-game quest chain and inventory system with ODOOM and Our World. The Blue Key found in Quake's e1m1 is the same item that appears in ODOOM and Our World.</p>
+      <p class="page-desc">OQuake is a fork of vkQuake — the Vulkan-based Quake source port — extended with full OASIS WEB4 and WEB5 integration via the same <strong>OGLib</strong> + <strong>STARAPIClient</strong> stack used by ODOOM. It shares the Key Hunters Trilogy cross-game quest chain and inventory system with ODOOM and Our World. The Blue Key found in Quake's e1m1 is the same item that appears in ODOOM and Our World.</p>
     </div>
 
     <div class="build-summary">
       <h4>Tech stack</h4>
       <ul>
         <li><strong>Base engine:</strong> vkQuake (C, Vulkan) extended with OGEngine OASIS layer</li>
+        <li><strong>OGLib:</strong> shared C helper library — same config, beamin, session, and cross-game layer as ODOOM (<code>oglib.h</code>)</li>
         <li><strong>OASIS integration:</strong> STARAPIClient C ABI — identical interface to ODOOM, different game</li>
         <li><strong>OASIS WEB4:</strong> Avatar auth, Karma, cross-game Inventory, HyperDrive save</li>
         <li><strong>OASIS WEB5:</strong> Missions, Quests (Key Hunters chain), Inventory Items (Blue Key), CelestialBody (Nexara Prime)</li>
@@ -90,6 +91,7 @@
         <tbody>
           <tr><td>Base engine</td><td>UZDoom (C)</td><td>vkQuake (C, Vulkan)</td></tr>
           <tr><td>Renderer</td><td>Software / OpenGL</td><td>Vulkan 1.1+</td></tr>
+          <tr><td>OGLib</td><td>✅ same oglib.h</td><td>✅ same oglib.h</td></tr>
           <tr><td>STARAPIClient</td><td>✅ same DLL</td><td>✅ same DLL</td></tr>
           <tr><td>star_api.h</td><td>✅ same header</td><td>✅ same header</td></tr>
           <tr><td>Quest chain</td><td>Mission 1 (Crimson Key)</td><td>Mission 2 (Blue Key)</td></tr>
@@ -100,12 +102,16 @@
       </table>
     </div>
 
-    <p>Because both games use the identical <code>star_api.h</code> interface, most OASIS game code is copy-paste between ODOOM and OQuake — only the monster types and level structure differ.</p>
+    <p>Both games use the identical <code>star_api.h</code> interface and the shared <code>oglib.h</code> helper layer. OGLib eliminates the boilerplate duplication that previously existed between them — config loading, session forwarders, beamin workflow, and cross-game mapping are defined once in OGLib and included by both integration files. Only the engine-specific hooks (monster types, level triggers, HUD rendering) differ per game.</p>
 
     <h2 id="step1">Step 1 — OGEngine Init (Vulkan-aware)</h2>
     <div class="code-block">
       <div class="code-block-header"><span class="code-lang">c</span><button class="copy-btn">Copy</button></div>
-      <pre><span class="cmt">// host.c — called after Vulkan device is created</span>
+      <pre><span class="cmt">// oquake_star_integration.c — OGLib handles all session/config boilerplate</span>
+<span class="kw">#define</span> OGLIB_SESSION_IMPL
+<span class="kw">#define</span> OGLIB_CONFIG_IMPL
+<span class="kw">#define</span> OGLIB_BEAMIN_IMPL
+<span class="kw">#include</span> <span class="str">"oglib.h"</span>   <span class="cmt">// config, beamin, session forwarders, cross-game, JSON/str utils</span>
 <span class="kw">#include</span> <span class="str">"star_api.h"</span>
 
 <span class="kw">void</span> <span class="fn">Host_Init</span>(<span class="kw">void</span>)
@@ -113,11 +119,10 @@
     <span class="fn">VID_Init</span>();       <span class="cmt">// Vulkan renderer init</span>
     <span class="fn">S_Init</span>();         <span class="cmt">// Audio init</span>
 
-    <span class="cmt">// OASIS: init after renderer — async callbacks use a dedicated thread</span>
-    <span class="fn">star_api_init</span>(<span class="str">"https://api.web4.oasisomniverse.one"</span>);
-
-    <span class="kw">const char</span> *saved_token = <span class="fn">Sys_GetConfigValue</span>(<span class="str">"oasis_token"</span>);
-    <span class="kw">if</span> (saved_token) <span class="fn">star_api_set_token</span>(saved_token);
+    <span class="cmt">// OGLib loads oasisstar.json and restores saved session — same as ODOOM</span>
+    <span class="fn">oglib_config_load</span>(&amp;g_star_config, <span class="str">"oasisstar.json"</span>, NULL, NULL);
+    <span class="fn">star_api_init</span>(g_star_config.star_api_url);
+    <span class="fn">oglib_beamin_restore_session</span>(&amp;g_star_config);
 
     <span class="cmt">// Register Nexara Prime as the CelestialBody for OQuake's world</span>
     <span class="fn">star_api_register_celestial_body</span>(<span class="str">"Nexara Prime"</span>, <span class="str">"Planet"</span>);
@@ -199,7 +204,7 @@
       <div class="callout-icon">💡</div>
       <div class="callout-body">
         <div class="callout-title">Source code</div>
-        <p>OQuake game code: <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/vkQuake" target="_blank">vkQuake fork ↗</a> · OASIS OQuake integration: <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/OASIS%20Omniverse/OQuake" target="_blank">OASIS Omniverse/OQuake ↗</a> · STARAPIClient: <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/OASIS%20Omniverse/STARAPIClient" target="_blank">STARAPIClient ↗</a></p>
+        <p>OQuake game code: <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/vkQuake" target="_blank">vkQuake fork ↗</a> · OASIS OQuake integration: <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/OASIS%20Omniverse/OQuake" target="_blank">OASIS Omniverse/OQuake ↗</a> · OGLib: <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/OASIS%20Omniverse/OGLib" target="_blank">OASIS Omniverse/OGLib ↗</a> · STARAPIClient: <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/OASIS%20Omniverse/STARAPIClient" target="_blank">STARAPIClient ↗</a></p>
       </div>
     </div>
 

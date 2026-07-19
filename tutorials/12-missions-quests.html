@@ -167,18 +167,20 @@ console.<span class="fn">log</span>(<span class="str">'Active:'</span>, active.l
 }</pre>
     </div>
 
-    <h2 id="c-api">Cross-Game Quests via STARAPIClient (C/C++)</h2>
-    <p>For native games like ODOOM and OQuake, the <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/OASIS%20Omniverse/STARAPIClient" target="_blank">STARAPIClient</a> exposes the same quest system as a C ABI — no HTTP calls in your game code, just a thin <code>star_api_*</code> call:</p>
+    <h2 id="c-api">Cross-Game Quests via OGLib + STARAPIClient (C/C++)</h2>
+    <p>For native games like ODOOM and OQuake, <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/OASIS%20Omniverse/OGLib" target="_blank">OGLib</a> provides the shared C helper layer (config, session, beamin/beamout) that sits on top of the <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/OASIS%20Omniverse/STARAPIClient" target="_blank">STARAPIClient</a> C ABI. Your game code stays lean — OGLib handles the boilerplate, and you call <code>star_api_*</code> only for game-specific events:</p>
 
     <div class="code-block">
       <div class="code-block-header"><span class="code-lang">c</span><button class="copy-btn">Copy</button></div>
-      <pre><span class="cmt">// In your C/C++ game — called when player completes an objective</span>
+      <pre><span class="cmt">// One-time setup — OGLib handles config loading and session restore</span>
+<span class="kw">#define</span> OGLIB_SESSION_IMPL
+<span class="kw">#define</span> OGLIB_CONFIG_IMPL
+<span class="kw">#define</span> OGLIB_BEAMIN_IMPL
+<span class="kw">#include</span> <span class="str">"oglib.h"</span>
 <span class="kw">#include</span> <span class="str">"star_api.h"</span>
 
-<span class="cmt">// Check if a quest objective is done (e.g. for HUD display)</span>
+<span class="cmt">// Game code — check cross-game inventory and complete quest objective</span>
 <span class="kw">bool</span> <span class="fn">has_key</span> = <span class="fn">star_api_has_item</span>(<span class="str">"crimson_key"</span>);
-
-<span class="cmt">// Record objective completion (triggers karma + quest progress server-side)</span>
 <span class="fn">star_api_complete_objective</span>(quest_id, objective_index, avatar_id);</pre>
     </div>
 
