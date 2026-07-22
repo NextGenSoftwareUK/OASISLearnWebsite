@@ -175,6 +175,7 @@ a:hover { text-decoration: underline; color: #33ddff; }
 .main {
   grid-area: main;
   margin-left: var(--sidebar-w);
+  margin-right: var(--rail-w);
   padding: 0 40px 80px 48px;
   max-width: calc(var(--sidebar-w) + var(--content-max) + 80px);
 }
