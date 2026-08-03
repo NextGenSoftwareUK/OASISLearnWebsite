@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Case Study: ODOOM — OASIS Learn</title>
-<meta name="description" content="How ODOOM was built — a UZDoom fork integrated with OASIS WEB4/WEB5 via the OGEngine and STARAPIClient C ABI, giving Doom cross-game inventory, karma and missions shared with OQuake and Our World.">
+<meta name="description" content="How ODOOM was built — a UZDoom fork integrated with OASIS WEB4/WEB5 via the OGEngine and OGEngineClient C ABI, giving Doom cross-game inventory, karma and missions shared with OQuake and Our World.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Titillium+Web:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/style.css">
@@ -67,7 +67,7 @@
         <span class="badge" style="background:#2a1a0e;color:#f97316">C/C++</span>
       </div>
       <h1 class="page-title">💀 Case Study: ODOOM</h1>
-      <p class="page-desc">ODOOM is a fork of UZDoom — the popular Doom source port — extended with full OASIS WEB4 and WEB5 integration via <strong>OGLib</strong> (shared C helper layer) and the <strong>STARAPIClient</strong> C ABI. Players authenticate as OASIS Avatars, earn karma for kills and completions, carry cross-game inventory shared with OQuake and Our World, and advance quest objectives that persist across all three games. ODOOM is the reference game for how to integrate any C/C++ title with the OASIS Omniverse in minutes.</p>
+      <p class="page-desc">ODOOM is a fork of UZDoom — the popular Doom source port — extended with full OASIS WEB4 and WEB5 integration via <strong>OGLib</strong> (shared C helper layer) and the <strong>OGEngineClient</strong> C ABI. Players authenticate as OASIS Avatars, earn karma for kills and completions, carry cross-game inventory shared with OQuake and Our World, and advance quest objectives that persist across all three games. ODOOM is the reference game for how to integrate any C/C++ title with the OASIS Omniverse in minutes.</p>
     </div>
 
     <div class="build-summary">
@@ -75,7 +75,7 @@
       <ul>
         <li><strong>Base engine:</strong> UZDoom (C/C++) extended with OGEngine OASIS layer</li>
         <li><strong>OGLib:</strong> shared C helper library — config loading, beamin/beamout, session forwarders, cross-game mapping (<code>oglib.h</code>)</li>
-        <li><strong>OASIS integration:</strong> STARAPIClient — a C ABI (<code>star_api_*</code> functions) wrapping WEB4 + WEB5</li>
+        <li><strong>OASIS integration:</strong> OGEngineClient — a C ABI (<code>star_api_*</code> functions) wrapping WEB4 + WEB5</li>
         <li><strong>OASIS WEB4:</strong> Avatar auth, Karma (kills/completions), cross-game Inventory, HyperDrive save data</li>
         <li><strong>OASIS WEB5:</strong> Missions, Quests, Inventory Items (keys/weapons), Cross-game quest chains</li>
         <li><strong>Shared with:</strong> OQuake (same quest chain), Our World (same inventory)</li>
@@ -83,14 +83,14 @@
     </div>
 
     <h2 id="ogengine">What is OGEngine?</h2>
-    <p>OGEngine is the full OASIS game integration stack: STARAPIClient (the C# NativeAOT DLL), WEB4, WEB5, and the optional <strong>OGLib</strong> C helper layer that sits on top. OGLib handles the boilerplate every game needs — config loading, session management, beamin/beamout workflow, and cross-game asset mapping — so game-specific code stays lean and only contains engine hooks.</p>
+    <p>OGEngine is the full OASIS game integration stack: OGEngineClient (the C# NativeAOT DLL), WEB4, WEB5, and the optional <strong>OGLib</strong> C helper layer that sits on top. OGLib handles the boilerplate every game needs — config loading, session management, beamin/beamout workflow, and cross-game asset mapping — so game-specific code stays lean and only contains engine hooks.</p>
     <div class="code-block">
       <div class="code-block-header"><span>OGEngine stack</span></div>
       <pre>uzdoom_star_integration.cpp  (ODOOM engine hooks only)
          ↓  #include "oglib.h"
     OGLib  (shared C library — config, beamin, session shims, cross-game)
          ↓  star_api_* calls
-  STARAPIClient  (C# NativeAOT → star_api.dll)
+  OGEngineClient  (C# NativeAOT → star_api.dll)
          ↓  HTTPS
   WEB4 / WEB5 OASIS APIs</pre>
     </div>
@@ -197,16 +197,16 @@
       <div class="callout-icon">💡</div>
       <div class="callout-body">
         <div class="callout-title">Source code</div>
-        <p>ODOOM game code: <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/UZDoom" target="_blank">UZDoom fork ↗</a> · OASIS ODOOM integration: <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/OASIS%20Omniverse/ODOOM" target="_blank">OASIS Omniverse/ODOOM ↗</a> · OGLib: <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/OASIS%20Omniverse/OGLib" target="_blank">OASIS Omniverse/OGLib ↗</a> · STARAPIClient: <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/OASIS%20Omniverse/STARAPIClient" target="_blank">STARAPIClient ↗</a></p>
+        <p>ODOOM game code: <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/UZDoom" target="_blank">UZDoom fork ↗</a> · OASIS ODOOM integration: <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/OASIS%20Omniverse/ODOOM" target="_blank">OASIS Omniverse/ODOOM ↗</a> · OGLib: <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/OASIS%20Omniverse/OGLib" target="_blank">OASIS Omniverse/OGLib ↗</a> · OGEngineClient: <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/OASIS%20Omniverse/STARAPIClient" target="_blank">OGEngineClient ↗</a></p>
       </div>
     </div>
 
     <div class="next-steps">
       <h3>Related case studies</h3>
       <ul>
-        <li><a href="/case-studies/oquake">OQuake — same OGEngine + STARAPIClient, Vulkan/Quake →</a></li>
+        <li><a href="/case-studies/oquake">OQuake — same OGEngine + OGEngineClient, Vulkan/Quake →</a></li>
         <li><a href="/case-studies/our-world">Our World — shares the same quest chain and inventory →</a></li>
-        <li><a href="/tutorials/12-missions-quests">Module 12: Missions &amp; Quests (STARAPIClient C section) →</a></li>
+        <li><a href="/tutorials/12-missions-quests">Module 12: Missions &amp; Quests (OGEngineClient C section) →</a></li>
       </ul>
     </div>
   </main>
