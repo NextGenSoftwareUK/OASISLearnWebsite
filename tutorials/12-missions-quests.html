@@ -76,7 +76,7 @@
         <li>Track objective completion and auto-award karma on mission finish</li>
         <li>Chain missions into a multi-stage quest</li>
         <li>Query a player's active and completed quests</li>
-        <li>Use the OGEngineClient C interface for cross-game quest hooks (ODOOM / OQuake)</li>
+        <li>Use the OGEngine Client C interface for cross-game quest hooks (ODOOM / OQuake)</li>
       </ul>
     </div>
 
@@ -167,8 +167,8 @@ console.<span class="fn">log</span>(<span class="str">'Active:'</span>, active.l
 }</pre>
     </div>
 
-    <h2 id="c-api">Cross-Game Quests via OGLib + OGEngineClient (C/C++)</h2>
-    <p>For native games like ODOOM and OQuake, <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/OASIS%20Omniverse/OGLib" target="_blank">OGLib</a> provides the shared C helper layer (config, session, beamin/beamout) that sits on top of the <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/OASIS%20Omniverse/STARAPIClient" target="_blank">OGEngineClient</a> C ABI. Your game code stays lean — OGLib handles the boilerplate, and you call <code>star_api_*</code> only for game-specific events:</p>
+    <h2 id="c-api">Cross-Game Quests via OGLib + OGEngine Client (C/C++)</h2>
+    <p>For native games like ODOOM and OQuake, <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/OASIS%20Omniverse/OGLib" target="_blank">OGLib</a> provides the shared C helper layer (config, session, beamin/beamout) that sits on top of the <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/OASIS%20Omniverse/STARAPIClient" target="_blank">OGEngine Client</a> C ABI. Your game code stays lean — OGLib handles the boilerplate, and you call <code>ogengine_*</code> only for game-specific events:</p>
 
     <div class="code-block">
       <div class="code-block-header"><span class="code-lang">c</span><button class="copy-btn">Copy</button></div>

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Case Study: OQuake — OASIS Learn</title>
-<meta name="description" content="How OQuake was built — a vkQuake (Vulkan Quake) fork integrated with OASIS WEB4/WEB5 via OGEngine and the OGEngineClient C ABI, sharing cross-game inventory and quests with ODOOM and Our World.">
+<meta name="description" content="How OQuake was built — a vkQuake (Vulkan Quake) fork integrated with OASIS WEB4/WEB5 via OGEngine and the OGEngine Client C ABI, sharing cross-game inventory and quests with ODOOM and Our World.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Titillium+Web:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/style.css">
@@ -68,7 +68,7 @@
         <span class="badge" style="background:#1a1a2e;color:#c084fc">Vulkan</span>
       </div>
       <h1 class="page-title">⚡ Case Study: OQuake</h1>
-      <p class="page-desc">OQuake is a fork of vkQuake — the Vulkan-based Quake source port — extended with full OASIS WEB4 and WEB5 integration via the same <strong>OGLib</strong> + <strong>OGEngineClient</strong> stack used by ODOOM. It shares the Key Hunters Trilogy cross-game quest chain and inventory system with ODOOM and Our World. The Blue Key found in Quake's e1m1 is the same item that appears in ODOOM and Our World.</p>
+      <p class="page-desc">OQuake is a fork of vkQuake — the Vulkan-based Quake source port — extended with full OASIS WEB4 and WEB5 integration via the same <strong>OGLib</strong> + <strong>OGEngine Client</strong> stack used by ODOOM. It shares the Key Hunters Trilogy cross-game quest chain and inventory system with ODOOM and Our World. The Blue Key found in Quake's e1m1 is the same item that appears in ODOOM and Our World.</p>
     </div>
 
     <div class="build-summary">
@@ -76,7 +76,7 @@
       <ul>
         <li><strong>Base engine:</strong> vkQuake (C, Vulkan) extended with OGEngine OASIS layer</li>
         <li><strong>OGLib:</strong> shared C helper library — same config, beamin, session, and cross-game layer as ODOOM (<code>oglib.h</code>)</li>
-        <li><strong>OASIS integration:</strong> OGEngineClient C ABI — identical interface to ODOOM, different game</li>
+        <li><strong>OASIS integration:</strong> OGEngine Client C ABI — identical interface to ODOOM, different game</li>
         <li><strong>OASIS WEB4:</strong> Avatar auth, Karma, cross-game Inventory, HyperDrive save</li>
         <li><strong>OASIS WEB5:</strong> Missions, Quests (Key Hunters chain), Inventory Items (Blue Key), CelestialBody (Nexara Prime)</li>
         <li><strong>Shared with:</strong> ODOOM (quest chain), Our World (inventory)</li>
@@ -92,7 +92,7 @@
           <tr><td>Base engine</td><td>UZDoom (C)</td><td>vkQuake (C, Vulkan)</td></tr>
           <tr><td>Renderer</td><td>Software / OpenGL</td><td>Vulkan 1.1+</td></tr>
           <tr><td>OGLib</td><td>✅ same oglib.h</td><td>✅ same oglib.h</td></tr>
-          <tr><td>OGEngineClient</td><td>✅ same DLL</td><td>✅ same DLL</td></tr>
+          <tr><td>OGEngine Client</td><td>✅ same DLL</td><td>✅ same DLL</td></tr>
           <tr><td>star_api.h</td><td>✅ same header</td><td>✅ same header</td></tr>
           <tr><td>Quest chain</td><td>Mission 1 (Crimson Key)</td><td>Mission 2 (Blue Key)</td></tr>
           <tr><td>Inventory item</td><td>Crimson Key</td><td>Blue Key</td></tr>
@@ -204,7 +204,7 @@
       <div class="callout-icon">💡</div>
       <div class="callout-body">
         <div class="callout-title">Source code</div>
-        <p>OQuake game code: <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/vkQuake" target="_blank">vkQuake fork ↗</a> · OASIS OQuake integration: <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/OASIS%20Omniverse/OQuake" target="_blank">OASIS Omniverse/OQuake ↗</a> · OGLib: <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/OASIS%20Omniverse/OGLib" target="_blank">OASIS Omniverse/OGLib ↗</a> · OGEngineClient: <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/OASIS%20Omniverse/STARAPIClient" target="_blank">OGEngineClient ↗</a></p>
+        <p>OQuake game code: <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/vkQuake" target="_blank">vkQuake fork ↗</a> · OASIS OQuake integration: <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/OASIS%20Omniverse/OQuake" target="_blank">OASIS Omniverse/OQuake ↗</a> · OGLib: <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/OASIS%20Omniverse/OGLib" target="_blank">OASIS Omniverse/OGLib ↗</a> · OGEngine Client: <a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/OASIS%20Omniverse/STARAPIClient" target="_blank">OGEngine Client ↗</a></p>
       </div>
     </div>
 
@@ -214,7 +214,7 @@
         <li><a href="/case-studies/odoom">ODOOM — the Doom counterpart (Mission 1 of Key Hunters) →</a></li>
         <li><a href="/case-studies/our-world">Our World — the AR game that completes the trilogy →</a></li>
         <li><a href="/tutorials/12-missions-quests">Module 12: Missions &amp; Quests →</a></li>
-        <li><a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/OASIS%20Omniverse/STARAPIClient" target="_blank">OGEngineClient source ↗</a></li>
+        <li><a href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/OASIS%20Omniverse/STARAPIClient" target="_blank">OGEngine Client source ↗</a></li>
       </ul>
     </div>
   </main>
