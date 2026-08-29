@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Module 15: WEB6 AI Layer Introduction — OASIS Learn</title>
-<meta name="description" content="Introduction to the OASIS WEB6 AI Abstraction Layer — 56 REST endpoints, 250 MCP tools, 20+ unified AI providers, Karma-Gated tiers and the FAHRN orchestration system.">
+<meta name="description" content="Introduction to the OASIS WEB6 AI Abstraction Layer — 56 REST endpoints, 250 MCP tools, 97 unified AI providers, 17 orchestrator protocols (MCP, A2A, LangGraph, OpenAI Agents SDK, Nostr NIP-90, ACP, ANP, and more), Karma-Gated tiers and the FAHRN orchestration system.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Titillium+Web:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/style.css">
@@ -85,7 +85,8 @@
       <table>
         <thead><tr><th>Layer</th><th>What it does</th></tr></thead>
         <tbody>
-          <tr><td><strong>Provider Abstraction</strong></td><td>Single API surfaces OpenAI, Anthropic, Google Gemini, Meta Llama, Mistral, xAI Grok, Cohere, HuggingFace, and 12+ more. Switch providers without changing your code.</td></tr>
+          <tr><td><strong>Provider Abstraction</strong></td><td>Single API surfaces 97 providers — OpenAI, Anthropic, Google Gemini, Meta Llama, Mistral, xAI Grok, Cohere, HuggingFace, DeepSeek, EXO, Cerebras, SambaNova, OpenRouter, ElevenLabs, Runway ML, Black Forest Labs, Alibaba Qwen, and 80+ more. Switch providers without changing your code.</td></tr>
+          <tr><td><strong>17 Orchestrator Protocols</strong></td><td>MCP, A2A, ACP, ANP, LangGraph, OpenAI Agents SDK / Swarm, Nostr NIP-90, LangChain, AutoGen, CrewAI, SemanticKernel, gRPC, GraphQL, Kafka, AMQP, MQTT, Webhook — all routed through a single <code>POST /v1/orchestrators/invoke</code> endpoint.</td></tr>
           <tr><td><strong>56 REST Endpoints</strong></td><td>Chat completions, streaming, embeddings, image gen, audio transcription, code analysis, summarisation, translation, sentiment, entity extraction, and more — all provider-agnostic.</td></tr>
           <tr><td><strong>250 MCP Tools</strong></td><td>Every endpoint also exposed as an MCP tool — drop OASIS AI into any MCP-compatible agent framework (Claude, Cursor, Continue, etc.) instantly.</td></tr>
           <tr><td><strong>Karma-Gated Tiers</strong></td><td>Avatar karma score gates access to AI compute. Low-karma users get base models; high-karma contributors unlock GPT-4o, Claude 3.5, Gemini Ultra, etc.</td></tr>
