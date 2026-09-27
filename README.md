@@ -37,7 +37,7 @@ Live site: **[learn.oasisomniverse.one](https://learn.oasisomniverse.one)**
 ### WEB6 AI Layer
 | Module | Title | Description |
 |---|---|---|
-| 15 | WEB6 AI Intro | 56 REST endpoints, 528 MCP tools, 100 AI providers, Karma-Gated tiers |
+| 15 | WEB6 AI Intro | 56 REST endpoints, 516 MCP tools, 100 AI providers, Karma-Gated tiers |
 | 16 | FAHRN Multi-Agent | Serial, Parallel, Debate and Voting orchestration; SkillOpt self-evolving agents |
 | 17 | Holonic Memory | Fractal Session→Agent→User→Group memory hierarchy with semantic search |
 
