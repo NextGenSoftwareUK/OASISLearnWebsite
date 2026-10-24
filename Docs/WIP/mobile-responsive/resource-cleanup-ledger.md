@@ -20,3 +20,7 @@ Verified all 24 HTML pages at 320, 390, 780, 1024 and 1440 CSS pixels: no horizo
 
 Retained screenshot: C:/Source/OASISLearnWebsite/Docs/WIP/mobile-responsive/home-mobile.png. Recreate with Puppeteer page screenshot at 390x900. Browser closed in finally; no persistent services, downloads, dependency restores, build outputs or disposable datasets were created. Shared runtime and browser remain owned by their existing installations; checkout and task evidence retained. Tests used in-memory scripts through stdin; no script files remain.
 Screenshot measured size: 33024 bytes.
+
+## Live cache correction — 2026-10-23
+
+Live Vercel production deployment dpl_D7N49xzeNRjcrg6UXJCmeJPbnc63 served commit 05968149c8709e67b63db573701af52ce65ba08f. Live HTML and CSS matched local source. Found /assets cache rule: one-year immutable caching at unchanged file paths. Updated all 24 stylesheet links with a version query and changed asset cache policy to revalidate. Reused existing checkout, Node, Puppeteer and Edge listed above; no downloads or installations. Live responses inspected in memory only, no stored payloads or secrets. Verification uses live site and retained evidence; browser processes close after checks.
