@@ -64,15 +64,15 @@
     <h2 id="provider-model">The OASIS Provider Model</h2>
     <p>Every storage, blockchain and identity operation in OASIS goes through a <strong>provider</strong> — a pluggable adapter that translates OASIS API calls into the native operations of a specific network or database. Your app code never calls Solana, MongoDB or Holochain directly; it calls the OASIS API and the active provider handles the rest.</p>
 
-    <p>This gives you three powerful capabilities out of the box:</p>
+    <p>OASIS exposes routing options for eligible storage providers:</p>
     <ul>
-      <li><strong>Auto-failover</strong> — if the primary provider is unavailable, OASIS automatically retries on the next provider in your priority list. Zero downtime, no code changes.</li>
-      <li><strong>Auto-replication</strong> — write once, and OASIS copies the data to all configured providers simultaneously. Reads come from whichever is fastest.</li>
+      <li><strong>Auto-failover</strong> — uses the configured provider order to try another eligible provider after a qualifying failure.</li>
+      <li><strong>Auto-replication</strong> — copies supported writes to eligible providers configured for replication.</li></li>
       <li><strong>Hot-swap</strong> — change the active provider at runtime (or per-request) without restarting anything.</li>
     </ul>
 
     <h2 id="provider-catalogue">Provider Catalogue</h2>
-    <p>The OASIS inventory lists <strong>234 shipping provider projects</strong>. This table highlights common choices. Before choosing a production backend, check the <a href="https://docs.oasisomniverse.one/providers/overview">provider overview</a> and the <a href="https://github.com/NextGenSoftwareUK/OASIS/blob/Development/Docs/WIP/HyperDrive-Providers/PROVIDER_MATRIX.md">verification matrix</a> for the capabilities and backend checks relevant to your deployment.</p>
+    <p>The OASIS inventory lists <strong>234 shipping provider projects</strong>. This table highlights common choices. Before choosing a production backend, check the <a href="https://docs.oasisomniverse.one/providers/overview">provider overview</a> and the <a href="https://github.com/NextGenSoftwareUK/OASIS/blob/Development/Docs/WIP/HyperDrive-Providers/PROVIDER_MATRIX.md">verification matrix</a> for the capabilities and backend checks relevant to your deployment. See the <a href="</p>
     <div class="api-table-wrap">
       <table>
         <thead><tr><th>Provider</th><th>Type</th><th>Best for</th><th>Status</th></tr></thead>
@@ -116,8 +116,8 @@
       }
     },
     <span class="str">"AutoFailOver"</span>:      <span class="kw">true</span>,
-    <span class="str">"AutoReplication"</span>:   <span class="kw">true</span>,   <span class="cmt">// write to all providers</span>
-    <span class="str">"AutoLoadBalance"</span>:   <span class="kw">true</span>,   <span class="cmt">// reads from fastest provider</span>
+    <span class="str">"AutoReplication"</span>:   <span class="kw">true</span>,   <span class="cmt">// replicate to eligible configured providers</span>
+    <span class="str">"AutoLoadBalance"</span>:   <span class="kw">true</span>,   <span class="cmt">// distribute eligible reads</span>
     <span class="str">"DefaultProvider"</span>:  <span class="str">"MongoDBOASIS"</span>,
 
     <span class="str">"JWT"</span>: {
