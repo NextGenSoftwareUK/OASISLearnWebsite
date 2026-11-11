@@ -104,6 +104,38 @@ console.<span class="fn">log</span>(result.session.avatarId);   <span class="cmt
       </table>
     </div>
 
+    <h2 id="test-accounts">Creating many test accounts without email verification</h2>
+    <p>Testing an app with dozens of accounts? Real verification emails get in the way. On a <strong>development</strong> OASIS server you can register with an address ending in <code>.invalid</code> and ask OASIS to skip the email; you get the verification token back and verify the account yourself. PIPER uses this to create test staff for every role.</p>
+
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">create-test-accounts.js</span><button class="copy-btn">Copy</button></div>
+      <pre><span class="kw">const</span> base = <span class="str">'https://YOUR-DEV-OASIS-SERVER/api/avatar'</span>;
+
+<span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">1</span>; i &lt;= <span class="num">10</span>; i++) {
+  <span class="kw">const</span> n = <span class="fn">String</span>(i).<span class="fn">padStart</span>(<span class="num">2</span>, <span class="str">'0'</span>);
+  <span class="kw">const</span> reg = <span class="kw">await</span> (<span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">`${base}/register`</span>, {
+    method: <span class="str">'POST'</span>,
+    headers: { <span class="str">'Content-Type'</span>: <span class="str">'application/json'</span> },
+    body: <span class="cls">JSON</span>.<span class="fn">stringify</span>({
+      username: <span class="str">`test_user_${n}`</span>,
+      email:    <span class="str">`user${n}@myapp.invalid`</span>,   <span class="cmt">// must end in .invalid</span>
+      password: <span class="str">'a-long-test-password'</span>,
+      suppressVerificationEmail: <span class="kw">true</span>
+    })
+  })).<span class="fn">json</span>();
+
+  <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">`${base}/verify-email?token=${reg.result.verificationToken}`</span>);
+}</pre>
+    </div>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">&#9888;&#65039;</div>
+      <div class="callout-body">
+        <div class="callout-title">Dev servers only</div>
+        <p>This works only when the server operator has enabled it (<code>OASIS_ALLOW_PROGRAMMATIC_VERIFICATION=true</code>) <em>and</em> the server identifies itself as a development server, and only for <code>.invalid</code> addresses. On a live server the same request sends the real email and returns no token, so it is safe to leave in your test scripts.</p>
+      </div>
+    </div>
+
     <h2 id="lookup">Looking Up Avatars</h2>
     <p>You can fetch any avatar by ID, email or username. ID lookups are fastest; prefer them in hot paths.</p>
 
@@ -282,6 +314,7 @@ console.<span class="fn">log</span>(<span class="str">'New level:'</span>,   res
     <nav class="rail-nav">
       <a href="#concepts">How SSO Works</a>
       <a href="#register">Registering</a>
+      <a href="#test-accounts">Test accounts</a>
       <a href="#lookup">Looking Up Avatars</a>
       <a href="#update">Updating</a>
       <a href="#inventory">Inventory</a>
