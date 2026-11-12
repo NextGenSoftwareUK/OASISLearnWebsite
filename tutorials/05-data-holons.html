@@ -173,6 +173,9 @@ console.<span class="fn">log</span>(holon.modifiedDate);     <span class="cmt">/
 <span class="kw">if</span> (!result.isError) console.<span class="fn">log</span>(<span class="str">'Holon deleted.'</span>);</pre>
     </div>
 
+    <h2 id="audit-trail">Audit Trail — Who Changed What</h2>
+    <p>Every save keeps a version, so OASIS can show a readable history of any holon: <code>GET /api/data/holon-audit-trail/{id}</code>. Each entry says who changed it, when, whether it was created, updated, deleted or restored, and which fields changed (old value and new value). Only people who can read the holon can see its trail. PIPER uses it for its audit record of authority, and any app can do the same without building its own.</p>
+
     <h2 id="hyperdrive">HyperDrive — Large File Storage</h2>
     <p><strong>HyperDrive</strong> is OASIS' distributed file system layer — built on top of Holochain's Hyperdrive and IPFS — for storing large files (3D assets, videos, audio, game bundles) that don't belong in a document store.</p>
 
