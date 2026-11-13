@@ -136,6 +136,9 @@ console.<span class="fn">log</span>(result.session.avatarId);   <span class="cmt
       </div>
     </div>
 
+    <h2 id="mfa">Optional Second Step (MFA)</h2>
+    <p>OASIS can ask for a code from an authenticator app after the password. It is off by default and each person opts in, so existing sign-ins keep working. Turn it on for a node with <code>OASIS.Security.Mfa.Enabled</code> in <code>OASIS_DNA.json</code>; people then enrol with <code>POST /api/avatar/mfa/enrol</code> and confirm with their first code, which also gives them one-time recovery codes. At sign-in, <code>authenticate</code> returns a challenge instead of tokens and <code>authenticate-mfa</code> completes it. Keep recovery codes safe: a lost device without them needs an administrator reset.</p>
+
     <h2 id="lookup">Looking Up Avatars</h2>
     <p>You can fetch any avatar by ID, email or username. ID lookups are fastest; prefer them in hot paths.</p>
 

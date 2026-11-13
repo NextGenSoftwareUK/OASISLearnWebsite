@@ -173,6 +173,9 @@ console.<span class="fn">log</span>(holon.modifiedDate);     <span class="cmt">/
 <span class="kw">if</span> (!result.isError) console.<span class="fn">log</span>(<span class="str">'Holon deleted.'</span>);</pre>
     </div>
 
+    <h2 id="access-log">Access Log — Who Looked at It</h2>
+    <p>The audit trail shows who changed a holon; the access log shows who <em>read</em> it. It is off by default and switched on in <code>OASIS_DNA.json</code> (<code>OASIS.AccessLog.Enabled</code>). Ask <code>GET /api/data/holon-access-log/{id}</code> to see the readers of a holon you own. Only ids are kept, never content.</p>
+
     <h2 id="audit-trail">Audit Trail — Who Changed What</h2>
     <p>Every save keeps a version, so OASIS can show a readable history of any holon: <code>GET /api/data/holon-audit-trail/{id}</code>. Each entry says who changed it, when, whether it was created, updated, deleted or restored, and which fields changed (old value and new value). Only people who can read the holon can see its trail. PIPER uses it for its audit record of authority, and any app can do the same without building its own.</p>
 
