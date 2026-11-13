@@ -173,6 +173,9 @@ console.<span class="fn">log</span>(holon.modifiedDate);     <span class="cmt">/
 <span class="kw">if</span> (!result.isError) console.<span class="fn">log</span>(<span class="str">'Holon deleted.'</span>);</pre>
     </div>
 
+    <h2 id="usage-visibility">Seeing Your Usage</h2>
+    <p>The portal's Usage and billing screen shows a chart of your daily requests against your plan limits, warns you when you reach 80% and 100% (you can change those, or switch warnings off), and can email you. If you own an app, an extra "Your apps" area shows how its shared allowance is used and by whom. You can opt in or out of each of these yourself.</p>
+
     <h2 id="access-log">Access Log — Who Looked at It</h2>
     <p>The audit trail shows who changed a holon; the access log shows who <em>read</em> it. It is off by default and switched on in <code>OASIS_DNA.json</code> (<code>OASIS.AccessLog.Enabled</code>). Ask <code>GET /api/data/holon-access-log/{id}</code> to see the readers of a holon you own. Only ids are kept, never content.</p>
 
