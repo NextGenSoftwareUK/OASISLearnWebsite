@@ -729,3 +729,18 @@ td code { font-size: 12px; }
  .method-list li{flex-wrap:wrap}
  .method-name{white-space:normal}
 }
+
+/* ─── MOBILE TABLES AND CODE ──────────────────────────────────
+   Tables keep readable columns and scroll sideways inside their wrapper instead
+   of breaking words letter-by-letter; code lines scroll rather than wrap. */
+@media (max-width: 780px) {
+  html, body { max-width: 100%; overflow-x: hidden; }
+  .api-table-wrap { max-width: 100%; -webkit-overflow-scrolling: touch; }
+  .api-table-wrap table { min-width: 560px; font-size: 13px; }
+  .main table th,
+  .main table td { overflow-wrap: normal; word-break: normal; padding: 8px 10px; }
+  .main table th { white-space: nowrap; }
+  .main table code { white-space: nowrap; overflow-wrap: normal; }
+  .code-block { max-width: 100%; }
+  .code-block pre { font-size: 12.5px; padding: 14px; overflow-wrap: normal; word-break: normal; white-space: pre; }
+}
