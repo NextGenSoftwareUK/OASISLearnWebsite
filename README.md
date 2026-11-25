@@ -40,6 +40,7 @@ Live site: **[learn.oasisomniverse.one](https://learn.oasisomniverse.one)**
 | 15 | WEB6 AI Intro | 56 REST endpoints, 508 MCP tools, 98 AI providers, Karma-Gated tiers |
 | 16 | FAHRN Multi-Agent | Serial, Parallel, Debate and Voting orchestration; SkillOpt self-evolving agents |
 | 17 | Holonic Memory | Fractal Session→Agent→User→Group memory hierarchy with semantic search |
+| 18 | COSMIC ORM & CQL | One JSON query on every provider, with HyperDrive fail-over in the sandbox |
 
 ---
 
@@ -100,7 +101,8 @@ OASISLearnWebsite/
 │   ├── 14-geonft-ar.html            # WEB5 GeoNFTs & AR
 │   ├── 15-web6-ai-intro.html        # WEB6 AI Abstraction Layer
 │   ├── 16-fahrn-agents.html         # WEB6 FAHRN multi-agent orchestration
-│   └── 17-holonic-memory.html       # WEB6 Holonic Memory
+│   ├── 17-holonic-memory.html       # WEB6 Holonic Memory
+│   └── 18-cosmic-orm-cql.html       # WEB4 COSMIC ORM & CQL
 ├── case-studies/
 │   ├── trust-site.html              # SovereignTrust (WEB4 + WEB6)
 │   ├── nft-founders.html            # Founder NFTs (WEB4)
