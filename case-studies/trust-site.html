@@ -24,7 +24,7 @@
       <a class="nav-item" href="/tutorials/04-nft-wallet"><span class="step-num">4</span> NFTs &amp; Wallet</a>
       <a class="nav-item" href="/tutorials/05-data-holons"><span class="step-num">5</span> Data &amp; Holons</a>
       <div class="nav-section-title">Building Apps</div>
-      <a class="nav-item" href="/tutorials/06-first-oapp"><span class="step-num">6</span> Your First OApp</a>
+      <a class="nav-item" href="/tutorials/06-first-oapp"><span class="step-num">6</span> Your First OAPP</a>
       <a class="nav-item" href="/tutorials/07-metaverse-game"><span class="step-num">7</span> Metaverse &amp; Games</a>
       <a class="nav-item" href="/tutorials/08-providers-production"><span class="step-num">8</span> Providers &amp; Production</a>
       <div class="nav-section-title">WEB4 Deep Dives</div>
@@ -106,9 +106,9 @@
 
     <div class="code-block">
       <div class="code-block-header"><span class="code-filename">auth.js</span><button class="copy-btn">Copy</button></div>
-      <pre><span class="kw">import</span> { OasisWeb4Client } <span class="kw">from</span> <span class="str">'@oasisomniverse/web4-api'</span>;
+      <pre><span class="kw">import</span> { OASISClient } <span class="kw">from</span> <span class="str">'@oasisomniverse/web4-api'</span>;
 
-<span class="kw">const</span> oasis4 = <span class="kw">new</span> <span class="fn">OasisWeb4Client</span>({ baseUrl: <span class="str">'https://api.web4.oasisomniverse.one'</span> });
+<span class="kw">const</span> oasis4 = <span class="kw">new</span> <span class="fn">OASISClient</span>({ baseUrl: <span class="str">'https://api.web4.oasisomniverse.one'</span> });
 
 <span class="kw">async function</span> <span class="fn">login</span>(email, password) {
   <span class="kw">const</span> { result, isError, message } = <span class="kw">await</span> oasis4.avatar.<span class="fn">authenticate</span>({ email, password });
@@ -209,9 +209,9 @@
 
     <div class="code-block">
       <div class="code-block-header"><span class="code-filename">leela.js</span><button class="copy-btn">Copy</button></div>
-      <pre><span class="kw">import</span> { OasisWeb6Client } <span class="kw">from</span> <span class="str">'@oasisomniverse/web6-api'</span>;
+      <pre><span class="kw">import</span> { Web6Client } <span class="kw">from</span> <span class="str">'@oasisomniverse/web6-api'</span>;
 
-<span class="kw">const</span> ai = <span class="kw">new</span> <span class="fn">OasisWeb6Client</span>({ baseUrl: <span class="str">'https://api.web4.oasisomniverse.one'</span> });
+<span class="kw">const</span> ai = <span class="kw">new</span> <span class="fn">Web6Client</span>({ baseUrl: <span class="str">'https://api.web6.oasisomniverse.one'</span> });
 ai.auth.<span class="fn">setToken</span>(oasis4.auth.<span class="fn">getToken</span>());
 
 <span class="kw">async function</span> <span class="fn">askLeela</span>(question, avatarId, sessionId) {
@@ -273,6 +273,6 @@ ai.auth.<span class="fn">setToken</span>(oasis4.auth.<span class="fn">getToken</
     </div>
   </main>
 </div>
-<script src="../assets/js/main.js"></script>
+<script src="../assets/js/site.js?v=20261116c"></script>
 </body>
 </html>

@@ -27,21 +27,40 @@
     <nav class="sidebar-nav">
       <div class="nav-section-title">Getting Started</div>
       <a class="nav-item" href="/">Overview</a>
-      <a class="nav-item active" href="/tutorials/01-getting-started">
-        <span class="step-num">1</span> Quick Start
-      </a>
-      <div class="nav-section-title">Core Concepts</div>
+      <a class="nav-item" href="/tutorials/01-getting-started"><span class="step-num">1</span> Quick Start</a>
+      <div class="nav-section-title">WEB4 Core</div>
       <a class="nav-item" href="/tutorials/02-avatar-identity"><span class="step-num">2</span> Avatar &amp; Identity</a>
       <a class="nav-item" href="/tutorials/03-karma-reputation"><span class="step-num">3</span> Karma &amp; Reputation</a>
       <a class="nav-item" href="/tutorials/04-nft-wallet"><span class="step-num">4</span> NFTs &amp; Wallet</a>
       <a class="nav-item" href="/tutorials/05-data-holons"><span class="step-num">5</span> Data &amp; Holons</a>
       <div class="nav-section-title">Building Apps</div>
-      <a class="nav-item" href="/tutorials/06-first-oapp"><span class="step-num">6</span> Your First OApp</a>
+      <a class="nav-item" href="/tutorials/06-first-oapp"><span class="step-num">6</span> Your First OAPP</a>
       <a class="nav-item" href="/tutorials/07-metaverse-game"><span class="step-num">7</span> Metaverse &amp; Games</a>
       <a class="nav-item" href="/tutorials/08-providers-production"><span class="step-num">8</span> Providers &amp; Production</a>
-      <div class="nav-section-title">Reference</div>
+      <div class="nav-section-title">WEB4 Deep Dives</div>
+      <a class="nav-item active" href="/tutorials/09-hyperdrive"><span class="step-num">9</span> HyperDrive Storage</a>
+      <a class="nav-item" href="/tutorials/10-onet-p2p"><span class="step-num">10</span> ONET &amp; P2P</a>
+      <div class="nav-section-title">WEB5 STAR API</div>
+      <a class="nav-item" href="/tutorials/11-web5-intro"><span class="step-num">11</span> WEB5 Introduction</a>
+      <a class="nav-item" href="/tutorials/12-missions-quests"><span class="step-num">12</span> Missions &amp; Quests</a>
+      <a class="nav-item" href="/tutorials/13-celestial-spaces"><span class="step-num">13</span> Celestial Spaces</a>
+      <a class="nav-item" href="/tutorials/14-geonft-ar"><span class="step-num">14</span> GeoNFTs &amp; AR</a>
+      <div class="nav-section-title">WEB6 AI Layer</div>
+      <a class="nav-item" href="/tutorials/15-web6-ai-intro"><span class="step-num">15</span> WEB6 AI Intro</a>
+      <a class="nav-item" href="/tutorials/16-fahrn-agents"><span class="step-num">16</span> FAHRN Multi-Agent</a>
+      <a class="nav-item" href="/tutorials/17-holonic-memory"><span class="step-num">17</span> Holonic Memory</a>
+      <div class="nav-section-title">Case Studies</div>
+      <a class="nav-item" href="/case-studies/trust-site">🏛️ SovereignTrust</a>
+      <a class="nav-item" href="/case-studies/nft-founders">🎖️ Founder NFTs</a>
+      <a class="nav-item" href="/case-studies/oportal">🌐 OPORTAL</a>
+      <a class="nav-item" href="/case-studies/our-world">🌍 Our World</a>
+      <a class="nav-item" href="/case-studies/odoom">💀 ODOOM</a>
+      <a class="nav-item" href="/case-studies/oquake">⚡ OQuake</a>
+      <div class="nav-section-title">API Reference</div>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB4%20OASIS%20API" target="_blank">WEB4 API Ref ↗</a>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB5%20STAR%20API" target="_blank">WEB5 STAR Ref ↗</a>
+      <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS/tree/master/Docs/Devs/API%20Documentation/WEB6" target="_blank">WEB6 AI Ref ↗</a>
       <a class="nav-item" href="https://github.com/NextGenSoftwareUK/OASIS" target="_blank">GitHub ↗</a>
-      <a class="nav-item" href="https://oasisomniverse.gitbook.io/oasis-platform" target="_blank">GitBook Docs ↗</a>
       <a class="nav-item" href="https://oportal.oasisomniverse.one/developer" target="_blank">Dev Portal ↗</a>
     </nav>
     <div class="sidebar-footer">
@@ -109,7 +128,7 @@
       <div class="callout-icon">📡</div>
       <div class="callout-body">
         <div class="callout-title">Live API endpoint</div>
-        <p>The default base URL baked into the SDK is <code>https://api.oasisweb4.one</code>. You can point at the staging environment by passing <code>baseUrl: 'https://api-dev.oasisweb4.one'</code> to the constructor.</p>
+        <p>The default base URL baked into the SDK is <code>https://api.web4.oasisomniverse.one</code>. You can point at the staging environment by passing <code>baseUrl: 'https://dev.api.web4.oasisomniverse.one'</code> to the constructor.</p>
       </div>
     </div>
 
@@ -122,12 +141,12 @@
       <div class="code-block-header"><span class="code-filename">oasis.js</span><button class="copy-btn">Copy</button></div>
       <pre><span class="kw">import</span> { OASISClient } <span class="kw">from</span> <span class="str">'@oasisomniverse/web4-api'</span>;
 
-<span class="cmt">// Default base URL: https://api.oasisweb4.one</span>
+<span class="cmt">// Default base URL: https://api.web4.oasisomniverse.one</span>
 <span class="kw">export const</span> oasis = <span class="kw">new</span> <span class="cls">OASISClient</span>();
 
 <span class="cmt">// Or with explicit config:</span>
 <span class="kw">export const</span> oasis = <span class="kw">new</span> <span class="cls">OASISClient</span>({
-  baseUrl: <span class="str">'https://api.oasisweb4.one'</span>,  <span class="cmt">// Live WEB4 API</span>
+  baseUrl: <span class="str">'https://api.web4.oasisomniverse.one'</span>,  <span class="cmt">// Live WEB4 API</span>
   persistSession: <span class="kw">true</span>               <span class="cmt">// Saves JWT to localStorage</span>
 });</pre>
     </div>

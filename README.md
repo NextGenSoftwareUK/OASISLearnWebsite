@@ -69,8 +69,8 @@ Six production apps built on the OASIS — each with step-by-step integration wa
 ## Getting Started
 
 ```bash
-git clone https://github.com/NextGenSoftwareUK/OASIS-LEARN.git
-cd OASIS-LEARN
+git clone https://github.com/NextGenSoftwareUK/OASISLearnWebsite.git
+cd OASISLearnWebsite
 npm install
 npm run dev
 # → http://localhost:3000
