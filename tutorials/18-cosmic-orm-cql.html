@@ -133,6 +133,22 @@ const count = await oasis.data.scalar({
     </div>
     <p>Other query kinds have their own methods: <code>indexed</code>, <code>projection</code>, <code>grouped</code>, <code>set</code>, <code>join</code>, <code>composition</code> and <code>federation</code> (one query across several providers). Their request shapes are on WEB4's Swagger page.</p>
 
+    <h2 id="text">In SQL or Plain English</h2>
+    <p>You do not have to write the JSON. WEB4 also takes a read-only SQL-like statement, or a plain question that WEB6 turns into one.</p>
+    <div class="code-block">
+      <div class="code-block-header"><span class="code-filename">text.js</span><button class="copy-btn">Copy</button></div>
+      <pre>// POST /api/data/query-cql/sql
+await oasis.data.sql({
+  query: &#x27;SELECT Id, Name FROM MongoDBOASIS WHERE Version &gt;= @min LIMIT 5&#x27;,
+  parameters: { min: 1 }
+});
+
+// POST /api/data/query-cql/ask : leave out execute:false to run it straight away
+const draft = await oasis.data.ask({ question: &#x27;How many records are in MongoDB?&#x27;, execute: false });
+console.log(draft.result.sql);</pre>
+    </div>
+    <p>Both are described in the <a href="https://docs.oasisomniverse.one/reference/cql#sql">CQL reference</a>.</p>
+
     <h2 id="cli">From the STAR CLI</h2>
     <div class="code-block">
       <div class="code-block-header"><span class="code-filename">STAR CLI</span><button class="copy-btn">Copy</button></div>
