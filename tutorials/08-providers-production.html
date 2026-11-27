@@ -284,6 +284,18 @@ volumes:
 <span class="out">{"status":"Healthy","providers":{"MongoDBOASIS":"Connected"}}</span></pre>
     </div>
 
+    <h2 id="where-to-host">Where to host your node and providers</h2>
+    <p>You don't have to run everything on one platform. A node can live on Railway, Holo, ThreeFold, Akash, Flux, Fly.io or the Oracle free tier, a Raspberry Pi or a home server, and its providers can live wherever is cheapest:</p>
+    <ul>
+      <li><strong>Databases</strong>: Neo4j AuraDB Free, MongoDB Atlas Flex, or SQLite and LocalFile on the node itself.</li>
+      <li><strong>Cache and files</strong>: Upstash for Redis-like storage; IPFS gateways plus a free pinning tier.</li>
+      <li><strong>Chains</strong>: public or testnet RPC endpoints; Holo for Holochain.</li>
+      <li><strong>Peer-to-peer</strong>: IPFS, Holochain, Nostr, ThreeFold, Ceramic and OrbitDB.</li>
+    </ul>
+    <p>Free-tier limits change, so check them first. A provider you stop can stay in your HyperDrive lists: fail-over routes around it.</p>
+    <p><strong>Proposed, not built yet:</strong> a <code>HostProfile</code> for each node (can it run sidecars, how much memory, x64 or arm64) and a <code>ConnectionMode</code> for each provider (<code>External</code>, <code>Local</code>, <code>Sidecar</code> or <code>Disabled</code>), so a node only starts what its host supports. Don't add these keys to your configuration yet.</p>
+    <p><strong>On the Development branch:</strong> sandbox sidecars can run on demand (<code>OASIS.Sandbox.Sidecars.OnDemand</code>), stopping after 10 idle minutes by default. Watch the <code>SIDECAR</code> log lines, or call <code>GET /api/admin/cql/sidecars</code> as a Wizard.</p>
+
     <h2 id="security">Production Security Checklist</h2>
 
     <div class="callout callout-warning">
@@ -402,7 +414,8 @@ console.<span class="fn">log</span>(stats.result.totalNFTs);</pre>
       <a href="#runtime-switch">Runtime Switch</a>
       <a href="#deploy-railway">Deploy: Railway</a>
       <a href="#deploy-docker">Deploy: Docker</a>
-      <a href="#security">Security Checklist</a>
+<a href="#where-to-host">Where to Host</a>
+            <a href="#security">Security Checklist</a>
       <a href="#health-monitoring">Monitoring</a>
       <a href="#custom-provider">Custom Provider</a>
       <a href="#whats-next">What's Next</a>
