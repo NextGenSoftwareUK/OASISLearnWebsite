@@ -175,35 +175,13 @@ nearby.<span class="fn">forEach</span>(g => {
 });</pre>
     </div>
 
-    <h2 id="unity">Displaying GeoNFTs in Unity AR</h2>
-    <p>In a Unity project using the OASIS SDK, the <code>OASISGeoManager</code> component handles all of this automatically:</p>
-
-    <div class="code-block">
-      <div class="code-block-header"><span class="code-lang">csharp</span><button class="copy-btn">Copy</button></div>
-      <pre><span class="cmt">// Unity C# — attach to your AR scene manager</span>
-<span class="kw">using</span> NextGenSoftware.OASIS.API.ONODE.WebAPI.Controllers;
-
-<span class="kw">public class</span> ARWorldManager : MonoBehaviour
-{
-    <span class="kw">async void</span> <span class="fn">Start</span>()
-    {
-        <span class="cmt">// Fetch nearby GeoNFTs and spawn AR prefabs at their GPS coords</span>
-        <span class="kw">var</span> nearby = <span class="kw">await</span> OASISGeoManager.Instance
-            .<span class="fn">GetNearbyGeoNFTsAsync</span>(radiusMetres: <span class="num">500</span>);
-
-        <span class="kw">foreach</span> (<span class="kw">var</span> geoNft <span class="kw">in</span> nearby)
-            OASISGeoManager.Instance.<span class="fn">SpawnARObject</span>(geoNft);
-    }
-}</pre>
-    </div>
-
-    <div class="callout callout-tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        <div class="callout-title">Our World is the production reference</div>
-        <p>The <a href="/case-studies/our-world">Our World AR game</a> uses GeoNFTs and GeoHotSpots at every point of interest worldwide. Its Unity integration is the most complete example of the OASIS AR layer in production.</p>
-      </div>
-    </div>
+    <h2 id="unity">Our World and shared OASIS map data</h2>
+    <p>Our World is one OASIS client. Its Unity sources use <code>Assets/_Game/Scripts/OASISIntegration/WorldscapePlaces.cs</code> for nearby places, presence and visit observations, and <code>WalkingRouteRecorder.cs</code>/<code>WalkingRoutePublication.cs</code> for recorded walks. GeoNFT and hotspot clients live under <code>Assets/_Game/Scripts/OASIS API/</code>, with game integration and trigger components alongside them.</p>
+    <p>OPORTAL's Map popup reads the same authenticated avatar's durable visit history through <code>GET /api/places/visits</code>, displaying app attribution, place, time and karma. The new optional <code>sourceApp</code> observation field lets each client report its label; legacy requests retain Our World attribution. Labels do not establish trusted app identity or reset physical-place reward eligibility.</p>
+    <p>Use the actual catalogue place ID, current device coordinates and fresh UTC observation time. Arrival is within 50m and departure at 100m or farther. The first physical-place visit earns 100 karma; returns earn 50. Already-active observations and departures may succeed without returning a visit. Always inspect the OASIS result.</p>
+    <p>Routes use <code>/api/map/routes</code> with separate lazy geometry, avatar ownership and conditional revisions. GeoNFTs, visible WEB5 hotspots and linked quests/objectives remain domain records displayed as map layers, rather than being copied into another visit ledger. Sharing a route or importing GPX does not itself prove a walk or award karma.</p>
+    <p>Current work preserves accepted GPX evidence. The new cross-app visit check encountered a real public catalogue timeout and is not accepted yet. A web popup check does not certify Unity compilation, device GPS, GOMap rendering or populated geo layers; those gates remain separate.</p>
+    <p><a href="https://docs.oasisomniverse.one/sdks/web4-api#map-module">Actual WEB4 map and places SDK methods</a> · <a href="https://github.com/NextGenSoftwareUK/OASIS/blob/Development/Docs/Devs/API%20Documentation/WEB4%20OASIS%20API/Map-API.md">Canonical map/place API contract</a></p>
 
     <div class="next-steps">
       <h3>Next steps</h3>
